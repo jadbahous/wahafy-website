@@ -4,6 +4,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -23,7 +24,6 @@ body {
   color: #0C0C0C;
   font-family: 'DM Sans', sans-serif;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
 }
 
 ::selection {
