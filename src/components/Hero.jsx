@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
-import { MeshGradient } from '@paper-design/shaders-react';
 import { ArrowRight, ChevronDown, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
+import CaptureScene from './CaptureScene.jsx';
 import { hero } from '../data.js';
 
 const title = hero.headline.join(' ');
@@ -51,53 +51,21 @@ export default function Hero() {
   const contentOpacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
   const contentY = useTransform(scrollYProgress, [0, 1], [0, prefersReducedMotion ? 0 : -140]);
   const contentScale = useTransform(scrollYProgress, [0, 1], [1, prefersReducedMotion ? 1 : 0.94]);
-  const bgScale = useTransform(scrollYProgress, [0, 1], [1, prefersReducedMotion ? 1 : 1.18]);
-  const bgOpacity = useTransform(scrollYProgress, [0, 1], [1, 0.5]);
   const cueOpacity = useTransform(scrollYProgress, [0, 0.12], [1, 0]);
 
   return (
     <section id="top" className="relative bg-ink">
       <div ref={wrapperRef} className="relative h-[165vh]">
         <div ref={stickyRef} className="sticky top-0 h-screen w-full overflow-hidden">
-          <svg className="absolute inset-0 w-0 h-0">
-            <defs>
-              <filter id="glass-effect" x="-50%" y="-50%" width="200%" height="200%">
-                <feTurbulence baseFrequency="0.004" numOctaves="1" result="noise" />
-                <feDisplacementMap in="SourceGraphic" in2="noise" scale="0.25" />
-                <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.9 0" />
-              </filter>
-            </defs>
-          </svg>
+          <CaptureScene scrollYProgress={scrollYProgress} isActive={isActive} />
 
-          <motion.div style={{ scale: bgScale, opacity: bgOpacity }} className="absolute inset-0 w-full h-full">
-            <MeshGradient
-              className="absolute inset-0 w-full h-full"
-              colors={['#0C0C0C', '#141414', '#C9973A', '#0C0C0C']}
-              speed={isActive ? 0.42 : 0.22}
-              backgroundColor="#0C0C0C"
-            />
-            <MeshGradient
-              className="absolute inset-0 w-full h-full opacity-30"
-              colors={['#0C0C0C', '#C9973A', '#1C1C1C']}
-              speed={isActive ? 0.28 : 0.14}
-              wireframe
-              backgroundColor="transparent"
-            />
-          </motion.div>
-
-          {/* Fine grid overlay for texture */}
+          {/* Readability scrim behind the headline block */}
           <div
-            className="pointer-events-none absolute inset-0 opacity-[0.05]"
+            className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] max-w-[94vw] h-[620px] blur-3xl"
             style={{
-              backgroundImage:
-                'linear-gradient(to right, #fff 1px, transparent 1px), linear-gradient(to bottom, #fff 1px, transparent 1px)',
-              backgroundSize: '64px 64px',
+              background:
+                'radial-gradient(ellipse at center, rgba(12,12,12,0.82) 0%, rgba(12,12,12,0.5) 45%, transparent 75%)',
             }}
-          />
-          {/* Vignette so foreground text always reads clean */}
-          <div
-            className="pointer-events-none absolute inset-0"
-            style={{ background: 'radial-gradient(ellipse at center, transparent 35%, #0C0C0C 88%)' }}
           />
 
           <motion.div
