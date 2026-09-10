@@ -1,16 +1,16 @@
 export const nav = [
-  { label: 'Services', href: '#services' },
-  { label: 'Work', href: '#work' },
-  { label: 'Process', href: '#process' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Services', href: '/services' },
+  { label: 'Work', href: '/work' },
+  { label: 'Process', href: '/process' },
+  { label: 'Contact', href: '/contact' },
 ];
 
 export const hero = {
   eyebrow: 'AI websites & automation — built in Doha',
   headline: ['Your website', 'should sell', 'while you sleep.'],
   sub: 'Wahafy builds AI-native websites for Qatar businesses — a concierge that answers questions, captures leads, books appointments, and follows up automatically, so nothing falls through the cracks.',
-  primaryCta: { label: 'Get my free demo', href: '#contact' },
-  secondaryCta: { label: 'See the work', href: '#work' },
+  primaryCta: { label: 'Get my free demo', href: '/contact' },
+  secondaryCta: { label: 'See the work', href: '/work' },
 };
 
 export const about = {
@@ -48,7 +48,7 @@ export const services = {
         'Mobile-optimized, fast-loading build',
         'WhatsApp click-to-chat integration',
       ],
-      cta: { label: 'Get a quote', href: '#contact' },
+      cta: { label: 'Get a quote', href: '/contact' },
       highlight: false,
     },
     {
@@ -62,7 +62,7 @@ export const services = {
         'Real-time analytics dashboard — leads, bookings, trends',
         'Priority support and monthly tune-ups',
       ],
-      cta: { label: 'Get a quote', href: '#contact' },
+      cta: { label: 'Get a quote', href: '/contact' },
       highlight: true,
     },
   ],
@@ -129,6 +129,27 @@ export const contact = {
   sub: 'Tell us a bit about your business and we’ll get back to you with a free demo — no obligation.',
   whatsapp: null,
 };
+
+export const explore = [
+  {
+    label: 'Services',
+    heading: 'Standard vs. Premium',
+    text: 'Two ways to work with us — from lead capture to fully automated booking and follow-up.',
+    href: '/services',
+  },
+  {
+    label: 'Work',
+    heading: 'Two businesses, two tiers',
+    text: 'Live demo builds for a dental studio and a coffee roastery — see exactly what each tier looks like.',
+    href: '/work',
+  },
+  {
+    label: 'Process',
+    heading: 'Live in days, not months',
+    text: 'A four-step process from discovery call to a site that runs the follow-up for you.',
+    href: '/process',
+  },
+];
 
 export const footer = {
   brand: 'Wahafy',
