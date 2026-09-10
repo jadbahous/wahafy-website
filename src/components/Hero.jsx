@@ -1,66 +1,116 @@
+import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
+import { MeshGradient } from '@paper-design/shaders-react';
+import { ArrowRight, Sparkles } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 import { hero } from '../data.js';
 
-const lineVariants = {
-  hidden: { y: '110%' },
-  visible: (i) => ({
-    y: 0,
-    transition: { duration: 0.9, delay: 0.15 + i * 0.09, ease: [0.16, 1, 0.3, 1] },
-  }),
+const title = hero.headline.join(' ');
+const words = title.split(' ');
+
+const letterAnimation = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+};
+
+const containerAnimation = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.028, delayChildren: 0.5 } },
 };
 
 const capabilities = ['AI Concierge', 'Lead Capture', 'Live Booking', 'WhatsApp Automation', 'Analytics'];
 
 export default function Hero() {
+  const containerRef = useRef(null);
+  const [isActive, setIsActive] = useState(false);
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const enter = () => setIsActive(true);
+    const leave = () => setIsActive(false);
+    el.addEventListener('mouseenter', enter);
+    el.addEventListener('mouseleave', leave);
+    return () => {
+      el.removeEventListener('mouseenter', enter);
+      el.removeEventListener('mouseleave', leave);
+    };
+  }, []);
+
   return (
-    <section id="top" className="relative bg-ink text-white overflow-hidden pt-[72px]">
-      {/* Ambient background */}
-      <div className="pointer-events-none absolute inset-0">
-        <div
-          className="absolute -top-[20%] left-1/2 -translate-x-1/2 w-[900px] h-[900px] rounded-full opacity-[0.14] blur-[120px]"
-          style={{ background: 'radial-gradient(circle, #C9973A 0%, transparent 70%)' }}
-        />
-        <div
-          className="absolute inset-0 opacity-[0.05]"
-          style={{
-            backgroundImage:
-              'linear-gradient(to right, #fff 1px, transparent 1px), linear-gradient(to bottom, #fff 1px, transparent 1px)',
-            backgroundSize: '64px 64px',
-          }}
-        />
-      </div>
+    <section id="top" ref={containerRef} className="relative min-h-screen bg-ink overflow-hidden w-full pt-[72px]">
+      <svg className="absolute inset-0 w-0 h-0">
+        <defs>
+          <filter id="glass-effect" x="-50%" y="-50%" width="200%" height="200%">
+            <feTurbulence baseFrequency="0.004" numOctaves="1" result="noise" />
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="0.25" />
+            <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.9 0" />
+          </filter>
+        </defs>
+      </svg>
 
-      <div className="section-wrap relative pt-24 pb-28 md:pt-32 md:pb-36">
-        <motion.p
-          initial={{ opacity: 0, y: 10 }}
+      <MeshGradient
+        className="absolute inset-0 w-full h-full"
+        colors={['#0C0C0C', '#141414', '#C9973A', '#0C0C0C']}
+        speed={isActive ? 0.42 : 0.22}
+        backgroundColor="#0C0C0C"
+      />
+      <MeshGradient
+        className="absolute inset-0 w-full h-full opacity-30"
+        colors={['#0C0C0C', '#C9973A', '#1C1C1C']}
+        speed={isActive ? 0.28 : 0.14}
+        wireframe
+        backgroundColor="transparent"
+      />
+
+      {/* Fine grid overlay for texture */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.05]"
+        style={{
+          backgroundImage:
+            'linear-gradient(to right, #fff 1px, transparent 1px), linear-gradient(to bottom, #fff 1px, transparent 1px)',
+          backgroundSize: '64px 64px',
+        }}
+      />
+      {/* Vignette so foreground text always reads clean */}
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{ background: 'radial-gradient(ellipse at center, transparent 35%, #0C0C0C 88%)' }}
+      />
+
+      <div className="relative z-10 flex flex-col items-center justify-center text-center min-h-[calc(100vh-72px)] px-4 py-24">
+        <motion.div
+          initial={{ opacity: 0, y: -16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.05 }}
-          className="font-display text-[13px] tracking-[0.16em] uppercase text-gold mb-6"
+          transition={{ delay: 0.15, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="mb-7 px-4 py-1.5 rounded-full bg-white/10 text-white/90 text-[13px] font-medium flex items-center gap-2 backdrop-blur-lg border border-white/15"
         >
+          <Sparkles className="w-3.5 h-3.5 text-gold" />
           {hero.eyebrow}
-        </motion.p>
+        </motion.div>
 
-        <h1 className="font-display font-semibold text-[13vw] leading-[0.98] tracking-tightest md:text-[6.4vw] md:leading-[0.95] max-w-[15ch]">
-          {hero.headline.map((line, i) => (
-            <span key={line} className="block overflow-hidden">
-              <motion.span
-                custom={i}
-                initial="hidden"
-                animate="visible"
-                variants={lineVariants}
-                className="block"
-              >
-                {line}
-              </motion.span>
+        <motion.h1
+          variants={containerAnimation}
+          initial="hidden"
+          animate="visible"
+          className="font-display font-semibold text-white text-[11vw] leading-[1.04] tracking-tightest md:text-[4.6vw] md:leading-[1.05] max-w-[18ch] flex flex-wrap justify-center gap-x-[0.26em]"
+        >
+          {words.map((word, wi) => (
+            <span key={wi} className="inline-flex whitespace-nowrap">
+              {word.split('').map((char, ci) => (
+                <motion.span key={ci} variants={letterAnimation}>
+                  {char}
+                </motion.span>
+              ))}
             </span>
           ))}
-        </h1>
+        </motion.h1>
 
         <motion.p
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.65, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-8 max-w-[46ch] text-[17px] md:text-[18px] leading-relaxed text-white/65"
+          transition={{ delay: 1.35, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="mt-7 max-w-[46ch] text-[17px] md:text-[18px] leading-relaxed text-white/60"
         >
           {hero.sub}
         </motion.p>
@@ -68,31 +118,28 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.78, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-10 flex flex-wrap items-center gap-4"
+          transition={{ delay: 1.55, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="mt-10 flex flex-wrap items-center justify-center gap-4"
         >
-          <a
-            href={hero.primaryCta.href}
-            className="inline-flex items-center rounded-full bg-gold text-ink text-[15px] font-medium px-7 py-3.5 hover:bg-white transition-colors duration-200"
-          >
-            {hero.primaryCta.label}
-          </a>
-          <a
-            href={hero.secondaryCta.href}
-            className="inline-flex items-center gap-2 rounded-full border border-white/20 text-white text-[15px] font-medium px-7 py-3.5 hover:border-white/50 transition-colors duration-200"
-          >
-            {hero.secondaryCta.label}
-          </a>
+          <Button asChild size="lg" variant="white" className="group">
+            <a href={hero.primaryCta.href}>
+              {hero.primaryCta.label}
+              <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+            </a>
+          </Button>
+          <Button asChild size="lg" variant="outline">
+            <a href={hero.secondaryCta.href}>{hero.secondaryCta.label}</a>
+          </Button>
         </motion.div>
 
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.7, delay: 0.95 }}
-          className="mt-20 flex flex-wrap gap-x-8 gap-y-3 border-t border-line pt-8"
+          transition={{ delay: 1.85, duration: 0.8 }}
+          className="mt-20 flex flex-wrap justify-center gap-x-8 gap-y-3 border-t border-line pt-8 w-full max-w-3xl"
         >
           {capabilities.map((c) => (
-            <span key={c} className="text-[13px] tracking-wide text-white/45 flex items-center gap-2">
+            <span key={c} className="text-[13px] tracking-wide text-white/40 flex items-center gap-2">
               <span className="w-1 h-1 rounded-full bg-gold" />
               {c}
             </span>
