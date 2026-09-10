@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { services } from '../data.js';
 
 const fadeUp = {
@@ -73,8 +74,8 @@ export default function Services() {
                 ))}
               </ul>
 
-              <a
-                href={tier.cta.href}
+              <Link
+                to={tier.cta.href}
                 className={`mt-9 inline-flex items-center justify-center rounded-full text-[14.5px] font-medium px-6 py-3.5 transition-colors duration-200 ${
                   tier.highlight
                     ? 'bg-gold text-ink hover:bg-white'
@@ -82,7 +83,7 @@ export default function Services() {
                 }`}
               >
                 {tier.cta.label}
-              </a>
+              </Link>
             </motion.div>
           ))}
         </div>
