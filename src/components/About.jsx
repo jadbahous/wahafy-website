@@ -18,7 +18,7 @@ const icons = [
 
 export default function About() {
   return (
-    <section id="about" className="bg-paper text-ink py-28 md:py-36">
+    <section id="about" className="bg-ink text-white py-28 md:py-36">
       <div className="section-wrap grid md:grid-cols-12 gap-12 md:gap-8">
         <motion.div
           variants={fadeUp}
@@ -33,7 +33,7 @@ export default function About() {
           <h2 className="font-display font-semibold text-[34px] md:text-[42px] leading-[1.08] tracking-tight max-w-[13ch]">
             {about.heading}
           </h2>
-          <p className="mt-6 text-[16px] leading-relaxed text-ink/60 max-w-[46ch]">{about.body}</p>
+          <p className="mt-6 text-[16px] leading-relaxed text-white/60 max-w-[46ch]">{about.body}</p>
         </motion.div>
 
         <div className="md:col-span-7 grid sm:grid-cols-2 gap-5">
@@ -45,14 +45,14 @@ export default function About() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: '-80px' }}
-              className={`rounded-2xl border border-paper-line bg-white p-7 ${i === 2 ? 'sm:col-span-2' : ''}`}
+              className={`rounded-2xl border border-line bg-panel p-7 ${i === 2 ? 'sm:col-span-2' : ''}`}
             >
               <svg
                 width="22"
                 height="22"
                 viewBox="0 0 24 24"
                 fill="none"
-                stroke="#395A4E"
+                stroke="#ffffff"
                 strokeWidth="1.6"
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -60,8 +60,8 @@ export default function About() {
               >
                 {icons[i]}
               </svg>
-              <h3 className="font-display font-semibold text-[17px] mb-2">{p.title}</h3>
-              <p className="text-[14.5px] leading-relaxed text-ink/55">{p.text}</p>
+              <h3 className="font-display font-semibold text-[17px] mb-2 text-white">{p.title}</h3>
+              <p className="text-[14.5px] leading-relaxed text-white/55">{p.text}</p>
             </motion.div>
           ))}
         </div>

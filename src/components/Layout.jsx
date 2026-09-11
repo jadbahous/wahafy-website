@@ -21,7 +21,7 @@ export default function Layout() {
       <ScrollToTop />
       <motion.div
         style={{ scaleX: progress }}
-        className="fixed top-0 left-0 right-0 h-[2px] bg-gold origin-left z-[60]"
+        className="fixed top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-white/30 via-white to-white/30 origin-left z-[60]"
       />
       <Nav />
       <main>
