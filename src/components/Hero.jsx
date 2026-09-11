@@ -42,10 +42,9 @@ export default function Hero() {
       <div className="relative z-10 flex-1 flex items-end justify-center px-6 pt-28 pb-10 md:pb-14">
         <div className="w-full max-w-[860px] flex flex-col items-center text-center">
           <motion.div
-            initial="hidden"
-            animate="visible"
-            custom={0.18}
-            variants={v(fadeUp(0.18))}
+            initial={prefersReducedMotion ? false : { opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: [0.9, 1.03, 1] }}
+            transition={{ duration: 0.9, delay: 0.18, times: [0, 0.7, 1], ease: [0.16, 1, 0.3, 1] }}
             className="mb-6 inline-flex items-center gap-2 px-4 py-2 rounded-md text-[12.5px] font-medium"
             style={{
               background: 'linear-gradient(90deg, #7d7d7d 0%, #2a2a2a 52%, #0a0a0a 100%)',
@@ -53,7 +52,14 @@ export default function Hero() {
               letterSpacing: '-0.01em',
             }}
           >
-            <Sparkles className="w-3.5 h-3.5 text-white" style={{ filter: 'drop-shadow(0 0 3px rgba(255,255,255,0.45))' }} />
+            <motion.span
+              initial={prefersReducedMotion ? false : { opacity: 0, scale: 0.2, rotate: -50 }}
+              animate={{ opacity: 1, scale: [0.2, 1.2, 1], rotate: [-50, 8, 0] }}
+              transition={{ duration: 0.9, delay: 0.3, times: [0, 0.65, 1], ease: [0.16, 1, 0.3, 1] }}
+              className="inline-flex"
+            >
+              <Sparkles className="w-3.5 h-3.5 text-white" style={{ filter: 'drop-shadow(0 0 3px rgba(255,255,255,0.45))' }} />
+            </motion.span>
             {hero.eyebrow}
           </motion.div>
 
@@ -62,13 +68,16 @@ export default function Hero() {
               <motion.span
                 initial="hidden"
                 animate="visible"
-                custom={0.36}
+                custom={0.42}
                 variants={v(maskLine)}
                 className="inline-block"
               >
                 Your website should{' '}
-                <em
-                  className="not-italic"
+                <motion.em
+                  initial={prefersReducedMotion ? false : { opacity: 0.35, filter: 'blur(4px)' }}
+                  animate={{ opacity: 1, filter: 'blur(0px)' }}
+                  transition={{ duration: 1.2, delay: 0.72, ease: [0.16, 1, 0.3, 1] }}
+                  className="not-italic inline-block"
                   style={{
                     fontFamily: '"Instrument Serif", "Times New Roman", Times, serif',
                     fontStyle: 'italic',
@@ -79,14 +88,14 @@ export default function Hero() {
                   }}
                 >
                   sell
-                </em>
+                </motion.em>
               </motion.span>
             </span>
             <span className="block overflow-hidden py-[0.06em] px-[0.15em]">
               <motion.span
                 initial="hidden"
                 animate="visible"
-                custom={0.56}
+                custom={0.62}
                 variants={v(maskLine)}
                 className="inline-block"
               >
@@ -106,23 +115,29 @@ export default function Hero() {
             {hero.sub}
           </motion.p>
 
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            custom={0.96}
-            variants={v(fadeUp(0.96))}
-            className="mt-7 flex flex-wrap items-center justify-center gap-3"
-          >
-            <Button asChild size="lg" variant="gradient" className="group h-[42px] px-[18px]">
-              <Link to={hero.primaryCta.href}>
-                {hero.primaryCta.label}
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-              </Link>
-            </Button>
-            <Button asChild size="lg" variant="outline" className="h-[42px] px-[18px]">
-              <Link to={hero.secondaryCta.href}>{hero.secondaryCta.label}</Link>
-            </Button>
-          </motion.div>
+          <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
+            <motion.div
+              initial={prefersReducedMotion ? false : { opacity: 0, y: 18, scale: 0.94 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 0.7, delay: 0.96, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <Button asChild size="lg" variant="gradient" className="group h-[42px] px-[18px]">
+                <Link to={hero.primaryCta.href}>
+                  {hero.primaryCta.label}
+                  <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                </Link>
+              </Button>
+            </motion.div>
+            <motion.div
+              initial={prefersReducedMotion ? false : { opacity: 0, x: 22 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.7, delay: 1.1, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <Button asChild size="lg" variant="outline" className="h-[42px] px-[18px]">
+                <Link to={hero.secondaryCta.href}>{hero.secondaryCta.label}</Link>
+              </Button>
+            </motion.div>
+          </div>
         </div>
       </div>
 
