@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import Hero from '../components/Hero.jsx';
 import About from '../components/About.jsx';
+import AuroraField from '../components/AuroraField.jsx';
 import { explore } from '../data.js';
 
 const fadeUp = {
@@ -62,14 +63,19 @@ function Explore() {
 
 function CtaBand() {
   return (
-    <section className="bg-ink text-white py-24 md:py-28 border-t border-line">
-      <div className="section-wrap flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+    <section className="relative bg-ink text-white py-32 md:py-44 border-t border-line overflow-hidden">
+      <div className="absolute inset-0 opacity-70">
+        <AuroraField />
+      </div>
+      <div className="noise-overlay" />
+
+      <div className="section-wrap relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-10">
         <motion.h2
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-80px' }}
-          className="font-display font-semibold text-[30px] md:text-[36px] leading-[1.1] tracking-tight max-w-[16ch]"
+          className="font-display font-semibold text-[clamp(2.4rem,6vw,4.2rem)] leading-[1.02] tracking-[-0.035em] max-w-[16ch]"
         >
           Ready to see it on your business?
         </motion.h2>
