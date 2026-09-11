@@ -21,10 +21,10 @@ export default function Work() {
           viewport={{ once: true, margin: '-80px' }}
           className="max-w-[46ch] mb-16"
         >
-          <p className="font-display text-[13px] tracking-[0.16em] uppercase text-gold-deep mb-5">
+          <p className="font-display text-[11px] tracking-[0.18em] uppercase text-white/40 mb-5">
             {work.eyebrow}
           </p>
-          <h2 className="font-display font-semibold text-[34px] md:text-[42px] leading-[1.08] tracking-tight">
+          <h2 className="font-display font-semibold text-[clamp(2.2rem,5vw,3.6rem)] leading-[1.02] tracking-[-0.035em]">
             {work.heading}
           </h2>
           <p className="mt-5 text-[16px] leading-relaxed text-white/55">{work.sub}</p>
@@ -49,7 +49,7 @@ export default function Work() {
                   src={p.image}
                   alt={p.imageAlt}
                   loading="lazy"
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:ssale-110"
                 />
                 <div
                   className="absolute inset-0"

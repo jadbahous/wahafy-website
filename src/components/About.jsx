@@ -27,10 +27,10 @@ export default function About() {
           viewport={{ once: true, margin: '-80px' }}
           className="md:col-span-5"
         >
-          <p className="font-display text-[13px] tracking-[0.16em] uppercase text-gold-deep mb-5">
+          <p className="font-display text-[11px] tracking-[0.18em] uppercase text-white/40 mb-5">
             {about.eyebrow}
           </p>
-          <h2 className="font-display font-semibold text-[34px] md:text-[42px] leading-[1.08] tracking-tight max-w-[13ch]">
+          <h2 className="font-display font-semibold text-[clamp(2.2rem,5vw,3.6rem)] leading-[1.02] tracking-[-0.035em] max-w-[13ch]">
             {about.heading}
           </h2>
           <p className="mt-6 text-[16px] leading-relaxed text-white/60 max-w-[46ch]">{about.body}</p>
