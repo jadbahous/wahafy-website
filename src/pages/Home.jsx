@@ -40,7 +40,7 @@ function Explore() {
             >
               <Link
                 to={item.href}
-                className="group block h-full rounded-2xl border border-line bg-panel/60 p-8 hover:border-gold/40 hover:bg-panel transition-colors duration-300"
+                className="group block h-full rounded-2xl border border-line bg-panel/60 p-8 hover:border-white/30 hover:bg-panel transition-colors duration-300"
               >
                 <span className="text-[12px] font-medium tracking-[0.14em] uppercase text-gold">
                   {item.label}
@@ -62,7 +62,7 @@ function Explore() {
 
 function CtaBand() {
   return (
-    <section className="bg-paper text-ink py-24 md:py-28">
+    <section className="bg-ink text-white py-24 md:py-28 border-t border-line">
       <div className="section-wrap flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
         <motion.h2
           variants={fadeUp}
@@ -81,7 +81,7 @@ function CtaBand() {
         >
           <Link
             to="/contact"
-            className="inline-flex items-center rounded-full bg-ink text-white text-[15px] font-medium px-7 py-3.5 hover:bg-gold-deep transition-colors duration-200"
+            className="inline-flex items-center rounded-full bg-gradient-to-b from-white via-[#e7e7e7] to-[#cfcfcf] text-black border border-white text-[15px] font-medium px-7 py-3.5 hover:shadow-[0_0_22px_rgba(186,208,255,0.3)] transition-all duration-300"
           >
             Get my free demo
           </Link>
