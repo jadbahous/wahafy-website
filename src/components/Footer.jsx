@@ -10,7 +10,7 @@ export default function Footer() {
     <footer className="bg-ink text-white/50 py-10">
       <div className="section-wrap flex flex-col sm:flex-row items-center justify-between gap-4 text-[13px]">
         <Link to="/" className="flex items-center gap-2.5">
-          <span className="grid place-items-center w-6 h-6 rounded-md bg-gold text-white font-display font-bold text-[11px]">
+          <span className="grid place-items-center w-6 h-6 rounded-md bg-white text-black font-display font-bold text-[11px]">
             W
           </span>
           <span className="text-white/70">{footer.brand}</span>

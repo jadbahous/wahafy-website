@@ -50,12 +50,12 @@ export default function Services() {
               viewport={{ once: true, margin: '-80px' }}
               className={`relative rounded-2xl p-9 flex flex-col ${
                 tier.highlight
-                  ? 'bg-panel border border-gold/40 shadow-[0_0_60px_-15px_rgba(79,124,108,0.35)]'
+                  ? 'bg-panel border border-white/30 shadow-[0_0_60px_-15px_rgba(255,255,255,0.22)]'
                   : 'bg-panel/60 border border-line'
               }`}
             >
               {tier.highlight && (
-                <span className="absolute -top-3 left-9 rounded-full bg-gold text-white text-[11.5px] font-medium px-3 py-1 tracking-wide">
+                <span className="absolute -top-3 left-9 rounded-full bg-gradient-to-b from-white via-[#e7e7e7] to-[#cfcfcf] text-black text-[11.5px] font-medium px-3 py-1 tracking-wide">
                   Most popular
                 </span>
               )}
@@ -66,7 +66,7 @@ export default function Services() {
               <ul className="mt-8 space-y-3.5 flex-1">
                 {tier.features.map((f) => (
                   <li key={f} className="flex items-start gap-3 text-[14.5px] text-white/75">
-                    <span className={tier.highlight ? 'text-gold' : 'text-white/40'}>
+                    <span className={tier.highlight ? 'text-white' : 'text-white/40'}>
                       <Check />
                     </span>
                     {f}
@@ -76,10 +76,10 @@ export default function Services() {
 
               <Link
                 to={tier.cta.href}
-                className={`mt-9 inline-flex items-center justify-center rounded-full text-[14.5px] font-medium px-6 py-3.5 transition-colors duration-200 ${
+                className={`mt-9 inline-flex items-center justify-center rounded-full text-[14.5px] font-medium px-6 py-3.5 transition-all duration-300 ${
                   tier.highlight
-                    ? 'bg-gold text-white hover:bg-white hover:text-ink'
-                    : 'border border-white/20 text-white hover:border-white/50'
+                    ? 'bg-gradient-to-b from-white via-[#e7e7e7] to-[#cfcfcf] text-black border border-white hover:shadow-[0_0_22px_rgba(186,208,255,0.3)]'
+                    : 'border border-white/20 text-white hover:border-white/50 hover:bg-white/5'
                 }`}
               >
                 {tier.cta.label}

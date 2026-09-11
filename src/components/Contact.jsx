@@ -47,7 +47,7 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="bg-paper text-ink py-28 md:py-36">
+    <section id="contact" className="bg-ink text-white py-28 md:py-36">
       <div className="section-wrap grid md:grid-cols-12 gap-12 md:gap-8">
         <motion.div
           variants={fadeUp}
@@ -62,7 +62,7 @@ export default function Contact() {
           <h2 className="font-display font-semibold text-[34px] md:text-[42px] leading-[1.08] tracking-tight max-w-[14ch]">
             {contact.heading}
           </h2>
-          <p className="mt-6 text-[16px] leading-relaxed text-ink/60 max-w-[42ch]">{contact.sub}</p>
+          <p className="mt-6 text-[16px] leading-relaxed text-white/60 max-w-[42ch]">{contact.sub}</p>
         </motion.div>
 
         <motion.div
@@ -73,19 +73,19 @@ export default function Contact() {
           className="md:col-span-7"
         >
           {status === 'success' ? (
-            <div className="rounded-2xl border border-paper-line bg-white p-10 text-center">
-              <div className="mx-auto mb-4 w-11 h-11 rounded-full bg-gold/15 grid place-items-center">
+            <div className="rounded-2xl border border-line bg-panel p-10 text-center">
+              <div className="mx-auto mb-4 w-11 h-11 rounded-full bg-white/10 grid place-items-center">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                  <path d="M5 13l4 4L19 7" stroke="#395A4E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M5 13l4 4L19 7" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </div>
-              <h3 className="font-display font-semibold text-[19px] mb-1.5">Message sent.</h3>
-              <p className="text-[14.5px] text-ink/55">
+              <h3 className="font-display font-semibold text-[19px] mb-1.5 text-white">Message sent.</h3>
+              <p className="text-[14.5px] text-white/55">
                 Thanks — we'll be in touch shortly with your free demo.
               </p>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="rounded-2xl border border-paper-line bg-white p-8 sm:p-10">
+            <form onSubmit={handleSubmit} className="rounded-2xl border border-line bg-panel p-8 sm:p-10">
               <div className="grid sm:grid-cols-2 gap-5">
                 <Field label="Your name" required>
                   <input
@@ -133,7 +133,7 @@ export default function Contact() {
               <button
                 type="submit"
                 disabled={status === 'loading'}
-                className="mt-7 w-full sm:w-auto inline-flex items-center justify-center rounded-full bg-ink text-white text-[14.5px] font-medium px-7 py-3.5 hover:bg-gold-deep transition-colors duration-200 disabled:opacity-50"
+                className="mt-7 w-full sm:w-auto inline-flex items-center justify-center rounded-full bg-gradient-to-b from-white via-[#e7e7e7] to-[#cfcfcf] text-black border border-white text-[14.5px] font-medium px-7 py-3.5 hover:shadow-[0_0_22px_rgba(186,208,255,0.3)] transition-all duration-300 disabled:opacity-50"
               >
                 {status === 'loading' ? 'Sending…' : 'Get my free demo'}
               </button>
@@ -151,18 +151,22 @@ export default function Contact() {
       <style>{`
         .field {
           width: 100%;
-          border: 1px solid #E4EDE7;
+          border: 1px solid rgba(255,255,255,0.14);
           border-radius: 10px;
           padding: 12px 14px;
           font-size: 14.5px;
-          font-family: 'Manrope', sans-serif;
-          background: #F3F5F2;
-          transition: border-color 150ms ease;
+          font-family: 'Inter', system-ui, sans-serif;
+          background: rgba(255,255,255,0.04);
+          color: #ffffff;
+          transition: border-color 150ms ease, background 150ms ease;
+        }
+        .field::placeholder {
+          color: rgba(255,255,255,0.35);
         }
         .field:focus {
           outline: none;
-          border-color: #395A4E;
-          background: #fff;
+          border-color: rgba(255,255,255,0.55);
+          background: rgba(255,255,255,0.07);
         }
       `}</style>
     </section>
@@ -172,7 +176,7 @@ export default function Contact() {
 function Field({ label, required, children }) {
   return (
     <label className="block">
-      <span className="block text-[13px] font-medium text-ink/70 mb-1.5">
+      <span className="block text-[13px] font-medium text-white/70 mb-1.5">
         {label} {required && <span className="text-gold-deep">*</span>}
       </span>
       {children}
