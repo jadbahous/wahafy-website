@@ -82,6 +82,8 @@ export const work = {
       tags: ['AI Chat', 'Live Booking', 'WhatsApp Automation', 'Analytics'],
       href: 'https://pearl-and-bloom-demo.vercel.app',
       accent: '#4F7C6C',
+      image: 'https://images.unsplash.com/photo-1609207825181-52d3214556dd?q=80&w=1200&auto=format&fit=crop',
+      imageAlt: 'Boutique treatment room with a stone wall and pool view',
     },
     {
       name: 'Dune & Bean Coffee Roastery',
@@ -92,6 +94,8 @@ export const work = {
       tags: ['AI Chat', 'Lead Capture'],
       href: 'https://dune-and-bean-demo.vercel.app',
       accent: '#B08655',
+      image: 'https://images.unsplash.com/photo-1445116572660-236099ec97a0?q=80&w=1200&auto=format&fit=crop',
+      imageAlt: 'Window-side café table with a plant and a french press',
     },
   ],
 };

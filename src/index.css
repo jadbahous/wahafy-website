@@ -20,19 +20,19 @@ html {
 }
 
 body {
-  background: #FAFAF8;
-  color: #0C0C0C;
-  font-family: 'DM Sans', sans-serif;
+  background: #F3F5F2;
+  color: #16231F;
+  font-family: 'Manrope', sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
 ::selection {
-  background: #4F6EFF;
+  background: #4F7C6C;
   color: #ffffff;
 }
 
 h1, h2, h3, h4, .font-display {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Manrope', sans-serif;
 }
 
 .section-wrap {
