@@ -50,7 +50,7 @@ export default function Services() {
               viewport={{ once: true, margin: '-80px' }}
               className={`relative rounded-2xl p-9 flex flex-col ${
                 tier.highlight
-                  ? 'bg-panel border border-gold/40 shadow-[0_0_60px_-15px_rgba(46,63,168,0.35)]'
+                  ? 'bg-panel border border-gold/40 shadow-[0_0_60px_-15px_rgba(79,124,108,0.35)]'
                   : 'bg-panel/60 border border-line'
               }`}
             >

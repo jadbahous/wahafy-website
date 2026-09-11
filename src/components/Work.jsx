@@ -44,20 +44,20 @@ export default function Work() {
               viewport={{ once: true, margin: '-80px' }}
               className="group rounded-2xl overflow-hidden border border-paper-line bg-white block"
             >
-              <div
-                className="relative h-56 md:h-64 flex items-end p-7 overflow-hidden"
-                style={{
-                  background: `linear-gradient(155deg, ${p.accent} 0%, #14140f 115%)`,
-                }}
-              >
+              <div className="relative h-56 md:h-64 flex items-end p-7 overflow-hidden">
+                <img
+                  src={p.image}
+                  alt={p.imageAlt}
+                  loading="lazy"
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                />
                 <div
-                  className="absolute inset-0 opacity-20 transition-transform duration-700 ease-out group-hover:scale-110"
+                  className="absolute inset-0"
                   style={{
-                    backgroundImage:
-                      'radial-gradient(circle at 25% 25%, rgba(255,255,255,0.5) 0, transparent 45%)',
+                    background: `linear-gradient(180deg, ${p.accent}33 0%, #16231Fcc 100%)`,
                   }}
                 />
-                <span className="relative font-display font-semibold text-white text-[26px] leading-tight">
+                <span className="relative font-display font-semibold text-white text-[26px] leading-tight [text-shadow:0_2px_16px_rgba(0,0,0,0.35)]">
                   {p.name}
                 </span>
               </div>

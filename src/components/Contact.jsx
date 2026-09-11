@@ -76,7 +76,7 @@ export default function Contact() {
             <div className="rounded-2xl border border-paper-line bg-white p-10 text-center">
               <div className="mx-auto mb-4 w-11 h-11 rounded-full bg-gold/15 grid place-items-center">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                  <path d="M5 13l4 4L19 7" stroke="#2E3FA8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M5 13l4 4L19 7" stroke="#395A4E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </div>
               <h3 className="font-display font-semibold text-[19px] mb-1.5">Message sent.</h3>
@@ -151,17 +151,17 @@ export default function Contact() {
       <style>{`
         .field {
           width: 100%;
-          border: 1px solid #E7E5E2;
+          border: 1px solid #E4EDE7;
           border-radius: 10px;
           padding: 12px 14px;
           font-size: 14.5px;
-          font-family: 'DM Sans', sans-serif;
-          background: #FAFAF8;
+          font-family: 'Manrope', sans-serif;
+          background: #F3F5F2;
           transition: border-color 150ms ease;
         }
         .field:focus {
           outline: none;
-          border-color: #2E3FA8;
+          border-color: #395A4E;
           background: #fff;
         }
       `}</style>

@@ -3,7 +3,7 @@ import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion
 import { ArrowRight, ChevronDown, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import CaptureScene from './CaptureScene.jsx';
+import AmbientOrbs from './AmbientOrbs.jsx';
 import ProductMockup from './ProductMockup.jsx';
 import { hero } from '../data.js';
 
@@ -56,19 +56,10 @@ export default function Hero() {
   const cueOpacity = useTransform(scrollYProgress, [0, 0.12], [1, 0]);
 
   return (
-    <section id="top" className="relative bg-ink">
+    <section id="top" className="relative bg-paper">
       <div ref={wrapperRef} className="relative h-[180vh]">
         <div ref={stickyRef} className="sticky top-0 h-screen w-full overflow-hidden">
-          <CaptureScene scrollYProgress={scrollYProgress} isActive={isActive} />
-
-          {/* Readability scrim behind the headline block */}
-          <div
-            className="pointer-events-none absolute left-1/2 top-[30%] -translate-x-1/2 -translate-y-1/2 w-[1000px] max-w-[94vw] h-[520px] blur-3xl"
-            style={{
-              background:
-                'radial-gradient(ellipse at center, rgba(12,12,12,0.82) 0%, rgba(12,12,12,0.5) 45%, transparent 75%)',
-            }}
-          />
+          <AmbientOrbs scrollYProgress={scrollYProgress} prefersReducedMotion={prefersReducedMotion} />
 
           <div className="relative z-10 flex flex-col items-center h-full px-4 pt-[104px] pb-6 overflow-hidden">
             <motion.div
@@ -79,7 +70,7 @@ export default function Hero() {
                 initial={{ opacity: 0, y: -16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.15, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                className="mb-5 px-4 py-1.5 rounded-full bg-white/10 text-white/90 text-[13px] font-medium flex items-center gap-2 backdrop-blur-lg border border-white/15"
+                className="mb-5 px-4 py-1.5 rounded-full bg-white/70 text-ink/75 text-[13px] font-medium flex items-center gap-2 backdrop-blur-lg border border-ink/10 shadow-sm"
               >
                 <Sparkles className="w-3.5 h-3.5 text-gold" />
                 {hero.eyebrow}
@@ -89,7 +80,7 @@ export default function Hero() {
                 variants={containerAnimation}
                 initial="hidden"
                 animate="visible"
-                className="font-display font-semibold text-white text-[10vw] leading-[1.04] tracking-tightest md:text-[3.7vw] md:leading-[1.05] max-w-[18ch] flex flex-wrap justify-center gap-x-[0.26em]"
+                className="font-display font-semibold text-ink text-[10vw] leading-[1.04] tracking-tightest md:text-[3.7vw] md:leading-[1.05] max-w-[18ch] flex flex-wrap justify-center gap-x-[0.26em]"
               >
                 {words.map((word, wi) => (
                   <span key={wi} className="inline-flex whitespace-nowrap">
@@ -106,7 +97,7 @@ export default function Hero() {
                 initial={{ opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1.35, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                className="mt-5 max-w-[44ch] text-[15.5px] md:text-[17px] leading-relaxed text-white/60"
+                className="mt-5 max-w-[44ch] text-[15.5px] md:text-[17px] leading-relaxed text-ink/60"
               >
                 {hero.sub}
               </motion.p>
@@ -123,7 +114,12 @@ export default function Hero() {
                     <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                   </Link>
                 </Button>
-                <Button asChild size="lg" variant="outline">
+                <Button
+                  asChild
+                  size="lg"
+                  variant="outline"
+                  className="border-ink/15 text-ink hover:border-ink/35 hover:bg-ink/5"
+                >
                   <Link to={hero.secondaryCta.href}>{hero.secondaryCta.label}</Link>
                 </Button>
               </motion.div>
@@ -134,7 +130,7 @@ export default function Hero() {
 
           <motion.div
             style={{ opacity: cueOpacity }}
-            className="pointer-events-none absolute bottom-5 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 text-white/40"
+            className="pointer-events-none absolute bottom-5 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 text-ink/35"
           >
             <span className="text-[11px] tracking-[0.2em] uppercase">Scroll</span>
             <motion.div
