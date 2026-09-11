@@ -31,7 +31,7 @@ export default function ProductMockup({ scrollYProgress, prefersReducedMotion })
         {/* ambient glow behind the frame */}
         <div
           className="absolute -inset-8 md:-inset-14 rounded-[48px] blur-3xl -z-10 pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse at 50% 40%, rgba(201,151,58,0.32), transparent 70%)' }}
+          style={{ background: 'radial-gradient(ellipse at 50% 40%, rgba(46,63,168,0.4), transparent 70%)' }}
         />
 
         <div className="rounded-2xl border border-black/10 bg-[#FAFAF8] shadow-[0_50px_100px_-25px_rgba(0,0,0,0.65)] overflow-hidden">
@@ -69,7 +69,7 @@ export default function ProductMockup({ scrollYProgress, prefersReducedMotion })
               className="absolute bottom-4 right-4 sm:bottom-5 sm:right-5 w-[178px] sm:w-[210px] rounded-2xl bg-[#0C0C0C] shadow-xl p-3 sm:p-3.5"
             >
               <div className="flex items-center gap-2 mb-2">
-                <span className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-gold flex items-center justify-center text-ink text-[9px] sm:text-[10px] font-bold shrink-0">
+                <span className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-gold flex items-center justify-center text-white text-[9px] sm:text-[10px] font-bold shrink-0">
                   W
                 </span>
                 <span className="text-[10px] sm:text-[11px] text-white/70 truncate">Pearl &amp; Bloom Assist</span>
@@ -77,7 +77,7 @@ export default function ProductMockup({ scrollYProgress, prefersReducedMotion })
               <div className="text-[10px] sm:text-[11px] text-white/85 bg-white/10 rounded-lg rounded-tl-sm px-2 sm:px-2.5 py-1.5 sm:py-2 mb-1.5 sm:mb-2 leading-snug">
                 Want to book a whitening consult this week?
               </div>
-              <div className="text-[10px] sm:text-[11px] text-ink bg-gold rounded-lg rounded-tr-sm px-2 sm:px-2.5 py-1.5 sm:py-2 ml-auto w-fit">
+              <div className="text-[10px] sm:text-[11px] text-white bg-gold rounded-lg rounded-tr-sm px-2 sm:px-2.5 py-1.5 sm:py-2 ml-auto w-fit">
                 Thursday works
               </div>
             </motion.div>

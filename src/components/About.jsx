@@ -52,7 +52,7 @@ export default function About() {
                 height="22"
                 viewBox="0 0 24 24"
                 fill="none"
-                stroke="#A16207"
+                stroke="#2E3FA8"
                 strokeWidth="1.6"
                 strokeLinecap="round"
                 strokeLinejoin="round"

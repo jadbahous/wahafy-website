@@ -159,7 +159,7 @@ export default function CaptureScene({ scrollYProgress, isActive }) {
             baseline={false}
             scrollRange={[0.55 + s.t * 0.1, 0.95 + s.t * 0.05]}
             scrollYProgress={scrollYProgress}
-            stroke="#C9973A"
+            stroke="#4F6EFF"
             strokeWidth={0.9}
             opacity={0.55}
           />
@@ -194,7 +194,7 @@ export default function CaptureScene({ scrollYProgress, isActive }) {
           className="w-full h-full rounded-full transition-[filter] duration-500"
           style={{
             background:
-              'radial-gradient(circle, rgba(243,200,120,0.55) 0%, rgba(201,151,58,0.2) 45%, transparent 72%)',
+              'radial-gradient(circle, rgba(138,160,255,0.55) 0%, rgba(46,63,168,0.2) 45%, transparent 72%)',
             filter: isActive ? 'blur(4px) brightness(1.15)' : 'blur(7px)',
           }}
         />

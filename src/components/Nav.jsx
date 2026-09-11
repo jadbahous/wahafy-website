@@ -34,7 +34,7 @@ export default function Nav() {
     >
       <div className="section-wrap flex items-center justify-between h-[72px]">
         <Link to="/" className="flex items-center gap-2.5 group">
-          <span className="grid place-items-center w-8 h-8 rounded-md bg-gold text-ink font-display font-bold text-sm">
+          <span className="grid place-items-center w-8 h-8 rounded-md bg-gold text-white font-display font-bold text-sm">
             W
           </span>
           <span className="font-display font-semibold text-white text-[17px] tracking-tight">
@@ -61,7 +61,7 @@ export default function Nav() {
         <div className="flex items-center gap-3">
           <Link
             to="/contact"
-            className="hidden sm:inline-flex items-center rounded-full bg-white text-ink text-[14px] font-medium px-5 py-2.5 hover:bg-gold transition-colors duration-200"
+            className="hidden sm:inline-flex items-center rounded-full bg-white text-ink text-[14px] font-medium px-5 py-2.5 hover:bg-gold hover:text-white transition-colors duration-200"
           >
             Get started
           </Link>
