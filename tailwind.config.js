@@ -4,19 +4,22 @@ export default {
   theme: {
     extend: {
       colors: {
-        ink: '#16231F',
-        matte: '#1E322B',
-        panel: '#22362E',
-        line: 'rgba(243,245,242,0.12)',
-        'line-soft': 'rgba(243,245,242,0.06)',
-        paper: '#F3F5F2',
-        'paper-line': '#E4EDE7',
-        gold: '#4F7C6C',
-        'gold-deep': '#395A4E',
+        ink: '#000000',
+        matte: '#0a0a0a',
+        panel: '#0d0d0d',
+        line: 'rgba(255,255,255,0.14)',
+        'line-soft': 'rgba(255,255,255,0.08)',
+        paper: '#000000',
+        'paper-line': 'rgba(255,255,255,0.12)',
+        muted: '#9a9a9a',
+        stat: '#d8d8d8',
+        gold: '#d4d4d4',
+        'gold-deep': '#ffffff',
       },
       fontFamily: {
-        display: ['"Manrope"', 'sans-serif'],
-        body: ['"Manrope"', 'sans-serif'],
+        display: ['"Inter"', 'system-ui', 'sans-serif'],
+        body: ['"Inter"', 'system-ui', 'sans-serif'],
+        serif: ['"Instrument Serif"', 'Times New Roman', 'Times', 'serif'],
       },
       letterSpacing: {
         tightest: '-0.045em',
