@@ -4,19 +4,19 @@ export default {
   theme: {
     extend: {
       colors: {
-        ink: '#0C0C0C',
-        matte: '#141414',
-        panel: '#1C1C1C',
-        line: 'rgba(255,255,255,0.10)',
-        'line-soft': 'rgba(255,255,255,0.06)',
-        paper: '#FAFAF8',
-        'paper-line': '#E7E5E2',
-        gold: '#4F6EFF',
-        'gold-deep': '#2E3FA8',
+        ink: '#16231F',
+        matte: '#1E322B',
+        panel: '#22362E',
+        line: 'rgba(243,245,242,0.12)',
+        'line-soft': 'rgba(243,245,242,0.06)',
+        paper: '#F3F5F2',
+        'paper-line': '#E4EDE7',
+        gold: '#4F7C6C',
+        'gold-deep': '#395A4E',
       },
       fontFamily: {
-        display: ['"Space Grotesk"', 'sans-serif'],
-        body: ['"DM Sans"', 'sans-serif'],
+        display: ['"Manrope"', 'sans-serif'],
+        body: ['"Manrope"', 'sans-serif'],
       },
       letterSpacing: {
         tightest: '-0.045em',
