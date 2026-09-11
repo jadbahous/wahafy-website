@@ -11,8 +11,8 @@ export default {
         'line-soft': 'rgba(255,255,255,0.06)',
         paper: '#FAFAF8',
         'paper-line': '#E7E5E2',
-        gold: '#C9973A',
-        'gold-deep': '#A16207',
+        gold: '#4F6EFF',
+        'gold-deep': '#2E3FA8',
       },
       fontFamily: {
         display: ['"Space Grotesk"', 'sans-serif'],
