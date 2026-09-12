@@ -4,6 +4,7 @@ import { ArrowRight } from 'lucide-react';
 import Hero from '../components/Hero.jsx';
 import About from '../components/About.jsx';
 import AuroraField from '../components/AuroraField.jsx';
+import Loader from '../components/Loader.jsx';
 import { explore } from '../data.js';
 
 const fadeUp = {
@@ -100,6 +101,7 @@ function CtaBand() {
 export default function Home() {
   return (
     <>
+      <Loader />
       <Hero />
       <About />
       <Explore />
