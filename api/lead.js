@@ -1,7 +1,7 @@
 /* ==========================================================================
    POST /api/lead
    Body: { name, clientId (business name), phone, note, source }
-   Backs the "Get my free demo" form on the Wahafy site itself.
+   Backs the "Get my free demo" form on the Marhab site itself.
    ========================================================================== */
 var saveLead = require('./_lead.js');
 
