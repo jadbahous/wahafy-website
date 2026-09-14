@@ -8,27 +8,27 @@ export const nav = [
 export const hero = {
   eyebrow: 'AI websites & automation — built in Doha',
   headline: ['Your website', 'should sell', 'while you sleep.'],
-  sub: 'Wahafy builds AI-native websites for Qatar businesses — a concierge that answers questions, captures leads, books appointments, and follows up automatically, so nothing falls through the cracks.',
+  sub: 'Your customers are already reaching out — on your website, on WhatsApp, on Instagram. Marhab AI makes sure every one of them gets answered, captured, and booked. Around the clock.',
   primaryCta: { label: 'Get my free demo', href: '/contact' },
   secondaryCta: { label: 'See the work', href: '/work' },
 };
 
 export const about = {
-  eyebrow: 'What is Wahafy',
-  heading: 'A studio that builds websites that actually do the work.',
-  body: "Wahafy is a small, focused studio building AI-native websites for Qatar's independent businesses — clinics, cafés, studios, and service providers who are excellent at what they do, but don't have time to chase every enquiry. We pair considered design with an AI concierge trained on your business, so the site doesn't just look good — it works, around the clock.",
+  eyebrow: 'Why Marhab',
+  heading: 'The customers are already there. Most businesses just don’t catch them.',
+  body: "Marhab is the word you hear before anything else in Doha — before the price, before the appointment, someone says marhaba. Welcome. The problem is the word stops at the door. Across Qatar we kept seeing the same thing: customers landing on the website, messaging on WhatsApp, asking on Instagram — real demand, arriving every day — and almost none of it captured. Messages sat until morning. Questions got answered three days later, after the customer had booked somewhere else. Marhab AI is built to fix exactly that: not to find new customers, but to catch the ones you already have. It answers the moment someone asks, in your own words, at three in the afternoon or three in the morning; logs every enquiry so nothing is lost; books the appointment into your real calendar; and follows up the next day.",
   pillars: [
     {
-      title: 'Built for your business',
-      text: 'The AI concierge is trained on your real services, pricing, and hours — not a generic chatbot with a script.',
+      title: 'Trained on your business',
+      text: 'Your real services, prices, and hours — answered in your tone. Not a generic chatbot reading a script.',
     },
     {
-      title: 'Never miss a lead',
-      text: 'Every conversation is logged automatically, and every enquiry reaches you the moment it happens.',
+      title: 'Every enquiry, captured',
+      text: 'Website, WhatsApp, Instagram — every conversation is logged and reaches you the moment it happens.',
     },
     {
       title: 'Grows with you',
-      text: 'Start with a site that captures leads. Add booking, reminders, and analytics whenever you’re ready.',
+      text: 'Start with a site that captures leads. Add booking, WhatsApp reminders, and analytics whenever you’re ready.',
     },
   ],
 };
@@ -156,7 +156,7 @@ export const explore = [
 ];
 
 export const footer = {
-  brand: 'Wahafy',
-  tagline: 'AI websites & automation for Qatar businesses.',
+  brand: 'Marhab AI',
+  tagline: 'Every customer who reaches out, answered.',
   location: 'Doha, Qatar',
 };
