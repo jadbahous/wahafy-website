@@ -1,6 +1,6 @@
-# Wahafy — agency website
+# Marhab AI — agency website
 
-The Wahafy studio site: what Wahafy is, Standard vs Premium services, a
+The Marhab AI studio site: what Marhab is, Standard vs Premium services, a
 showcase of the Pearl & Bloom and Dune & Bean pilot builds, and a lead
 capture form.
 
