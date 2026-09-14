@@ -7,7 +7,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 // minimum duration so it never flashes, then the whole sheet wipes upward
 // to reveal the page. Shown once per session; skipped for reduced motion.
 
-const KEY = 'wahafy:loaded';
+const KEY = 'marhab:loaded';
 const MIN_MS = 2100;
 
 export default function Loader({ onDone }) {
@@ -101,12 +101,7 @@ export default function Loader({ onDone }) {
           </div>
 
           <div className="absolute top-6 left-0 right-0 flex justify-center">
-            <span className="flex items-center gap-2.5">
-              <span className="grid place-items-center w-6 h-6 rounded-md bg-white text-black font-display font-bold text-[11px]">
-                W
-              </span>
-              <span className="font-display font-semibold text-[15px] tracking-tight text-white/85">Wahafy</span>
-            </span>
+            <img src="/brand/lockup-white.png" alt="Marhab" className="h-[26px] w-auto opacity-90 select-none" draggable="false" />
           </div>
 
           <motion.div

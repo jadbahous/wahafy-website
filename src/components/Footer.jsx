@@ -9,11 +9,8 @@ export default function Footer() {
   return (
     <footer className="bg-ink text-white/35 py-8 border-t border-white/10">
       <div className="section-wrap flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] uppercase tracking-[0.14em]">
-        <Link to="/" className="flex items-center gap-2.5 normal-case tracking-normal">
-          <span className="grid place-items-center w-6 h-6 rounded-md bg-white text-black font-display font-bold text-[11px]">
-            W
-          </span>
-          <span className="text-white/60">{footer.brand}</span>
+        <Link to="/" className="flex items-center normal-case tracking-normal" aria-label={footer.brand}>
+          <img src="/brand/lockup-white.png" alt={footer.brand} className="h-[22px] w-auto opacity-80 select-none" draggable="false" />
         </Link>
         <span className="normal-case tracking-normal text-white/30">{footer.tagline}</span>
         <div className="flex items-center gap-6">

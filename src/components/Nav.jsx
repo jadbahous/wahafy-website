@@ -38,13 +38,13 @@ export default function Nav() {
         className="fixed top-0 left-0 right-0 z-50 bg-black/70 backdrop-blur-md border-b border-white/10"
       >
         <div className="section-wrap grid grid-cols-[1fr_auto_1fr] items-center h-[72px]">
-          <Link to="/" className="justify-self-start flex items-center gap-2.5 group">
-            <span className="grid place-items-center w-8 h-8 rounded-md bg-white text-black font-display font-bold text-sm">
-              W
-            </span>
-            <span className="font-display font-semibold text-white text-[17px] tracking-tight">
-              Wahafy
-            </span>
+          <Link to="/" className="justify-self-start flex items-center group" aria-label="Marhab AI — home">
+            <img
+              src="/brand/lockup-white.png"
+              alt="Marhab"
+              className="h-[30px] w-auto select-none"
+              draggable="false"
+            />
           </Link>
 
           <nav className="hidden md:flex items-center gap-2" aria-label="Primary">

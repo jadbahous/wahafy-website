@@ -105,7 +105,7 @@ export default function Hero() {
     const url = window.location.origin;
     try {
       if (navigator.share) {
-        await navigator.share({ title: 'Wahafy', text: 'Websites that sell while you sleep.', url });
+        await navigator.share({ title: 'Marhab AI', text: 'Every customer who reaches out, answered.', url });
       } else {
         await navigator.clipboard.writeText(url);
         setShared(true);
