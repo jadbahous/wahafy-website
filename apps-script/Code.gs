@@ -1,5 +1,5 @@
 /**
- * Wahafy website — "Get my free demo" form backend, Google Apps Script Web App.
+ * Marhab AI website — "Get my free demo" form backend, Google Apps Script Web App.
  * Paste this whole file into Extensions > Apps Script on a Google Sheet,
  * then deploy as a Web App (see README.md in this folder for the steps).
  */
@@ -34,10 +34,10 @@ function doPost(e) {
     data.source || ''
   ]);
 
-  var subject = 'Wahafy enquiry: ' + (data.name || 'Unknown') +
+  var subject = 'Marhab enquiry: ' + (data.name || 'Unknown') +
     (data.clientId ? ' (' + data.clientId + ')' : '');
   var body =
-    'New enquiry from the Wahafy website!\n\n' +
+    'New enquiry from the Marhab website!\n\n' +
     'Business: ' + (data.clientId || '') + '\n' +
     'Name: ' + (data.name || '') + '\n' +
     'Phone: ' + (data.phone || '') + '\n' +
@@ -58,5 +58,5 @@ function doPost(e) {
 
 // Lets you sanity-check the deployed URL by opening it in a browser.
 function doGet(e) {
-  return ContentService.createTextOutput('Wahafy lead endpoint is live.');
+  return ContentService.createTextOutput('Marhab lead endpoint is live.');
 }

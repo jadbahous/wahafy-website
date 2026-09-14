@@ -1,19 +1,19 @@
 # Lead sheet + email notifier (Google Apps Script)
 
-Backs the "Get my free demo" form on the Wahafy site. Free, no API key, runs
+Backs the "Get my free demo" form on the Marhab site. Free, no API key, runs
 entirely under your own Google account.
 
 ## One-time setup (about 5 minutes)
 
 1. Go to **sheets.google.com** and create a new blank spreadsheet. Name it
-   something like `Wahafy — Leads`.
+   something like `Marhab — Leads`.
 2. In the sheet, go to **Extensions → Apps Script**. A new tab opens with a
    code editor.
 3. Delete the placeholder code in `Code.gs` and paste in the contents of
    `Code.gs` from this folder.
 4. Click **Deploy → New deployment**. Click the gear icon next to
    "Select type" and choose **Web app**.
-   - Description: `wahafy lead endpoint`
+   - Description: `marhab lead endpoint`
    - Execute as: **Me**
    - Who has access: **Anyone**
 5. Click **Deploy**. The first time, Google will ask you to authorize the
