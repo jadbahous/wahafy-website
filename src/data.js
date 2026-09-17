@@ -36,11 +36,13 @@ export const about = {
 export const services = {
   eyebrow: 'Services',
   heading: 'Two ways to work with us.',
-  sub: 'Every project starts with a custom-designed website. From there, choose how much of the follow-up you want automated.',
+  sub: 'Every project starts with a custom-designed website. From there, choose how much of the follow-up you want automated. Clear pricing, no surprises.',
   tiers: [
     {
       name: 'Standard',
       tagline: 'A site that captures every lead.',
+      price: { setup: '12,000', monthly: '1,500' },
+      monthlyCovers: 'Hosting, AI concierge usage, monitoring, and monthly content updates.',
       features: [
         'Custom-designed, multi-page website',
         'AI chat concierge trained on your business',
@@ -54,6 +56,8 @@ export const services = {
     {
       name: 'Premium',
       tagline: 'A site that runs the follow-up for you.',
+      price: { setup: '18,000', monthly: '3,500' },
+      monthlyCovers: 'Everything in Standard, plus WhatsApp messaging fees, booking sync, the live dashboard, and priority support.',
       features: [
         'Everything in Standard',
         'Live appointment booking synced to your calendar',
@@ -66,6 +70,7 @@ export const services = {
       highlight: true,
     },
   ],
+  note: 'Setup prices are starting points — the final quote depends on the size of the site and is confirmed after a free discovery call. Monthly plans run on a 12-month term; the site, concierge, and hosting are provided as a service and stay live for as long as the plan is active.',
 };
 
 export const work = {
@@ -138,7 +143,7 @@ export const explore = [
   {
     label: 'Services',
     heading: 'Standard vs. Premium',
-    text: 'Two ways to work with us — from lead capture to fully automated booking and follow-up.',
+    text: 'Two ways to work with us — from lead capture at 12,000 QAR to fully automated booking and follow-up from 18,000 QAR.',
     href: '/services',
   },
   {
