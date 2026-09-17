@@ -12,7 +12,7 @@ export default function ServicesPreview() {
     <section className="bg-ink text-white py-28 md:py-36 border-t border-white/[0.08]">
       <div className="section-wrap grid lg:grid-cols-12 gap-12 lg:gap-8">
         <div className="lg:col-span-4">
-          <SectionHeading eyebrow={servicesPreview.eyebrow} heading={servicesPreview.heading} cta={servicesPreview.cta} max="16ch" className="lg:sticky lg:top-28" />
+          <SectionHeading eyebrow={servicesPreview.eyebrow} heading={servicesPreview.heading} cta={servicesPreview.cta} max="22ch" className="lg:sticky lg:top-28" />
         </div>
 
         <ul className="lg:col-span-8 border-t border-white/10">

@@ -10,7 +10,7 @@ export default function QatarBand() {
     <section className="bg-ink text-white py-28 md:py-36 border-t border-white/[0.08]">
       <div className="section-wrap grid lg:grid-cols-12 gap-12 lg:gap-8 items-start">
         <div className="lg:col-span-5">
-          <SectionHeading eyebrow={qatar.eyebrow} heading={qatar.heading} max="14ch" />
+          <SectionHeading eyebrow={qatar.eyebrow} heading={qatar.heading} max="20ch" />
           <motion.p
             variants={fadeUp}
             custom={1}
