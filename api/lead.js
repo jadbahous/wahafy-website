@@ -19,8 +19,11 @@ export default async function handler(req, res) {
 
   const ok = await saveLead({
     clientId: body.clientId,
+    businessType: body.businessType,
     name: body.name,
     phone: body.phone,
+    email: body.email,
+    website: body.website,
     note: body.note,
     source: body.source || 'website-form',
   });

@@ -15,8 +15,11 @@ export default async function saveLead(lead) {
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify({
         clientId: lead.clientId || 'marhab',
+        businessType: lead.businessType || '',
         name: lead.name || '',
         phone: lead.phone || '',
+        email: lead.email || '',
+        website: lead.website || '',
         note: lead.note || '',
         source: lead.source || 'website-form',
         time: new Date().toISOString(),
