@@ -10,12 +10,10 @@ import SectionHeading from './SectionHeading.jsx';
 export default function ServicesPreview() {
   return (
     <section className="bg-ink text-white py-28 md:py-36 border-t border-white/[0.08]">
-      <div className="section-wrap grid lg:grid-cols-12 gap-12 lg:gap-8">
-        <div className="lg:col-span-4">
-          <SectionHeading eyebrow={servicesPreview.eyebrow} heading={servicesPreview.heading} cta={servicesPreview.cta} max="16ch" className="lg:sticky lg:top-28" />
-        </div>
+      <div className="section-wrap">
+        <SectionHeading eyebrow={servicesPreview.eyebrow} heading={servicesPreview.heading} cta={servicesPreview.cta} max="20ch" className="mb-14 md:mb-20" />
 
-        <ul className="lg:col-span-8 border-t border-white/10">
+        <ul className="border-t border-white/10">
           {servicesPreview.items.map((s, i) => (
             <motion.li key={s.title} variants={fadeUp} custom={i + 1} initial="hidden" whileInView="visible" viewport={viewportOnce}>
               <Link
