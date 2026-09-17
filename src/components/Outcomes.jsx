@@ -32,7 +32,7 @@ export default function Outcomes() {
       <div className="section-wrap">
         <div className="grid lg:grid-cols-12 gap-10 lg:gap-8 mb-14 md:mb-20">
           <div className="lg:col-span-7">
-            <SectionHeading eyebrow={outcomes.eyebrow} heading={outcomes.heading} max="18ch" />
+            <SectionHeading eyebrow={outcomes.eyebrow} heading={outcomes.heading} max="21ch" />
           </div>
           <motion.p
             variants={fadeUp}

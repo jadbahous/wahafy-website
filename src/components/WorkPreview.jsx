@@ -35,7 +35,7 @@ export default function WorkPreview() {
   return (
     <section className="bg-ink text-white py-28 md:py-36 border-t border-white/[0.08]">
       <div className="section-wrap">
-        <SectionHeading eyebrow={work.eyebrow} heading={work.heading} cta={{ label: 'See the full case studies', href: '/work' }} max="24ch" className="mb-14 md:mb-20" />
+        <SectionHeading eyebrow={work.eyebrow} heading={work.heading} cta={{ label: 'See the full case studies', href: '/work' }} max="17ch" className="mb-14 md:mb-20" />
 
         <div className="grid md:grid-cols-2 gap-5">
           {work.projects.map((p, i) => (

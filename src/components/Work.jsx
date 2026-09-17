@@ -13,7 +13,7 @@ export default function Work() {
   return (
     <section id="work" className="bg-ink text-white pt-36 md:pt-44 pb-24 md:pb-32">
       <div className="section-wrap">
-        <SectionHeading eyebrow={work.eyebrow} heading={work.heading} sub={work.sub} max="52ch" className="mb-16 md:mb-24" />
+        <SectionHeading eyebrow={work.eyebrow} heading={work.heading} sub={work.sub} max="17ch" subMax="58ch" className="mb-16 md:mb-24" />
 
         <div className="flex flex-col gap-20 md:gap-28">
           {work.projects.map((p, i) => (

@@ -9,7 +9,7 @@ export default function ProcessPreview() {
   return (
     <section className="bg-ink text-white py-28 md:py-36 border-t border-white/[0.08]">
       <div className="section-wrap">
-        <SectionHeading eyebrow={processHome.eyebrow} heading={processHome.heading} cta={processHome.cta} max="20ch" className="mb-14 md:mb-20" />
+        <SectionHeading eyebrow={processHome.eyebrow} heading={processHome.heading} cta={processHome.cta} max="16ch" className="mb-14 md:mb-20" />
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-white/10 rounded-2xl overflow-hidden border border-white/10">
           {process.steps.map((s, i) => (

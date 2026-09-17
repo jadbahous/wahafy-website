@@ -17,7 +17,7 @@ export default function Process() {
   return (
     <section id="process" className="bg-ink text-white pt-36 md:pt-44 pb-24 md:pb-32">
       <div className="section-wrap">
-        <SectionHeading eyebrow={process.eyebrow} heading={process.heading} sub={process.sub} max="40ch" className="mb-16 md:mb-24" />
+        <SectionHeading eyebrow={process.eyebrow} heading={process.heading} sub={process.sub} max="16ch" subMax="46ch" className="mb-16 md:mb-24" />
 
         <div ref={ref} className="relative">
           <div className="absolute left-[15px] md:left-1/2 top-3 bottom-3 w-px bg-white/10 md:-translate-x-1/2">

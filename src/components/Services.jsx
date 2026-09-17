@@ -20,7 +20,7 @@ export default function Services() {
     <>
       <section id="services" className="bg-ink text-white pt-36 md:pt-44 pb-24 md:pb-32">
         <div className="section-wrap">
-          <SectionHeading eyebrow={services.eyebrow} heading={services.heading} sub={services.sub} max="52ch" className="mb-16 md:mb-24" />
+          <SectionHeading eyebrow={services.eyebrow} heading={services.heading} sub={services.sub} max="16ch" subMax="58ch" className="mb-16 md:mb-24" />
 
           <div className="border-t border-white/10">
             {services.categories.map((c, i) => (
@@ -58,7 +58,7 @@ export default function Services() {
 
       <section id="plans" className="bg-ink text-white py-24 md:py-32 border-t border-white/[0.08] scroll-mt-16">
         <div className="section-wrap">
-          <SectionHeading eyebrow={services.tiersEyebrow} heading={services.tiersHeading} sub={services.tiersSub} max="46ch" className="mb-16" />
+          <SectionHeading eyebrow={services.tiersEyebrow} heading={services.tiersHeading} sub={services.tiersSub} max="16ch" subMax="52ch" className="mb-16" />
 
           <div className="grid md:grid-cols-2 gap-6">
             {services.tiers.map((tier, i) => (

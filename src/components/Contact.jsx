@@ -56,7 +56,7 @@ export default function Contact() {
     <section id="contact" className="bg-ink text-white pt-36 md:pt-44 pb-24 md:pb-32">
       <div className="section-wrap grid lg:grid-cols-12 gap-12 lg:gap-10">
         <div className="lg:col-span-5">
-          <SectionHeading eyebrow={contact.eyebrow} heading={contact.heading} sub={contact.sub} max="30ch" />
+          <SectionHeading eyebrow={contact.eyebrow} heading={contact.heading} sub={contact.sub} max="15ch" subMax="42ch" />
 
           <motion.ol
             variants={fadeUp}

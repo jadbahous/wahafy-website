@@ -20,7 +20,7 @@ export default function Journey() {
   return (
     <section className="bg-ink text-white py-28 md:py-36 border-t border-white/[0.08] overflow-hidden">
       <div className="section-wrap">
-        <SectionHeading eyebrow={journey.eyebrow} heading={journey.heading} sub={journey.sub} align="center" max="30ch" className="mb-16 md:mb-24" />
+        <SectionHeading eyebrow={journey.eyebrow} heading={journey.heading} sub={journey.sub} align="center" max="20ch" className="mb-16 md:mb-24" />
 
         <div ref={ref} className="relative">
           {/* Desktop: horizontal */}
