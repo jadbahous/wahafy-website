@@ -56,8 +56,16 @@ export default function ChatWidget() {
     function onKey(e) {
       if (e.key === 'Escape') setOpen(false);
     }
+    // Any "Try it yourself" / "Talk to Marhab" button on the site opens the panel.
+    function onOpen() {
+      setOpen(true);
+    }
     window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
+    window.addEventListener('marhab:open-chat', onOpen);
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      window.removeEventListener('marhab:open-chat', onOpen);
+    };
   }, []);
 
   async function send(text) {

@@ -25,19 +25,10 @@ import FluidField from './FluidField.jsx';
 // — before the section releases into the normal page. The CTA bar and the
 // corner labels stay put the whole way down; the site still has to sell.
 
-const stats = [
-  { icon: Clock, label: 'Live in days — not months' },
-  { icon: MessageCircle, label: 'AI concierge, answering 24/7' },
-  { icon: MapPin, label: 'Qatar-built, for Qatar businesses' },
-];
-
-const numbers = [
-  { value: 24, suffix: '/7', label: 'Answering questions and capturing leads, around the clock.' },
-  { value: 100, suffix: '%', label: 'Of enquiries logged and sent to you the moment they land.' },
-  { value: 4, suffix: '', label: 'Steps from the first call to a live, connected site.' },
-];
-
-const lines = ['Answers questions.', 'Books appointments.', 'Follows up — automatically.'];
+const statIcons = [Clock, MessageCircle, MapPin];
+const stats = hero.meta.map((label, i) => ({ icon: statIcons[i], label }));
+const numbers = hero.numbers;
+const lines = hero.lines;
 
 const scenes = ['01', '02', '03'];
 
@@ -101,6 +92,12 @@ export default function Hero() {
 
   const v = (style) => (prefersReducedMotion ? undefined : style);
 
+  function seeItInAction(e) {
+    e.preventDefault();
+    const el = document.getElementById('demo');
+    if (el) el.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'start' });
+  }
+
   async function share() {
     const url = window.location.origin;
     try {
@@ -151,21 +148,22 @@ export default function Hero() {
             >
               <motion.h1
                 style={v({ y: aLine1Y })}
-                className="font-display font-semibold text-white text-[clamp(2.3rem,10vw,6.4rem)] leading-[0.95] tracking-[-0.04em] max-w-[16ch]"
+                className="font-display font-semibold text-white text-[clamp(2.1rem,7.2vw,5.2rem)] leading-[0.98] tracking-[-0.04em] max-w-[14ch]"
               >
-                Websites that
+                {hero.headline[0]}
               </motion.h1>
-              <motion.p
+              <motion.div
                 style={v({ opacity: aSubOpacity, scale: aSubScale })}
-                className="mx-auto max-w-[420px] text-center text-[14.5px] md:text-[15.5px] leading-relaxed text-white/55"
+                className="mx-auto max-w-[460px] text-center"
               >
-                {hero.sub}
-              </motion.p>
+                <p className="text-[10.5px] md:text-[11px] uppercase tracking-[0.18em] text-white/40 mb-3">{hero.support}</p>
+                <p className="text-[14.5px] md:text-[15.5px] leading-relaxed text-white/60">{hero.sub}</p>
+              </motion.div>
               <motion.h1
                 style={v({ y: aLine2Y })}
-                className="self-end font-display font-semibold text-white text-[clamp(2.5rem,11vw,7.2rem)] leading-[0.95] tracking-[-0.04em] text-right max-w-[20ch]"
+                className="self-end font-display font-semibold text-white text-[clamp(3.2rem,14vw,9.5rem)] leading-[0.9] tracking-[-0.05em] text-right"
               >
-                sell while you sleep.
+                {hero.headline[1]}
               </motion.h1>
             </motion.div>
 
@@ -222,11 +220,9 @@ export default function Hero() {
           {/* Bottom bar */}
           <div className="border-t border-white/10 py-6 md:py-7 flex items-center justify-between gap-6">
             <div className="flex flex-wrap items-center gap-3">
-              <Button asChild size="lg" variant="gradient" className="group h-[42px] px-[18px]">
-                <Link to={hero.primaryCta.href}>
-                  {hero.primaryCta.label}
-                  <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-                </Link>
+              <Button size="lg" variant="gradient" className="group h-[42px] px-[18px]" onClick={seeItInAction}>
+                {hero.primaryCta.label}
+                <ArrowRight className="ml-2 h-4 w-4 rotate-90 transition-transform duration-300 group-hover:translate-y-0.5" />
               </Button>
               <Button asChild size="lg" variant="outline" className="h-[42px] px-[18px]">
                 <Link to={hero.secondaryCta.href}>{hero.secondaryCta.label}</Link>

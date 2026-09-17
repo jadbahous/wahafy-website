@@ -2,11 +2,22 @@ import { useEffect, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
-import { nav } from '../data.js';
+import { nav, navCta } from '../data.js';
 
 export default function Nav() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const { pathname } = useLocation();
+
+  // Transparent over the hero; a quiet dark glass once the page moves.
+  useEffect(() => {
+    function onScroll() {
+      setScrolled(window.scrollY > 24);
+    }
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   useEffect(() => {
     setOpen(false);
@@ -35,9 +46,11 @@ export default function Nav() {
         initial={{ y: -40, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        className="fixed top-0 left-0 right-0 z-50 bg-black/70 backdrop-blur-md border-b border-white/10"
+        className={`fixed top-0 left-0 right-0 z-50 border-b transition-[background-color,border-color,backdrop-filter] duration-500 ${
+          scrolled || open ? 'bg-black/70 backdrop-blur-md border-white/10' : 'bg-transparent border-transparent'
+        }`}
       >
-        <div className="section-wrap grid grid-cols-[1fr_auto_1fr] items-center h-[72px]">
+        <div className={`section-wrap grid grid-cols-[1fr_auto_1fr] items-center transition-[height] duration-500 ${scrolled ? 'h-[64px]' : 'h-[72px]'}`}>
           <Link to="/" className="justify-self-start flex items-center group" aria-label="Marhab AI — home">
             <img
               src="/brand/lockup-white.png"
@@ -61,10 +74,10 @@ export default function Nav() {
 
           <div className="justify-self-end flex items-center gap-3">
             <Link
-              to="/contact"
-              className="hidden sm:inline-flex items-center rounded-full text-white text-[14px] font-medium px-5 py-2.5 border border-white/25 bg-white/[0.04] backdrop-blur-md hover:border-white/50 hover:bg-white/[0.08] hover:shadow-[0_0_20px_rgba(170,200,255,0.18)] transition-all duration-300"
+              to={navCta.href}
+              className="hidden sm:inline-flex items-center rounded-full text-black text-[14px] font-medium px-5 py-2.5 bg-gradient-to-b from-white via-[#e7e7e7] to-[#cfcfcf] border border-white hover:shadow-[0_0_20px_rgba(186,208,255,0.35)] active:scale-[0.98] transition-[box-shadow,transform] duration-300"
             >
-              Get started
+              {navCta.label}
             </Link>
 
             <button
@@ -118,10 +131,10 @@ export default function Nav() {
                 className="w-full max-w-[320px] mt-3"
               >
                 <Link
-                  to="/contact"
+                  to={navCta.href}
                   className="flex items-center justify-center w-full h-14 rounded-[10px] text-[16px] font-medium text-black bg-gradient-to-b from-white via-[#e7e7e7] to-[#cfcfcf]"
                 >
-                  Get started
+                  {navCta.label}
                 </Link>
               </motion.div>
             </nav>
