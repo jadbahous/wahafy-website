@@ -21,7 +21,7 @@ export const hero = {
   meta: ['Premium websites', 'AI reception, 24/7', 'Built for Qatar'],
   numbers: [
     { value: 24, suffix: '/7', label: 'Answering enquiries, capturing leads and booking appointments — around the clock.' },
-    { value: 100, suffix: '%', label: 'Of enquiries captured and sent to you the moment they land.' },
+    { text: 'Every lead, in one place.', label: 'Enquiries captured and sent to you the moment they arrive.' },
     { value: 2, suffix: '', label: 'Languages — Arabic and English, in the same conversation.' },
   ],
   lines: ['Answers questions.', 'Books appointments.', 'Follows up — automatically.'],
@@ -78,7 +78,7 @@ export const servicesPreview = {
   cta: { label: 'Explore all services', href: '/services' },
   items: [
     { title: 'Premium websites', text: 'Digital experiences designed around conversion, credibility and customer experience.' },
-    { title: 'AI reception', text: 'Instantly answer common enquiries and guide customers toward the right action.' },
+    { title: 'AI reception', text: 'Your 24/7 AI receptionist — answers common enquiries instantly and guides customers toward the right next step.' },
     { title: 'Booking & lead systems', text: 'Turn website and customer conversations into structured leads and appointments.' },
     { title: 'Customer automation', text: 'Automate reminders, follow-ups and repetitive customer communication.' },
     { title: 'Growth & insights', text: 'Understand how visitors, conversations and bookings move through the journey.' },
@@ -98,7 +98,7 @@ export const qatar = {
   points: [
     { title: 'Arabic and English', text: 'Customers are answered in the language they write in — in the same conversation.' },
     { title: 'WhatsApp-first journeys', text: 'Confirmations, reminders and follow-ups arrive where your customers already are.' },
-    { title: 'Local context', text: 'Hours, weekends, prayer times and the way business is actually done here.' },
+    { title: 'Local context', text: 'Operating hours, weekends, local schedules and the way business is actually done here.' },
     { title: 'Support in Doha', text: 'A team you can meet — not a ticket queue in another time zone.' },
   ],
 };
@@ -126,7 +126,7 @@ export const services = {
     {
       n: '02',
       title: 'AI reception',
-      lead: 'Immediate assistance for every customer — including the ones who write at midnight.',
+      lead: 'An AI receptionist for your business — immediate, 24/7 assistance for every customer, including the ones who write at midnight.',
       points: ['Answers common questions instantly', 'Guides customers to the right service', 'Collects customer details naturally', 'Handles enquiries outside opening hours', 'Directs customers to book or get in touch', 'Arabic and English'],
     },
     {
@@ -164,7 +164,7 @@ export const services = {
         'Mobile-first, fast-loading build',
         'WhatsApp click-to-chat',
       ],
-      cta: { label: 'Get a quote', href: '/contact' },
+      cta: { label: 'Book a free demo', href: '/contact' },
       highlight: false,
     },
     {
@@ -180,11 +180,15 @@ export const services = {
         'Live dashboard — leads, bookings, trends',
         'Priority support and monthly tune-ups',
       ],
-      cta: { label: 'Get a quote', href: '/contact' },
+      cta: { label: 'Book a free demo', href: '/contact' },
       highlight: true,
     },
   ],
-  note: 'Setup prices are starting points — the final quote depends on the size of the site and is confirmed after a free discovery call. Monthly plans run on a 12-month term; the site, reception, and hosting are provided as a service and stay live for as long as the plan is active.',
+  note: [
+    'Setup prices are starting points — the final quote depends on the scope of the site and is confirmed after a free discovery call.',
+    'The setup fee covers the design and build of your website and customer system. The monthly plan covers what keeps it running — hosting, the AI reception, monitoring, updates and support — with Marhab managing the system on your behalf.',
+    'Plans run on a 12-month term. The full terms, including what happens at the end of a plan, are explained clearly before anything is signed.',
+  ],
 };
 
 /* ------------------------------------------------------------------ work */
@@ -248,7 +252,7 @@ export const work = {
 export const process = {
   eyebrow: 'Process',
   heading: 'Working with Marhab is simple.',
-  sub: 'Six steps, one point of contact, and a system that is live in days — not months.',
+  sub: 'Six steps, one point of contact, and a clear path from first conversation to launch.',
   steps: [
     { n: '01', title: 'Discover', text: 'We learn how your business receives enquiries, customers and bookings today — and where they slip through.', get: 'A short call and a clear summary of what’s being lost.' },
     { n: '02', title: 'Plan', text: 'We define what the customer experience should look like, from the first message to the review.', get: 'A one-page plan of the journey we’ll build.' },
