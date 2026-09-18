@@ -18,8 +18,8 @@ export function Panel({ title, sub, children, className = '' }) {
             <span className="absolute -right-0.5 -bottom-0.5 w-2 h-2 rounded-full bg-[#5ad88a] ring-2 ring-[#0b0b0b]" />
           </div>
           <div className="min-w-0">
-            <p className="text-[13.5px] font-medium leading-tight text-white truncate">{title}</p>
-            {sub && <p className="text-[11px] tracking-[0.04em] text-white/45 mt-0.5">{sub}</p>}
+            <p className="text-[14px] font-medium leading-tight text-white truncate">{title}</p>
+            {sub && <p className="text-[12px] tracking-[0.04em] text-white/60 mt-0.5">{sub}</p>}
           </div>
         </div>
       )}
@@ -33,7 +33,7 @@ export function Bubble({ role, children, className = '' }) {
   return (
     <div className={`flex ${me ? 'justify-end' : 'justify-start'} ${className}`}>
       <div
-        className={`max-w-[84%] px-[14px] py-[10px] text-[13.5px] leading-[1.5] ${
+        className={`max-w-[84%] px-[14px] py-[10px] text-[14px] leading-[1.5] ${
           me
             ? 'bg-white text-black rounded-[16px] rounded-br-[5px]'
             : 'bg-white/[0.06] border border-white/[0.07] text-white/85 rounded-[16px] rounded-bl-[5px]'
@@ -77,10 +77,10 @@ export function StatusRow({ label, detail, state = 'idle' }) {
         )}
       </span>
       <div className="flex-1 flex items-baseline justify-between gap-4 min-w-0">
-        <span className={`text-[13.5px] transition-colors duration-300 ${state === 'idle' ? 'text-white/35' : 'text-white'}`}>
+        <span className={`text-[14px] transition-colors duration-300 ${state === 'idle' ? 'text-white/50' : 'text-white'}`}>
           {label}
         </span>
-        <span className={`text-[12px] tabular-nums truncate transition-colors duration-300 ${state === 'idle' ? 'text-white/20' : 'text-white/45'}`}>
+        <span className={`text-[13px] tabular-nums truncate transition-colors duration-300 ${state === 'idle' ? 'text-white/20' : 'text-white/60'}`}>
           {detail}
         </span>
       </div>
@@ -95,11 +95,11 @@ export function BookingCard({ title, line1, line2, className = '' }) {
         <span className="grid place-items-center w-6 h-6 rounded-full bg-[#5ad88a]/15 border border-[#5ad88a]/30">
           <Check className="w-3.5 h-3.5 text-[#9fe7bb]" strokeWidth={2.5} />
         </span>
-        <p className="text-[13.5px] font-medium text-white">{title}</p>
+        <p className="text-[14px] font-medium text-white">{title}</p>
       </div>
-      <div className="mt-3 pt-3 border-t border-white/[0.08] text-[12.5px] leading-relaxed">
+      <div className="mt-3 pt-3 border-t border-white/[0.08] text-[13.5px] leading-relaxed">
         <p className="text-white/80">{line1}</p>
-        <p className="text-white/40">{line2}</p>
+        <p className="text-white/55">{line2}</p>
       </div>
     </div>
   );
