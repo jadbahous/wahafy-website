@@ -38,12 +38,12 @@ export default function Services() {
                     {c.n}
                   </span>
                   <h3 className="font-display font-semibold text-[clamp(1.6rem,3vw,2.2rem)] leading-[1.05] tracking-[-0.03em]">{c.title}</h3>
-                  <p className="mt-4 text-[16px] leading-relaxed text-white/55 max-w-[40ch]">{c.lead}</p>
+                  <p className="mt-4 text-[16px] leading-relaxed text-white/65 max-w-[40ch]">{c.lead}</p>
                 </div>
                 <ul className="lg:col-span-7 grid sm:grid-cols-2 gap-x-8 gap-y-3.5 lg:pt-[4.6rem]">
                   {c.points.map((p) => (
                     <li key={p} className="flex items-start gap-3 text-[14.5px] text-white/75">
-                      <span className="text-white/40">
+                      <span className="text-white/55">
                         <Check />
                       </span>
                       {p}
@@ -76,35 +76,35 @@ export default function Services() {
                 }`}
               >
                 {tier.highlight && (
-                  <span className="absolute -top-3 left-9 rounded-full bg-gradient-to-b from-white via-[#e7e7e7] to-[#cfcfcf] text-black text-[11.5px] font-medium px-3 py-1 tracking-wide">
+                  <span className="absolute -top-3 left-9 rounded-full bg-gradient-to-b from-white via-[#e7e7e7] to-[#cfcfcf] text-black text-[12.5px] font-medium px-3 py-1 tracking-wide">
                     Most popular
                   </span>
                 )}
 
                 <h3 className="font-display font-semibold text-[24px]">{tier.name}</h3>
-                <p className="mt-1.5 text-[15px] text-white/50">{tier.tagline}</p>
+                <p className="mt-1.5 text-[15px] text-white/65">{tier.tagline}</p>
 
                 {tier.price && (
                   <div className="mt-7 pt-7 border-t border-white/10">
                     <div className="flex flex-wrap items-end gap-x-6 gap-y-3">
                       <div>
-                        <p className="text-[11px] uppercase tracking-[0.16em] text-white/40 mb-1.5">From</p>
+                        <p className="text-[12px] uppercase tracking-[0.16em] text-white/55 mb-1.5">From</p>
                         <p className="font-display font-semibold text-[clamp(2rem,3.4vw,2.6rem)] leading-none tracking-[-0.035em] text-white tabular-nums">
                           {tier.price.setup}
-                          <span className="ml-1.5 text-[14px] font-medium tracking-normal text-white/55">QAR</span>
+                          <span className="ml-1.5 text-[14px] font-medium tracking-normal text-white/65">QAR</span>
                         </p>
-                        <p className="mt-1.5 text-[12.5px] text-white/45">one-time setup</p>
+                        <p className="mt-1.5 text-[13.5px] text-white/60">one-time setup</p>
                       </div>
                       <div className="pb-[3px]">
-                        <p className="text-[11px] uppercase tracking-[0.16em] text-white/40 mb-1.5">Then</p>
+                        <p className="text-[12px] uppercase tracking-[0.16em] text-white/55 mb-1.5">Then</p>
                         <p className="font-display font-semibold text-[22px] leading-none tracking-[-0.03em] text-white/85 tabular-nums">
                           {tier.price.monthly}
-                          <span className="ml-1 text-[12.5px] font-medium tracking-normal text-white/50">QAR / month</span>
+                          <span className="ml-1 text-[13.5px] font-medium tracking-normal text-white/65">QAR / month</span>
                         </p>
-                        <p className="mt-1.5 text-[12.5px] text-white/45">12-month plan</p>
+                        <p className="mt-1.5 text-[13.5px] text-white/60">12-month plan</p>
                       </div>
                     </div>
-                    <p className="mt-4 text-[13px] leading-relaxed text-white/45 max-w-[40ch]">
+                    <p className="mt-4 text-[13.5px] leading-relaxed text-white/60 max-w-[40ch]">
                       <span className="text-white/65">Monthly covers:</span> {tier.monthlyCovers}
                     </p>
                   </div>
@@ -113,7 +113,7 @@ export default function Services() {
                 <ul className="mt-8 space-y-3.5 flex-1">
                   {tier.features.map((f) => (
                     <li key={f} className="flex items-start gap-3 text-[14.5px] text-white/75">
-                      <span className={tier.highlight ? 'text-white' : 'text-white/40'}>
+                      <span className={tier.highlight ? 'text-white' : 'text-white/55'}>
                         <Check />
                       </span>
                       {f}
@@ -136,16 +136,20 @@ export default function Services() {
           </div>
 
           {services.note && (
-            <motion.p
+            <motion.div
               variants={fadeUp}
               custom={3}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: '-40px' }}
-              className="mt-8 text-[13px] leading-relaxed text-white/40 max-w-[78ch]"
+              className="mt-10 pt-8 border-t border-white/10 grid md:grid-cols-3 gap-6 md:gap-10"
             >
-              {services.note}
-            </motion.p>
+              {(Array.isArray(services.note) ? services.note : [services.note]).map((n, i) => (
+                <p key={i} className="text-[14px] leading-relaxed text-white/60 max-w-[44ch]">
+                  {n}
+                </p>
+              ))}
+            </motion.div>
           )}
         </div>
       </section>

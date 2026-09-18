@@ -27,7 +27,7 @@ export default function SectionHeading({
       className={`${centered ? 'flex flex-col items-center text-center' : ''} ${className}`}
     >
       {eyebrow && (
-        <p className="font-display text-[11px] tracking-[0.18em] uppercase text-white/40 mb-5">{eyebrow}</p>
+        <p className="font-display text-[12px] tracking-[0.18em] uppercase text-white/55 mb-5">{eyebrow}</p>
       )}
       <h2
         className="font-display font-semibold text-[clamp(2.2rem,5vw,3.6rem)] leading-[1.02] tracking-[-0.035em] text-white text-balance"
@@ -36,7 +36,7 @@ export default function SectionHeading({
         {heading}
       </h2>
       {sub && (
-        <p className="mt-5 text-[16px] leading-relaxed text-white/55" style={{ maxWidth: subMax }}>
+        <p className="mt-5 text-[16px] leading-relaxed text-white/65" style={{ maxWidth: subMax }}>
           {sub}
         </p>
       )}

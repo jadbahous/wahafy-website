@@ -22,11 +22,11 @@ export default function ProcessPreview() {
               viewport={viewportOnce}
               className="group bg-ink p-7 md:p-8 hover:bg-[#0a0a0a] transition-colors duration-300"
             >
-              <span className="block font-display font-semibold text-[clamp(2.4rem,5vw,3.6rem)] leading-none tracking-[-0.03em] text-white/15 group-hover:text-white/30 transition-colors duration-300 mb-4">
+              <span className="block font-display font-semibold text-[clamp(2.4rem,5vw,3.6rem)] leading-none tracking-[-0.03em] text-white/15 group-hover:text-white/45 transition-colors duration-300 mb-4">
                 {s.n}
               </span>
               <h3 className="font-display font-semibold text-[19px] mb-2">{s.title}</h3>
-              <p className="text-[14px] leading-relaxed text-white/50">{s.text}</p>
+              <p className="text-[14px] leading-relaxed text-white/65">{s.text}</p>
             </motion.div>
           ))}
         </div>

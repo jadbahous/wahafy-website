@@ -21,7 +21,7 @@ export default function Work() {
               {/* Header */}
               <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce} className="flex flex-wrap items-center gap-3 mb-5">
                 <DemoTag />
-                <span className="text-[12px] tracking-[0.12em] uppercase text-white/40">
+                <span className="text-[13px] tracking-[0.12em] uppercase text-white/55">
                   {p.type} · {p.location} · {p.tier}
                 </span>
               </motion.div>
@@ -41,7 +41,7 @@ export default function Work() {
                   initial="hidden"
                   whileInView="visible"
                   viewport={viewportOnce}
-                  className="lg:col-span-6 text-[16px] leading-relaxed text-white/55 max-w-[52ch] lg:pt-2"
+                  className="lg:col-span-6 text-[16px] leading-relaxed text-white/65 max-w-[52ch] lg:pt-2"
                 >
                   {p.description}
                 </motion.p>
@@ -59,7 +59,8 @@ export default function Work() {
                 <div className="lg:col-span-7">
                   <BrowserFrame src={p.image} alt={p.imageAlt} />
                 </div>
-                <div className="lg:col-span-5 grid grid-cols-[1fr_1.1fr] sm:grid-cols-2 lg:grid-cols-[1fr_1.15fr] gap-4 items-end">
+                <div className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1fr_1.15fr] gap-4 items-end">
+                  <div className="w-full max-w-[250px] sm:max-w-none">
                   <PhoneFrame>
                     <div className="relative aspect-[9/16] bg-[#111]">
                       <img src={p.image} alt="" loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
@@ -69,6 +70,7 @@ export default function Work() {
                       </div>
                     </div>
                   </PhoneFrame>
+                  </div>
                   <Panel title={p.name.split(' ').slice(0, 3).join(' ')} sub="AI reception">
                     <div className="px-3.5 py-4 flex flex-col gap-2.5">
                       {p.mock.chat.map((m, k) => (
@@ -82,11 +84,11 @@ export default function Work() {
               {/* Story */}
               <div className="grid md:grid-cols-2 gap-px bg-white/10 border border-white/10 rounded-2xl overflow-hidden mt-8 md:mt-10">
                 <motion.div variants={fadeUp} custom={1} initial="hidden" whileInView="visible" viewport={viewportOnce} className="bg-ink p-7 md:p-9">
-                  <p className="text-[11px] uppercase tracking-[0.18em] text-white/40 mb-4">The challenge</p>
+                  <p className="text-[12px] uppercase tracking-[0.18em] text-white/55 mb-4">The challenge</p>
                   <p className="text-[15px] leading-relaxed text-white/70">{p.challenge}</p>
                 </motion.div>
                 <motion.div variants={fadeUp} custom={2} initial="hidden" whileInView="visible" viewport={viewportOnce} className="bg-ink p-7 md:p-9">
-                  <p className="text-[11px] uppercase tracking-[0.18em] text-white/40 mb-4">The experience</p>
+                  <p className="text-[12px] uppercase tracking-[0.18em] text-white/55 mb-4">The experience</p>
                   <p className="text-[15px] leading-relaxed text-white/70">{p.experience}</p>
                 </motion.div>
               </div>
@@ -100,7 +102,7 @@ export default function Work() {
                 className="mt-8 flex flex-col md:flex-row md:items-center justify-between gap-6"
               >
                 <div>
-                  <p className="text-[11px] uppercase tracking-[0.18em] text-white/40 mb-3">The customer journey</p>
+                  <p className="text-[12px] uppercase tracking-[0.18em] text-white/55 mb-3">The customer journey</p>
                   <JourneyChips steps={p.journey} />
                 </div>
                 <a
@@ -124,7 +126,7 @@ export default function Work() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-40px' }}
-          className="mt-20 text-[13px] leading-relaxed text-white/40 max-w-[60ch]"
+          className="mt-20 text-[13.5px] leading-relaxed text-white/55 max-w-[60ch]"
         >
           {work.future}
         </motion.p>

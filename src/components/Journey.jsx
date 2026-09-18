@@ -71,7 +71,7 @@ function Stop({ label, index, n, progress, reduced }) {
       />
       <motion.span
         style={reduced ? undefined : { opacity }}
-        className={`mt-5 text-[13px] lg:text-[14px] tracking-[-0.01em] ${last ? 'font-semibold text-white' : 'text-white/85'}`}
+        className={`mt-5 text-[13.5px] lg:text-[14px] tracking-[-0.01em] ${last ? 'font-semibold text-white' : 'text-white/85'}`}
       >
         {label}
       </motion.span>

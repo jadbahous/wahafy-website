@@ -126,14 +126,14 @@ export default function ChatWidget() {
                 </div>
                 <div>
                   <p className="text-[14px] font-medium leading-tight">Marhab</p>
-                  <p className="text-[11px] tracking-[0.04em] text-white/45 mt-0.5">AI assistant · replies in seconds</p>
+                  <p className="text-[12px] tracking-[0.04em] text-white/60 mt-0.5">AI assistant · replies in seconds</p>
                 </div>
               </div>
               <button
                 type="button"
                 onClick={() => setOpen(false)}
                 aria-label="Close chat"
-                className="grid place-items-center w-8 h-8 rounded-full text-white/55 hover:text-white hover:bg-white/[0.06] transition-colors duration-200"
+                className="grid place-items-center w-8 h-8 rounded-full text-white/65 hover:text-white hover:bg-white/[0.06] transition-colors duration-200"
               >
                 <X className="w-4 h-4" strokeWidth={1.8} />
               </button>
@@ -144,7 +144,7 @@ export default function ChatWidget() {
               {messages.map((m, i) => (
                 <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                   <div
-                    className={`max-w-[84%] px-[14px] py-[10px] text-[13.5px] leading-[1.55] whitespace-pre-wrap break-words ${
+                    className={`max-w-[84%] px-[14px] py-[10px] text-[14px] leading-[1.55] whitespace-pre-wrap break-words ${
                       m.role === 'user'
                         ? 'bg-white text-black rounded-[16px] rounded-br-[5px]'
                         : 'bg-white/[0.06] border border-white/[0.07] text-white/85 rounded-[16px] rounded-bl-[5px]'
@@ -157,7 +157,7 @@ export default function ChatWidget() {
 
               {captured && (
                 <div className="flex justify-start">
-                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#5ad88a]/30 bg-[#5ad88a]/10 text-[11.5px] text-[#9fe7bb]">
+                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#5ad88a]/30 bg-[#5ad88a]/10 text-[12.5px] text-[#9fe7bb]">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#5ad88a]" />
                     Saved — Jad has your details
                   </div>
@@ -173,7 +173,7 @@ export default function ChatWidget() {
               )}
 
               {error && (
-                <p className="text-[12px] text-white/45 px-1">
+                <p className="text-[13px] text-white/60 px-1">
                   Couldn’t reach the assistant just now.{' '}
                   <button type="button" onClick={() => send(messages[messages.length - 1]?.content)} className="underline hover:text-white">
                     Try again
@@ -188,7 +188,7 @@ export default function ChatWidget() {
                       key={s}
                       type="button"
                       onClick={() => send(s)}
-                      className="px-3 py-1.5 rounded-full border border-white/[0.16] bg-transparent text-[12.5px] text-white/70 hover:text-white hover:border-white/40 hover:bg-white/[0.04] active:scale-[0.98] transition-[color,border-color,background-color,transform] duration-200"
+                      className="px-3 py-1.5 rounded-full border border-white/[0.16] bg-transparent text-[13.5px] text-white/70 hover:text-white hover:border-white/40 hover:bg-white/[0.04] active:scale-[0.98] transition-[color,border-color,background-color,transform] duration-200"
                     >
                       {s}
                     </button>
@@ -211,7 +211,7 @@ export default function ChatWidget() {
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Ask about your business…"
                 autoComplete="off"
-                className="flex-1 h-[42px] rounded-full border border-white/[0.14] bg-white/[0.04] px-4 text-[13.5px] text-white placeholder:text-white/35 focus:outline-none focus:border-white/50 focus:bg-white/[0.06] transition-[border-color,background-color] duration-150"
+                className="flex-1 h-[42px] rounded-full border border-white/[0.14] bg-white/[0.04] px-4 text-[14px] text-white placeholder:text-white/50 focus:outline-none focus:border-white/50 focus:bg-white/[0.06] transition-[border-color,background-color] duration-150"
               />
               <button
                 type="submit"

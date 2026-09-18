@@ -40,7 +40,7 @@ export default function Outcomes() {
             initial="hidden"
             whileInView="visible"
             viewport={viewportOnce}
-            className="lg:col-span-5 lg:pt-14 text-[16px] leading-relaxed text-white/55 max-w-[44ch]"
+            className="lg:col-span-5 lg:pt-14 text-[16px] leading-relaxed text-white/65 max-w-[44ch]"
           >
             {outcomes.sub}
           </motion.p>
@@ -56,7 +56,7 @@ export default function Outcomes() {
                     <Icon className="w-[18px] h-[18px]" strokeWidth={1.6} />
                   </span>
                   <h3 className="mt-6 font-display font-semibold text-[19px] leading-snug text-white">{o.title}</h3>
-                  <p className="mt-2.5 text-[14.5px] leading-relaxed text-white/55">{o.text}</p>
+                  <p className="mt-2.5 text-[14.5px] leading-relaxed text-white/65">{o.text}</p>
                 </SpotlightCard>
               </motion.div>
             );

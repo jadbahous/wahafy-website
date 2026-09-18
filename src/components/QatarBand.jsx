@@ -27,7 +27,7 @@ export default function QatarBand() {
           {qatar.points.map((p, i) => (
             <motion.div key={p.title} variants={fadeUp} custom={i + 1} initial="hidden" whileInView="visible" viewport={viewportOnce} className="bg-ink p-7 md:p-8">
               <h3 className="font-display font-semibold text-[18px] mb-2">{p.title}</h3>
-              <p className="text-[14.5px] leading-relaxed text-white/50">{p.text}</p>
+              <p className="text-[14.5px] leading-relaxed text-white/65">{p.text}</p>
             </motion.div>
           ))}
         </div>

@@ -46,7 +46,7 @@ function CountUp({ value, suffix, active }) {
   return (
     <span className="tabular-nums">
       {n}
-      <span className="text-white/55">{suffix}</span>
+      <span className="text-white/65">{suffix}</span>
     </span>
   );
 }
@@ -121,7 +121,7 @@ export default function Hero() {
           {/* Top meta row */}
           <motion.div
             style={v({ opacity: metaOpacity })}
-            className="pt-24 md:pt-28 flex items-center justify-between gap-6 text-[11px] uppercase tracking-[0.16em] text-white/45"
+            className="pt-24 md:pt-28 flex items-center justify-between gap-6 text-[12px] uppercase tracking-[0.16em] text-white/60"
           >
             <span className="inline-flex items-center gap-2">
               <span className="relative inline-flex w-1.5 h-1.5 rounded-full bg-white/70">
@@ -131,8 +131,8 @@ export default function Hero() {
             </span>
             <div className="hidden sm:flex items-center gap-7 normal-case tracking-normal">
               {stats.map((s) => (
-                <span key={s.label} className="inline-flex items-center gap-2 text-[12.5px] text-white/50">
-                  <s.icon className="w-3.5 h-3.5 text-white/40" strokeWidth={1.7} />
+                <span key={s.label} className="inline-flex items-center gap-2 text-[13.5px] text-white/65">
+                  <s.icon className="w-3.5 h-3.5 text-white/55" strokeWidth={1.7} />
                   {s.label}
                 </span>
               ))}
@@ -156,8 +156,8 @@ export default function Hero() {
                 style={v({ opacity: aSubOpacity, scale: aSubScale })}
                 className="mx-auto max-w-[460px] text-center"
               >
-                <p className="text-[10.5px] md:text-[11px] uppercase tracking-[0.18em] text-white/40 mb-3">{hero.support}</p>
-                <p className="text-[14.5px] md:text-[15.5px] leading-relaxed text-white/60">{hero.sub}</p>
+                <p className="text-[11.5px] md:text-[12px] uppercase tracking-[0.18em] text-white/55 mb-3">{hero.support}</p>
+                <p className="text-[14.5px] md:text-[15.5px] leading-relaxed text-white/70">{hero.sub}</p>
               </motion.div>
               <motion.h1
                 style={v({ y: aLine2Y })}
@@ -174,16 +174,22 @@ export default function Hero() {
                 className="absolute inset-0 flex flex-col justify-center"
                 aria-hidden={scene !== 1}
               >
-                <p className="text-[11px] uppercase tracking-[0.18em] text-white/45 mb-8 md:mb-12">
-                  What it does, in numbers
+                <p className="text-[13px] uppercase tracking-[0.18em] text-white/70 mb-8 md:mb-12">
+                  What it does
                 </p>
                 <div className="grid sm:grid-cols-3 gap-10 sm:gap-6 lg:gap-12">
                   {numbers.map((n) => (
                     <div key={n.label} className="border-t border-white/15 pt-6">
-                      <div className="font-display font-semibold text-white text-[clamp(3.6rem,9vw,7.5rem)] leading-none tracking-[-0.045em]">
-                        <CountUp value={n.value} suffix={n.suffix} active={scene === 1} />
-                      </div>
-                      <p className="mt-4 max-w-[28ch] text-[14px] md:text-[15px] leading-relaxed text-white/55">
+                      {n.text ? (
+                        <div className="font-display font-semibold text-white text-[clamp(2.3rem,4.6vw,3.9rem)] leading-[0.98] tracking-[-0.04em] min-h-[1em] sm:min-h-[2em] flex items-end">
+                          <span className="text-balance">{n.text}</span>
+                        </div>
+                      ) : (
+                        <div className="font-display font-semibold text-white text-[clamp(3.6rem,9vw,7.5rem)] leading-none tracking-[-0.045em]">
+                          <CountUp value={n.value} suffix={n.suffix} active={scene === 1} />
+                        </div>
+                      )}
+                      <p className="mt-4 max-w-[28ch] text-[14.5px] md:text-[15px] leading-relaxed text-white/65">
                         {n.label}
                       </p>
                     </div>
@@ -199,7 +205,7 @@ export default function Hero() {
                 className="absolute inset-0 flex flex-col justify-center"
                 aria-hidden={scene !== 2}
               >
-                <p className="text-[11px] uppercase tracking-[0.18em] text-white/45 mb-6 md:mb-8">Your site, working</p>
+                <p className="text-[12px] uppercase tracking-[0.18em] text-white/60 mb-6 md:mb-8">Your site, working</p>
                 <div className="flex flex-col gap-1 md:gap-2">
                   {lines.map((line, i) => (
                     <motion.h2
@@ -228,7 +234,7 @@ export default function Hero() {
                 <Link to={hero.secondaryCta.href}>{hero.secondaryCta.label}</Link>
               </Button>
             </div>
-            <div className="hidden sm:flex items-center gap-6 text-[12px] uppercase tracking-[0.14em] text-white/35">
+            <div className="hidden sm:flex items-center gap-6 text-[13px] uppercase tracking-[0.14em] text-white/50">
               <button type="button" onClick={share} className="hover:text-white transition-colors duration-200">
                 {shared ? 'Link copied' : 'Share'}
               </button>
@@ -243,7 +249,7 @@ export default function Hero() {
             {scenes.map((s, i) => (
               <span
                 key={s}
-                className={`font-display text-[11px] tracking-[0.14em] transition-colors duration-300 ${
+                className={`font-display text-[12px] tracking-[0.14em] transition-colors duration-300 ${
                   scene === i ? 'text-white' : 'text-white/25'
                 }`}
               >

@@ -60,12 +60,12 @@ export default function Nav() {
             />
           </Link>
 
-          <nav className="hidden md:flex items-center gap-2" aria-label="Primary">
+          <nav className="hidden md:flex items-center gap-8 lg:gap-10" aria-label="Primary">
             {nav.map((item) => (
               <NavLink
                 key={item.href}
                 to={item.href}
-                className={({ isActive }) => `nav-pill${isActive ? ' active' : ''}`}
+                className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`}
               >
                 {item.label}
               </NavLink>
@@ -143,43 +143,47 @@ export default function Nav() {
       </AnimatePresence>
 
       <style>{`
-        .nav-pill {
+        .nav-link {
           position: relative;
           display: inline-flex;
           align-items: center;
           height: 40px;
-          padding: 0 18px;
-          border-radius: 7px;
-          overflow: hidden;
-          border: 1px solid rgba(198,198,198,0.55);
-          background: linear-gradient(105deg, #050505 0%, #2a2a2a 48%, #4a4a4a 100%);
-          color: #f3f3f3;
-          font-size: 14px;
-          font-weight: 400;
-          letter-spacing: -0.01em;
+          padding: 0 2px;
+          color: rgba(255,255,255,0.68);
+          font-size: 14.5px;
+          font-weight: 450;
+          letter-spacing: -0.005em;
           white-space: nowrap;
-          transition: background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+          transition: color 0.25s ease;
         }
-        .nav-pill::before {
+        .nav-link::after {
           content: '';
           position: absolute;
-          inset: 0;
-          background: linear-gradient(115deg, transparent 30%, rgba(255,255,255,0.16) 50%, transparent 70%);
-          transform: translateX(-120%);
-          transition: transform 0.6s ease;
+          left: 0;
+          right: 0;
+          bottom: 9px;
+          height: 1px;
+          background: currentColor;
+          transform: scaleX(0);
+          transform-origin: right;
+          transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .nav-pill:hover::before {
-          transform: translateX(120%);
-        }
-        .nav-pill:hover {
-          border-color: rgba(235,235,235,0.9);
-          background: linear-gradient(105deg, #111 0%, #3a3a3a 45%, #6a6a6a 100%);
-          box-shadow: 0 0 18px rgba(200,210,230,0.18);
-        }
-        .nav-pill.active {
-          border-color: rgba(235,235,235,0.9);
-          background: linear-gradient(105deg, #161616 0%, #3e3e3e 48%, #6e6e6e 100%);
+        .nav-link:hover,
+        .nav-link:focus-visible {
           color: #ffffff;
+          outline: none;
+        }
+        .nav-link:hover::after,
+        .nav-link:focus-visible::after {
+          transform: scaleX(1);
+          transform-origin: left;
+        }
+        .nav-link.active {
+          color: #ffffff;
+        }
+        .nav-link.active::after {
+          transform: scaleX(1);
+          opacity: 0.5;
         }
         body.menu-open {
           overflow: hidden;

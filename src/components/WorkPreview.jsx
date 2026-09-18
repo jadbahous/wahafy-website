@@ -11,10 +11,10 @@ export function JourneyChips({ steps, className = '' }) {
     <ol className={`flex flex-wrap items-center gap-y-2 ${className}`}>
       {steps.map((s, i) => (
         <li key={s} className="flex items-center">
-          <span className="text-[12.5px] px-2.5 py-1 rounded-full border border-white/[0.12] bg-white/[0.03] text-white/75 whitespace-nowrap">
+          <span className="text-[13.5px] px-2.5 py-1 rounded-full border border-white/[0.12] bg-white/[0.03] text-white/75 whitespace-nowrap">
             {s}
           </span>
-          {i < steps.length - 1 && <span className="mx-1.5 text-white/25 text-[12px]">→</span>}
+          {i < steps.length - 1 && <span className="mx-1.5 text-white/25 text-[13px]">→</span>}
         </li>
       ))}
     </ol>
@@ -23,7 +23,7 @@ export function JourneyChips({ steps, className = '' }) {
 
 export function DemoTag() {
   return (
-    <span className="inline-flex items-center gap-1.5 text-[11px] font-medium tracking-[0.12em] uppercase text-white/60 border border-white/[0.14] rounded-full px-2.5 py-1">
+    <span className="inline-flex items-center gap-1.5 text-[12px] font-medium tracking-[0.12em] uppercase text-white/70 border border-white/[0.14] rounded-full px-2.5 py-1">
       <span className="w-1.5 h-1.5 rounded-full bg-white/60" />
       {work.demoLabel}
     </span>
@@ -52,7 +52,7 @@ export default function WorkPreview() {
                 </div>
 
                 <div className="mt-10 flex items-center justify-between gap-4">
-                  <span className="text-[12px] tracking-[0.12em] uppercase text-white/40">{p.type} · {p.tier}</span>
+                  <span className="text-[13px] tracking-[0.12em] uppercase text-white/55">{p.type} · {p.tier}</span>
                   <DemoTag />
                 </div>
                 <h3 className="mt-3 font-display font-semibold text-[24px] leading-tight tracking-[-0.02em]">{p.name}</h3>

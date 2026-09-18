@@ -118,10 +118,10 @@ export default function ProductDemo() {
                 </AnimatePresence>
               </div>
               <div className="flex items-center gap-2 px-3 py-3 border-t border-white/[0.08]">
-                <div className="flex-1 h-[40px] rounded-full border border-white/[0.12] bg-white/[0.03] px-4 text-[13px] text-white/30 flex items-center">
+                <div className="flex-1 h-[40px] rounded-full border border-white/[0.12] bg-white/[0.03] px-4 text-[13.5px] text-white/45 flex items-center">
                   Type a message…
                 </div>
-                <span className="grid place-items-center w-[40px] h-[40px] rounded-full bg-white/[0.08] text-white/40">
+                <span className="grid place-items-center w-[40px] h-[40px] rounded-full bg-white/[0.08] text-white/55">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
                 </span>
               </div>
@@ -139,8 +139,8 @@ export default function ProductDemo() {
           >
             <div className="rounded-[22px] border border-white/[0.12] bg-[#0b0b0b] px-6 py-5">
               <div className="flex items-center justify-between mb-2">
-                <p className="text-[11px] uppercase tracking-[0.18em] text-white/40">What just happened</p>
-                <span className={`text-[11px] tabular-nums transition-colors duration-300 ${finished ? 'text-[#9fe7bb]' : 'text-white/30'}`}>
+                <p className="text-[12px] uppercase tracking-[0.18em] text-white/55">What just happened</p>
+                <span className={`text-[12px] tabular-nums transition-colors duration-300 ${finished ? 'text-[#9fe7bb]' : 'text-white/45'}`}>
                   {done}/{pipeTotal}
                 </span>
               </div>
@@ -177,7 +177,7 @@ export default function ProductDemo() {
                 </button>
               )}
             </div>
-            <p className="text-[13px] leading-relaxed text-white/40 max-w-[40ch]">
+            <p className="text-[13.5px] leading-relaxed text-white/55 max-w-[40ch]">
               The same reception runs on this site. Ask it anything about your business — it’s the experience your customers would get.
             </p>
           </motion.div>

@@ -68,10 +68,10 @@ export default function Contact() {
           >
             {contact.next.map((n, i) => (
               <li key={n.title} className="grid grid-cols-[auto_1fr] gap-5 py-5 border-b border-white/10">
-                <span className="font-display text-[12px] tabular-nums text-white/30 pt-1">0{i + 1}</span>
+                <span className="font-display text-[13px] tabular-nums text-white/45 pt-1">0{i + 1}</span>
                 <span>
                   <span className="block text-[15.5px] font-medium text-white">{n.title}</span>
-                  <span className="block mt-1 text-[14px] leading-relaxed text-white/50">{n.text}</span>
+                  <span className="block mt-1 text-[14px] leading-relaxed text-white/65">{n.text}</span>
                 </span>
               </li>
             ))}
@@ -106,7 +106,7 @@ export default function Contact() {
             </button>
             <a
               href={`mailto:${contact.email}`}
-              className="inline-flex items-center gap-2 rounded-full text-white/60 text-[14px] px-2 h-[44px] hover:text-white transition-colors duration-200"
+              className="inline-flex items-center gap-2 rounded-full text-white/70 text-[14px] px-2 h-[44px] hover:text-white transition-colors duration-200"
             >
               <Mail className="w-4 h-4" strokeWidth={1.8} />
               {contact.email}
@@ -123,7 +123,7 @@ export default function Contact() {
                 </svg>
               </div>
               <h3 className="font-display font-semibold text-[22px] mb-2 text-white">Thank you — we’ll be in touch.</h3>
-              <p className="text-[15px] text-white/55 max-w-[38ch] mx-auto">
+              <p className="text-[15px] text-white/65 max-w-[38ch] mx-auto">
                 Jad will reply within one business day to arrange your free demo.
               </p>
             </div>
@@ -176,11 +176,11 @@ export default function Contact() {
                   {status === 'loading' ? 'Sending…' : contact.cta}
                   {status !== 'loading' && <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />}
                 </button>
-                <p className="text-[12.5px] text-white/40">No obligation. We reply within one business day.</p>
+                <p className="text-[13.5px] text-white/55">No obligation. We reply within one business day.</p>
               </div>
 
               {status === 'error' && (
-                <p className="mt-4 text-[13.5px] text-red-400">
+                <p className="mt-4 text-[14px] text-red-400">
                   Something went wrong — please try again, or email {contact.email}.
                 </p>
               )}
@@ -223,7 +223,7 @@ export default function Contact() {
 function Field({ label, required, children }) {
   return (
     <label className="block">
-      <span className="block text-[13px] font-medium text-white/70 mb-1.5">
+      <span className="block text-[13.5px] font-medium text-white/70 mb-1.5">
         {label} {required && <span className="text-white">*</span>}
       </span>
       {children}

@@ -41,8 +41,8 @@ export default function Process() {
                       {s.n}
                     </span>
                     <h3 className="font-display font-semibold text-[clamp(1.5rem,2.6vw,2rem)] leading-[1.05] tracking-[-0.03em]">{s.title}</h3>
-                    <p className={`mt-4 text-[15.5px] leading-relaxed text-white/60 max-w-[44ch] ${left ? 'md:ml-auto' : ''}`}>{s.text}</p>
-                    <p className={`mt-4 text-[13.5px] leading-relaxed text-white/45 max-w-[44ch] ${left ? 'md:ml-auto' : ''}`}>
+                    <p className={`mt-4 text-[15.5px] leading-relaxed text-white/70 max-w-[44ch] ${left ? 'md:ml-auto' : ''}`}>{s.text}</p>
+                    <p className={`mt-4 text-[14px] leading-relaxed text-white/60 max-w-[44ch] ${left ? 'md:ml-auto' : ''}`}>
                       <span className="text-white/70">You get:</span> {s.get}
                     </p>
                   </motion.div>

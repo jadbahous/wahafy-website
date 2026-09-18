@@ -13,7 +13,7 @@ export default function FinalCta() {
   }
   return (
     <section className="relative bg-ink text-white py-32 md:py-44 border-t border-white/[0.08] overflow-hidden">
-      <div className="absolute inset-0 opacity-70">
+      <div className="absolute inset-0 opacity-60">
         <AuroraField />
       </div>
       <div className="noise-overlay" />
@@ -24,7 +24,7 @@ export default function FinalCta() {
           initial="hidden"
           whileInView="visible"
           viewport={viewportOnce}
-          className="font-display font-semibold text-[clamp(2.4rem,6.5vw,5rem)] leading-[1.0] tracking-[-0.04em] max-w-[14ch]"
+          className="font-display font-semibold text-[clamp(2.3rem,6.5vw,5rem)] leading-[1.0] tracking-[-0.04em] max-w-[24ch] text-balance [text-shadow:0_2px_28px_rgba(0,0,0,0.5)]"
         >
           {finalCta.heading}
         </motion.h2>
@@ -34,7 +34,7 @@ export default function FinalCta() {
           initial="hidden"
           whileInView="visible"
           viewport={viewportOnce}
-          className="mt-6 text-[17px] leading-relaxed text-white/60 max-w-[36ch]"
+          className="mt-6 text-[17px] leading-relaxed text-white/75 max-w-[36ch] [text-shadow:0_1px_18px_rgba(0,0,0,0.5)]"
         >
           {finalCta.sub}
         </motion.p>
