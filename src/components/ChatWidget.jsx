@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { ArrowUp, X } from 'lucide-react';
+import ChatBooking from './ChatBooking.jsx';
 
 // The on-site concierge. It is both a feature and the demo: a visitor talking
 // to it is seeing exactly what their own customers would get. Black sheet,
@@ -33,6 +34,7 @@ export default function ChatWidget() {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState(false);
   const [captured, setCaptured] = useState(false);
+  const [showBooking, setShowBooking] = useState(false);
   const [unread, setUnread] = useState(true);
   const listRef = useRef(null);
   const inputRef = useRef(null);
@@ -86,6 +88,7 @@ export default function ChatWidget() {
       if (!res.ok || !data.reply) throw new Error(data.error || 'bad response');
       setMessages((m) => [...m, { role: 'assistant', content: data.reply }]);
       if (data.leadCaptured) setCaptured(true);
+      if (data.showCalendar) setShowBooking(true);
     } catch {
       setError(true);
     } finally {
@@ -154,6 +157,17 @@ export default function ChatWidget() {
                   </div>
                 </div>
               ))}
+
+              {showBooking && (
+                <div className="flex justify-start">
+                  <ChatBooking
+                    onLayoutChange={() => {
+                      const el = listRef.current;
+                      if (el) el.scrollTop = el.scrollHeight;
+                    }}
+                  />
+                </div>
+              )}
 
               {captured && (
                 <div className="flex justify-start">
