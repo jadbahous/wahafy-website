@@ -274,6 +274,8 @@ export const contact = {
   // Set to the Marhab WhatsApp number in international format without "+", e.g. '97455512345'.
   // The WhatsApp option only renders once this is filled in.
   whatsapp: '97477261697',
+  // Same number, formatted for display and for the tel: link.
+  phone: '+974 7726 1697',
   next: [
     { title: 'We reply within one business day', text: 'A short note from Jad, not an automated ticket.' },
     { title: 'A 20-minute call', text: 'We look at how customers reach you today and what gets missed.' },
