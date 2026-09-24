@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Mail, MessageCircle } from 'lucide-react';
+import { ArrowRight, Mail, MessageCircle, Phone } from 'lucide-react';
 import { contact } from '../data.js';
 import { fadeUp, viewportOnce } from '../lib/motion.js';
 import SectionHeading from './SectionHeading.jsx';
@@ -104,6 +104,15 @@ export default function Contact() {
               <MessageCircle className="w-4 h-4" strokeWidth={1.8} />
               Talk to Marhab now
             </button>
+            {contact.phone && (
+              <a
+                href={`tel:+${contact.whatsapp}`}
+                className="inline-flex items-center gap-2 rounded-full text-white/70 text-[14px] px-2 h-[44px] hover:text-white transition-colors duration-200"
+              >
+                <Phone className="w-4 h-4" strokeWidth={1.8} />
+                {contact.phone}
+              </a>
+            )}
             <a
               href={`mailto:${contact.email}`}
               className="inline-flex items-center gap-2 rounded-full text-white/70 text-[14px] px-2 h-[44px] hover:text-white transition-colors duration-200"
