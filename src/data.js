@@ -270,10 +270,10 @@ export const contact = {
   heading: 'Let’s build a better customer experience.',
   sub: 'Tell us about your business and where customers currently reach you. We’ll explore how Marhab could improve the journey — no obligation.',
   cta: 'Book a free demo',
-  email: 'jad.bahous@gmail.com',
+  email: 'jad@marhab.agency',
   // Set to the Marhab WhatsApp number in international format without "+", e.g. '97455512345'.
   // The WhatsApp option only renders once this is filled in.
-  whatsapp: '',
+  whatsapp: '97477261697',
   next: [
     { title: 'We reply within one business day', text: 'A short note from Jad, not an automated ticket.' },
     { title: 'A 20-minute call', text: 'We look at how customers reach you today and what gets missed.' },
