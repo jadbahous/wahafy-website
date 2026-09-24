@@ -7,7 +7,7 @@
  */
 
 // Inbox that should receive enquiry notifications.
-var ownerEmail = 'jad.bahous@gmail.com';
+var ownerEmail = 'jad@marhab.agency';
 
 var HEADERS = ['Time', 'Business', 'Business type', 'Name', 'Phone', 'Email', 'Website / Instagram', 'Note', 'Source'];
 
