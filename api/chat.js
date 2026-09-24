@@ -10,6 +10,7 @@ import saveLead from './_lead.js';
 import { CLIENT_ID, SYSTEM_PROMPT } from './_business.js';
 
 const LEAD_RE = /\[\[LEAD\s+name="([^"]*)"\s+phone="([^"]*)"\s+note="([^"]*)"\]\]/;
+const SHOW_CALENDAR_RE = /\[\[SHOW_CALENDAR\]\]/;
 const MODEL = 'claude-haiku-4-5-20251001';
 
 export default async function handler(req, res) {
@@ -70,6 +71,11 @@ export default async function handler(req, res) {
     let reply =
       (data.content && data.content[0] && data.content[0].text) || 'Sorry, could you say that again?';
 
+    const showCalendar = SHOW_CALENDAR_RE.test(reply);
+    if (showCalendar) {
+      reply = reply.replace(SHOW_CALENDAR_RE, '').trim();
+    }
+
     let leadCaptured = false;
     const m = reply.match(LEAD_RE);
     if (m) {
@@ -83,7 +89,7 @@ export default async function handler(req, res) {
       });
     }
 
-    res.status(200).json({ reply, leadCaptured });
+    res.status(200).json({ reply, leadCaptured, showCalendar });
   } catch (err) {
     console.error('chat handler error', err);
     res.status(500).json({ error: 'Something went wrong' });
