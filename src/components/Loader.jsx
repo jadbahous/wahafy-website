@@ -4,28 +4,36 @@ import { AnimatePresence, motion } from 'framer-motion';
 // Full-screen entry loader: black field with a faint dot grid, a thin
 // progress bar along the top edge, and a giant percentage counting up in
 // the bottom-left. The count is tied to real readiness (fonts) with a
-// minimum duration so it never flashes, then the whole sheet wipes upward
-// to reveal the page. Shown once per session; skipped for reduced motion.
+// minimum duration so it never flashes. At 100 the sheet does not wipe: it
+// fades, and what it fades onto is the hero's window of night already filling
+// the screen, so the dark of the loader becomes the dark of the product before
+// the page zooms out around it (see Hero). `onDone(played)` tells the page
+// whether that handoff is happening or the loader was skipped (second visit
+// in the session, or reduced motion).
 
 const KEY = 'marhab:loaded';
 const MIN_MS = 2100;
 
+/** Whether the loader will show on this page view: first visit in the session, motion allowed. */
+export function loaderWillPlay() {
+  if (typeof window === 'undefined') return false;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return false;
+  try {
+    return !sessionStorage.getItem(KEY);
+  } catch {
+    return true;
+  }
+}
+
 export default function Loader({ onDone }) {
-  const [visible, setVisible] = useState(() => {
-    if (typeof window === 'undefined') return false;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return false;
-    try {
-      return !sessionStorage.getItem(KEY);
-    } catch {
-      return true;
-    }
-  });
+  const [visible, setVisible] = useState(loaderWillPlay);
   const [pct, setPct] = useState(0);
   const doneRef = useRef(false);
+  const playedRef = useRef(visible);
 
   useEffect(() => {
     if (!visible) {
-      onDone?.();
+      onDone?.(playedRef.current);
       return;
     }
     document.body.style.overflow = 'hidden';
@@ -68,20 +76,17 @@ export default function Loader({ onDone }) {
   }, [visible, onDone]);
 
   useEffect(() => {
-    if (!visible) {
-      document.body.style.overflow = '';
-      onDone?.();
-    }
-  }, [visible, onDone]);
+    if (!visible) document.body.style.overflow = '';
+  }, [visible]);
 
   return (
     <AnimatePresence>
       {visible && (
         <motion.div
           key="loader"
-          initial={{ y: 0 }}
-          exit={{ y: '-100%' }}
-          transition={{ duration: 0.85, ease: [0.76, 0, 0.24, 1] }}
+          initial={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.55, ease: [0.4, 0, 0.2, 1] }}
           className="fixed inset-0 z-[100] zone-dark bg-bg text-fg overflow-hidden"
           aria-live="polite"
           aria-busy="true"

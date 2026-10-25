@@ -1,63 +1,35 @@
-import { useEffect, useState } from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
+import { useLayoutEffect, useRef, useState } from 'react';
+import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 import { ArrowDown, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { hero, demo } from '../data.js';
 import FluidField from './FluidField.jsx';
-import { Bubble, BookingCard, PhoneFrame, TypingDots } from './ui/mock.jsx';
+import { Bubble, BookingCard, PhoneFrame } from './ui/mock.jsx';
+import Words from './ui/Words.jsx';
 
 // The opening, on the daylight look.
 //
 // One screen that says what Marhab is and shows it working: the promise on
-// paper, in ink, at the left; at the right a window of night — the same
-// indigo field as before, now held in a frame rather than filling the sky —
-// with a phone in front of it where a customer books at 11pm. The three
-// facts that used to be scenes two and three of a five-screen dive sit in a
-// quiet strip underneath. A clinic owner on a phone sees the whole argument
-// before their thumb moves.
+// paper, in ink, at the left; at the right a window of night with a phone
+// in it, the whole conversation already there, booked. The conversation is
+// still here on purpose: the next section is where it unfolds.
 //
-// Motion is one orchestrated arrival: the words rise, the window settles,
-// the conversation plays once. Nothing loops except the field itself.
+// The entrance, once per session: the loader's counter reaches 100 and its
+// dark sheet fades onto this same window, which at that moment fills the
+// screen, the phone close up. Then the window zooms out into its place on
+// the page, the paper comes up behind it, and the headline rises word by
+// word. Nothing loops. Only transform and opacity move.
 //
-// The hero holds four things and no more: the label, the promise, one
-// sentence, two buttons. The facts live in their own strip below the fold.
+// On scroll the window drifts a little slower than the page, so the hero has
+// depth on the way out. Reduced motion skips the zoom, the drift and the
+// word-rise; the page is simply there.
 
 const ease = [0.16, 1, 0.3, 1];
-const rise = (delay) => ({
-  hidden: { opacity: 0, y: 18 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease, delay } },
-});
 
-/** The conversation, arriving one line at a time, once. */
-function Conversation({ reduced }) {
-  const lines = demo.conversation.slice(0, 4);
-  const [shown, setShown] = useState(reduced ? lines.length : 0);
-  const [typing, setTyping] = useState(false);
-  useEffect(() => {
-    if (reduced) return;
-    let alive = true;
-    const timers = [];
-    let t = 900;
-    lines.forEach((line, i) => {
-      const isMarhab = line.role === 'marhab';
-      if (isMarhab) timers.push(setTimeout(() => alive && setTyping(true), t - 650));
-      timers.push(
-        setTimeout(() => {
-          if (!alive) return;
-          setTyping(false);
-          setShown(i + 1);
-        }, t),
-      );
-      t += isMarhab ? 1500 : 1100;
-    });
-    return () => {
-      alive = false;
-      timers.forEach(clearTimeout);
-    };
-  }, [reduced]);
+function Conversation() {
   return (
-    <div className="px-3 pb-3 pt-1 space-y-2.5 min-h-[286px]">
-      <div className="flex items-center gap-2.5 px-1 pb-2">
+    <div className="px-3 pb-3 pt-1 space-y-2">
+      <div className="flex items-center gap-2.5 px-1 pb-1.5">
         <span className="relative grid place-items-center w-7 h-7 rounded-full border border-fg/[0.14] bg-fg/[0.04]">
           <img src="/brand/mark-white.png" alt="" className="h-[13px] w-auto select-none" draggable="false" />
           <span className="absolute -right-0.5 -bottom-0.5 w-2 h-2 rounded-full bg-ok-dot ring-2 ring-bg" />
@@ -67,39 +39,71 @@ function Conversation({ reduced }) {
           <p className="text-[10.5px] tracking-[0.06em] uppercase text-fg/60">AI reception · 11:02 pm</p>
         </div>
       </div>
-      {lines.slice(0, shown).map((line, i) => (
-        <motion.div
-          key={i}
-          initial={reduced ? false : { opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.45, ease }}
-        >
-          <Bubble role={line.role}>{line.text}</Bubble>
-        </motion.div>
+      {demo.conversation.map((line, i) => (
+        <Bubble key={i} role={line.role} dense>
+          {line.text}
+        </Bubble>
       ))}
-      {typing && <TypingDots />}
     </div>
   );
 }
 
-export default function Hero() {
+export default function Hero({ ready = true, intro = false }) {
   const reduced = useReducedMotion();
-  const [booked, setBooked] = useState(!!reduced);
-  useEffect(() => {
-    if (reduced) return;
-    const t = setTimeout(() => setBooked(true), 6400);
-    return () => clearTimeout(t);
-  }, [reduced]);
+  const zoom = intro && !reduced;
+
+  const sectionRef = useRef(null);
+  const winRef = useRef(null);
+  // The transform that puts the window in the middle of the screen, as large
+  // as fits: measured once from its resting place, before the loader lets go.
+  const [from, setFrom] = useState(null);
+  const [settled, setSettled] = useState(!zoom);
+
+  useLayoutEffect(() => {
+    if (!zoom || !winRef.current) return;
+    const r = winRef.current.getBoundingClientRect();
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const scale = Math.min((vw * 0.92) / r.width, (vh * 0.9) / r.height);
+    setFrom({
+      x: vw / 2 - (r.left + r.width / 2),
+      y: vh / 2 - (r.top + r.height / 2),
+      scale,
+    });
+  }, [zoom]);
+
+  // On the way out, the window lags the page a little.
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start start', 'end start'] });
+  const drift = useTransform(scrollYProgress, [0, 1], [0, -72]);
+  const copyDrift = useTransform(scrollYProgress, [0, 1], [0, 28]);
+
+  const base = zoom ? 1.05 : 0.05; // when the words start, after the loader
+  const rise = (delay) => ({
+    hidden: { opacity: 0, y: 14 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease, delay: base + delay } },
+  });
+  const state = ready ? 'visible' : 'hidden';
 
   return (
-    <section className="relative bg-bg overflow-hidden">
+    <section ref={sectionRef} className="relative bg-bg overflow-hidden">
+      {/* The dark the loader fades onto: gone once the window has zoomed out. */}
+      {zoom && !settled && (
+        <motion.div
+          className="fixed inset-0 z-[65] zone-dark bg-bg pointer-events-none"
+          initial={{ opacity: 1 }}
+          animate={{ opacity: ready ? 0 : 1 }}
+          transition={{ duration: 0.9, ease: [0.4, 0, 0.2, 1], delay: ready ? 0.95 : 0 }}
+        />
+      )}
+
       <div className="section-wrap pt-[104px] md:pt-[120px] pb-14 md:pb-20">
         <div className="grid lg:grid-cols-12 gap-10 lg:gap-8 items-center">
           {/* The promise */}
           <motion.div
             className="lg:col-span-6"
             initial="hidden"
-            animate="visible"
+            animate={state}
+            style={reduced || !settled ? undefined : { y: copyDrift }}
           >
             <motion.p
               variants={rise(0)}
@@ -107,19 +111,19 @@ export default function Hero() {
             >
               {hero.support.replace(/\. One connected.*$/, '')}
             </motion.p>
-            <motion.h1
-              variants={rise(0.08)}
-              className="mt-6 font-display font-semibold text-fg text-[clamp(2.5rem,4.9vw,4.5rem)] leading-[1.0] tracking-[-0.035em] max-w-[14ch] text-balance"
-            >
-              {hero.headline[0]} <span className="text-fg/45">{hero.headline[1]}</span>
-            </motion.h1>
+            <h1 className="mt-6 font-display font-semibold text-fg text-[clamp(2.5rem,4.9vw,4.5rem)] leading-[1.0] tracking-[-0.035em] max-w-[14ch] text-balance">
+              <Words text={hero.headline[0]} delay={base + 0.05} />{' '}
+              <span className="text-fg/45">
+                <Words text={hero.headline[1]} delay={base + 0.05 + hero.headline[0].split(' ').length * 0.045} />
+              </span>
+            </h1>
             <motion.p
-              variants={rise(0.16)}
+              variants={rise(0.3)}
               className="mt-7 text-[17px] md:text-[18px] leading-[1.6] text-fg/72 max-w-[44ch]"
             >
               {hero.sub}
             </motion.p>
-            <motion.div variants={rise(0.24)} className="mt-9 flex flex-wrap items-center gap-3">
+            <motion.div variants={rise(0.42)} className="mt-9 flex flex-wrap items-center gap-3">
               <Link to={hero.secondaryCta.href} className="btn-primary group h-[52px] px-7 text-[15px]">
                 {hero.secondaryCta.label}
                 <ArrowRight className="w-4 h-4 transition-transform duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-0.5" strokeWidth={2} />
@@ -132,52 +136,51 @@ export default function Hero() {
           </motion.div>
 
           {/* The window of night */}
-          <motion.div
-            className="lg:col-span-6 lg:justify-self-end w-full max-w-[520px]"
-            initial={reduced ? false : { opacity: 0, y: 24, scale: 0.985 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 1.1, ease, delay: 0.18 }}
-          >
-            <div
-              className="zone-dark relative aspect-[3/4] sm:aspect-[1/1] lg:aspect-[5/6] rounded-[28px] overflow-hidden"
-              style={{ boxShadow: 'var(--shadow-3)' }}
+          <div className="lg:col-span-6 lg:justify-self-end w-full max-w-[520px]">
+            <motion.div
+              ref={winRef}
+              className={`zone-dark relative rounded-[28px] overflow-hidden ${settled ? '' : 'z-[70]'}`}
+              style={{ boxShadow: 'var(--shadow-3)', transformOrigin: '50% 50%' }}
+              initial={false}
+              animate={zoom && !ready && from ? from : { x: 0, y: 0, scale: 1 }}
+              transition={zoom && ready ? { duration: 1.2, ease, delay: 0.95 } : { duration: 0 }}
+              onAnimationComplete={() => {
+                if (zoom && ready) setSettled(true);
+              }}
             >
-              <FluidField progress={null} />
-              <div className="noise-overlay" />
-              {/* a hairline of light at the top edge, the way glass catches it */}
-              <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
+              <motion.div style={reduced || !settled ? undefined : { y: drift }} className="relative">
+                <div className="absolute inset-0">
+                  <FluidField progress={null} />
+                  <div className="noise-overlay" />
+                  <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
+                </div>
 
-              <div className="absolute inset-0 flex items-end justify-center px-6 pb-0 sm:px-10">
-                <motion.div
-                  className="w-full max-w-[280px]"
-                  animate={reduced ? undefined : { y: [0, -6, 0] }}
-                  transition={{ duration: 7, ease: 'easeInOut', repeat: Infinity }}
-                >
-                  <PhoneFrame className="translate-y-6 sm:translate-y-8">
-                    <Conversation reduced={!!reduced} />
+                <div className="relative p-5 sm:p-6 flex justify-center xl:justify-end">
+                  <PhoneFrame className="w-full max-w-[272px] xl:max-w-[264px]">
+                    <Conversation />
                   </PhoneFrame>
+                </div>
+
+                {/* The result, beside the phone; only where there is room beside it. */}
+                <motion.div
+                  className="hidden xl:block absolute left-6 top-6 w-[190px]"
+                  initial={zoom ? { opacity: 0, y: -8 } : false}
+                  animate={zoom ? (settled ? { opacity: 1, y: 0 } : { opacity: 0, y: -8 }) : { opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, ease }}
+                >
+                  <BookingCard
+                    title={demo.pipeline[0].label}
+                    line1={`${demo.pipeline[0].detail} · Sara`}
+                    line2={`${demo.pipeline[2].label} on WhatsApp`}
+                  />
                 </motion.div>
-              </div>
 
-              <motion.div
-                className="hidden sm:block absolute left-5 top-5 sm:left-7 sm:top-7 max-w-[230px]"
-                initial={reduced ? false : { opacity: 0, y: -8 }}
-                animate={booked ? { opacity: 1, y: 0 } : { opacity: 0, y: -8 }}
-                transition={{ duration: 0.6, ease }}
-                aria-hidden={!booked}
-              >
-                <BookingCard
-                  title={demo.pipeline[0].label}
-                  line1={`${demo.pipeline[0].detail} · Sara`}
-                  line2={`${demo.pipeline[2].label} on WhatsApp`}
-                />
+                <p className="absolute right-5 bottom-4 sm:right-7 sm:bottom-5 font-display text-[11px] font-medium uppercase tracking-[0.16em] text-fg/60">
+                  Live demo
+                </p>
               </motion.div>
-
-              <p className="absolute right-5 bottom-4 sm:right-7 sm:bottom-5 font-display text-[11px] font-medium uppercase tracking-[0.16em] text-fg/60">
-                Live demo
-              </p>
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
         </div>
 
         {/* The three facts */}

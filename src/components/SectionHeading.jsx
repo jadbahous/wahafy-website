@@ -2,10 +2,11 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { fadeUp, viewportOnce } from '../lib/motion.js';
+import Words from './ui/Words.jsx';
 
 // The one heading treatment used across every section, so the site reads as
-// a single voice: an optional small label, a tight display heading, a muted
-// lead. Most sections carry no label; the heading is enough, and the few
+// a single voice: an optional small label, a tight display heading that rises
+// word by word as the section arrives, a muted lead. Most sections carry no label; the heading is enough, and the few
 // labels that remain mean something (a page title, a demo).
 // `max` is the heading's measure in its own characters (so ~16–22ch gives a
 // three-line display heading); `subMax` is the lead paragraph's measure.
@@ -35,7 +36,7 @@ export default function SectionHeading({
         className="font-display font-semibold text-[clamp(2.1rem,4.6vw,3.4rem)] leading-[1.04] tracking-[-0.03em] text-fg text-balance"
         style={{ maxWidth: max }}
       >
-        {heading}
+        <Words text={heading} delay={0.05} />
       </h2>
       {sub && (
         <p className="mt-5 text-[16.5px] leading-[1.6] text-fg/70" style={{ maxWidth: subMax }}>

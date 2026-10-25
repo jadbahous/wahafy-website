@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { work } from '../data.js';
-import { fadeUp, viewportOnce } from '../lib/motion.js';
+import { EASE, fadeUp, viewportOnce } from '../lib/motion.js';
 import SectionHeading from './SectionHeading.jsx';
 import { BrowserFrame, BookingCard } from './ui/mock.jsx';
 
@@ -31,8 +31,8 @@ export function DemoTag() {
 
 // Work preview: each demo system shown through its own window of night, the
 // same device-in-the-dark motif as the hero, so the page carries one idea
-// from top to bottom. The site sits in the window; the booking that came
-// out of it floats above.
+// from top to bottom. As the card scrolls in, the site rises into the window
+// and the booking that came out of it drops in above: cause, then effect.
 export default function WorkPreview() {
   return (
     <section className="bg-matte text-fg py-28 md:py-36">
@@ -46,10 +46,14 @@ export default function WorkPreview() {
                 <div className="night-window zone-dark relative rounded-[16px] aspect-[16/11] overflow-hidden">
                   <div className="noise-overlay" />
                   <div className="absolute left-[24%] -right-[7%] -bottom-[14%] transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:-translate-y-2">
-                    <BrowserFrame src={p.image} alt={p.imageAlt} />
+                    <motion.div variants={{ hidden: { y: 64, opacity: 0 }, visible: { y: 0, opacity: 1, transition: { duration: 0.95, ease: EASE, delay: 0.1 } } }}>
+                      <BrowserFrame src={p.image} alt={p.imageAlt} />
+                    </motion.div>
                   </div>
                   <div className="absolute left-5 top-5 w-[58%] max-w-[240px] transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:-translate-y-1">
-                    <BookingCard title={p.mock.booking.title} line1={p.mock.booking.line1} line2={p.mock.booking.line2} />
+                    <motion.div variants={{ hidden: { y: -14, opacity: 0 }, visible: { y: 0, opacity: 1, transition: { duration: 0.6, ease: EASE, delay: 0.6 } } }}>
+                      <BookingCard title={p.mock.booking.title} line1={p.mock.booking.line1} line2={p.mock.booking.line2} />
+                    </motion.div>
                   </div>
                 </div>
 
