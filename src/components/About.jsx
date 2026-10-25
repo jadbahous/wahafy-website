@@ -18,7 +18,7 @@ const icons = [
 
 export default function About() {
   return (
-    <section id="about" className="bg-ink text-white py-28 md:py-36">
+    <section id="about" className="bg-bg text-fg py-28 md:py-36">
       <div className="section-wrap grid md:grid-cols-12 gap-12 md:gap-8">
         <motion.div
           variants={fadeUp}
@@ -27,13 +27,13 @@ export default function About() {
           viewport={{ once: true, margin: '-80px' }}
           className="md:col-span-5"
         >
-          <p className="font-display text-[11px] tracking-[0.18em] uppercase text-white/40 mb-5">
+          <p className="font-display text-[12px] tracking-[0.18em] uppercase text-fg/55 mb-5">
             {about.eyebrow}
           </p>
           <h2 className="font-display font-semibold text-[clamp(2.2rem,5vw,3.6rem)] leading-[1.02] tracking-[-0.035em] max-w-[13ch]">
             {about.heading}
           </h2>
-          <p className="mt-6 text-[16px] leading-relaxed text-white/60 max-w-[46ch]">{about.body}</p>
+          <p className="mt-6 text-[16px] leading-relaxed text-fg/70 max-w-[46ch]">{about.body}</p>
         </motion.div>
 
         <div className="md:col-span-7 grid sm:grid-cols-2 gap-5">
@@ -52,7 +52,7 @@ export default function About() {
                 height="22"
                 viewBox="0 0 24 24"
                 fill="none"
-                stroke="#ffffff"
+                stroke="rgb(var(--fg))"
                 strokeWidth="1.6"
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -60,8 +60,8 @@ export default function About() {
               >
                 {icons[i]}
               </svg>
-              <h3 className="font-display font-semibold text-[17px] mb-2 text-white">{p.title}</h3>
-              <p className="text-[14.5px] leading-relaxed text-white/55">{p.text}</p>
+              <h3 className="font-display font-semibold text-[17px] mb-2 text-fg">{p.title}</h3>
+              <p className="text-[14.5px] leading-relaxed text-fg/65">{p.text}</p>
             </motion.div>
           ))}
         </div>

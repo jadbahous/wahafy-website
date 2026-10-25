@@ -18,17 +18,17 @@ export default function Journey() {
   const n = journey.steps.length;
 
   return (
-    <section className="bg-ink text-white py-28 md:py-36 border-t border-white/[0.08] overflow-hidden">
+    <section className="bg-bg text-fg py-28 md:py-36 border-t border-fg/[0.08] overflow-hidden">
       <div className="section-wrap">
-        <SectionHeading eyebrow={journey.eyebrow} heading={journey.heading} sub={journey.sub} align="center" max="20ch" className="mb-16 md:mb-24" />
+        <SectionHeading heading={journey.heading} sub={journey.sub} align="center" max="20ch" className="mb-16 md:mb-24" />
 
         <div ref={ref} className="relative">
           {/* Desktop: horizontal */}
           <div className="hidden md:block">
-            <div className="relative h-px bg-white/10 mx-[7%]">
+            <div className="relative h-px bg-fg/10 mx-[7%]">
               <motion.div
                 style={{ scaleX: prefersReducedMotion ? 1 : scaleX }}
-                className="absolute inset-0 origin-left bg-gradient-to-r from-white/40 via-white to-white/40"
+                className="absolute inset-0 origin-left bg-gradient-to-r from-fg/40 via-fg to-fg/40"
               />
             </div>
             <div className="grid mt-[-5px]" style={{ gridTemplateColumns: `repeat(${n}, minmax(0, 1fr))` }}>
@@ -40,10 +40,10 @@ export default function Journey() {
 
           {/* Mobile: vertical */}
           <div className="md:hidden relative pl-8">
-            <div className="absolute left-[11px] top-2 bottom-2 w-px bg-white/10">
+            <div className="absolute left-[11px] top-2 bottom-2 w-px bg-fg/10">
               <motion.div
                 style={{ scaleY: prefersReducedMotion ? 1 : scaleY }}
-                className="absolute inset-0 origin-top bg-gradient-to-b from-white/40 via-white to-white/40"
+                className="absolute inset-0 origin-top bg-gradient-to-b from-fg/40 via-fg to-fg/40"
               />
             </div>
             <ul className="flex flex-col gap-7">
@@ -67,11 +67,11 @@ function Stop({ label, index, n, progress, reduced }) {
     <div className="flex flex-col items-center text-center">
       <motion.span
         style={reduced ? undefined : { scale }}
-        className={`block w-[11px] h-[11px] rounded-full ${last ? 'bg-white shadow-[0_0_18px_rgba(255,255,255,0.6)]' : 'bg-white'}`}
+        className={`block w-[11px] h-[11px] rounded-full bg-fg ${last ? 'ring-4 ring-fg/15' : ''}`}
       />
       <motion.span
         style={reduced ? undefined : { opacity }}
-        className={`mt-5 text-[13.5px] lg:text-[14px] tracking-[-0.01em] ${last ? 'font-semibold text-white' : 'text-white/85'}`}
+        className={`mt-5 text-[14px] lg:text-[14.5px] ${last ? 'font-semibold text-fg' : 'text-fg/85'}`}
       >
         {label}
       </motion.span>
@@ -91,8 +91,8 @@ function StopV({ label, index, n, progress, reduced }) {
       transition={{ duration: 0.5, delay: index * 0.05, ease: EASE }}
       className="relative flex items-center gap-4"
     >
-      <span className={`absolute -left-8 top-1/2 -translate-y-1/2 translate-x-[6px] w-[11px] h-[11px] rounded-full bg-white ${last ? 'shadow-[0_0_18px_rgba(255,255,255,0.6)]' : ''}`} />
-      <motion.span style={reduced ? undefined : { opacity }} className={`text-[16px] ${last ? 'font-semibold text-white' : 'text-white/85'}`}>
+      <span className={`absolute -left-8 top-1/2 -translate-y-1/2 translate-x-[6px] w-[11px] h-[11px] rounded-full bg-fg ${last ? 'ring-4 ring-fg/15' : ''}`} />
+      <motion.span style={reduced ? undefined : { opacity }} className={`text-[16px] ${last ? 'font-semibold text-fg' : 'text-fg/85'}`}>
         {label}
       </motion.span>
     </motion.li>

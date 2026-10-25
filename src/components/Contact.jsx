@@ -53,7 +53,7 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="bg-ink text-white pt-36 md:pt-44 pb-24 md:pb-32">
+    <section id="contact" className="bg-bg text-fg pt-36 md:pt-44 pb-24 md:pb-32">
       <div className="section-wrap grid lg:grid-cols-12 gap-12 lg:gap-10">
         <div className="lg:col-span-5">
           <SectionHeading eyebrow={contact.eyebrow} heading={contact.heading} sub={contact.sub} max="15ch" subMax="42ch" />
@@ -64,14 +64,14 @@ export default function Contact() {
             initial="hidden"
             whileInView="visible"
             viewport={viewportOnce}
-            className="mt-12 border-t border-white/10"
+            className="mt-12 border-t border-fg/10"
           >
             {contact.next.map((n, i) => (
-              <li key={n.title} className="grid grid-cols-[auto_1fr] gap-5 py-5 border-b border-white/10">
-                <span className="font-display text-[13px] tabular-nums text-white/45 pt-1">0{i + 1}</span>
+              <li key={n.title} className="grid grid-cols-[auto_1fr] gap-5 py-5 border-b border-fg/10">
+                <span className="font-display text-[13.5px] font-medium tabular-nums text-fg/60 pt-1">0{i + 1}</span>
                 <span>
-                  <span className="block text-[15.5px] font-medium text-white">{n.title}</span>
-                  <span className="block mt-1 text-[14px] leading-relaxed text-white/65">{n.text}</span>
+                  <span className="block text-[16px] font-medium text-fg">{n.title}</span>
+                  <span className="block mt-1 text-[14.5px] leading-relaxed text-fg/70">{n.text}</span>
                 </span>
               </li>
             ))}
@@ -86,28 +86,19 @@ export default function Contact() {
             className="mt-8 flex flex-wrap gap-3"
           >
             {contact.whatsapp && (
-              <a
-                href={`https://wa.me/${contact.whatsapp}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/[0.03] text-white text-[14px] font-medium px-5 h-[44px] hover:border-white/50 hover:bg-white/[0.07] active:scale-[0.98] transition-[border-color,background-color,transform] duration-300"
-              >
+              <a href={`https://wa.me/${contact.whatsapp}`} target="_blank" rel="noopener noreferrer" className="btn-secondary h-[46px] px-5 text-[14px]">
                 <MessageCircle className="w-4 h-4" strokeWidth={1.8} />
                 WhatsApp us
               </a>
             )}
-            <button
-              type="button"
-              onClick={openChat}
-              className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/[0.03] text-white text-[14px] font-medium px-5 h-[44px] hover:border-white/50 hover:bg-white/[0.07] active:scale-[0.98] transition-[border-color,background-color,transform] duration-300"
-            >
+            <button type="button" onClick={openChat} className="btn-secondary h-[46px] px-5 text-[14px]">
               <MessageCircle className="w-4 h-4" strokeWidth={1.8} />
-              Talk to Marhab now
+              Talk to Marhab
             </button>
             {contact.phone && (
               <a
                 href={`tel:+${contact.whatsapp}`}
-                className="inline-flex items-center gap-2 rounded-full text-white/70 text-[14px] px-2 h-[44px] hover:text-white transition-colors duration-200"
+                className="inline-flex items-center gap-2 rounded-full text-fg/75 text-[14px] px-2 h-[46px] hover:text-fg transition-colors duration-200"
               >
                 <Phone className="w-4 h-4" strokeWidth={1.8} />
                 {contact.phone}
@@ -115,7 +106,7 @@ export default function Contact() {
             )}
             <a
               href={`mailto:${contact.email}`}
-              className="inline-flex items-center gap-2 rounded-full text-white/70 text-[14px] px-2 h-[44px] hover:text-white transition-colors duration-200"
+              className="inline-flex items-center gap-2 rounded-full text-fg/75 text-[14px] px-2 h-[46px] hover:text-fg transition-colors duration-200"
             >
               <Mail className="w-4 h-4" strokeWidth={1.8} />
               {contact.email}
@@ -125,19 +116,19 @@ export default function Contact() {
 
         <motion.div variants={fadeUp} custom={1} initial="hidden" whileInView="visible" viewport={viewportOnce} className="lg:col-span-7">
           {status === 'success' ? (
-            <div className="rounded-2xl border border-line bg-panel p-10 md:p-14 text-center">
-              <div className="mx-auto mb-5 w-11 h-11 rounded-full bg-white/10 grid place-items-center">
+            <div className="rounded-[22px] surface-2 p-10 md:p-14 text-center">
+              <div className="mx-auto mb-5 w-11 h-11 rounded-full bg-fg/10 grid place-items-center">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                  <path d="M5 13l4 4L19 7" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M5 13l4 4L19 7" stroke="rgb(var(--fg))" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </div>
-              <h3 className="font-display font-semibold text-[22px] mb-2 text-white">Thank you — we’ll be in touch.</h3>
-              <p className="text-[15px] text-white/65 max-w-[38ch] mx-auto">
+              <h3 className="font-display font-semibold text-[22px] mb-2 text-fg">Thank you. We’ll be in touch.</h3>
+              <p className="text-[15.5px] text-fg/70 max-w-[38ch] mx-auto">
                 Jad will reply within one business day to arrange your free demo.
               </p>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="rounded-2xl border border-line bg-panel p-7 sm:p-10">
+            <form onSubmit={handleSubmit} className="rounded-[22px] surface-2 p-7 sm:p-10">
               <div className="grid sm:grid-cols-2 gap-5">
                 <Field label="Your name" required>
                   <input required value={form.name} onChange={update('name')} placeholder="Full name" className="field" autoComplete="name" />
@@ -177,20 +168,16 @@ export default function Contact() {
               </div>
 
               <div className="mt-7 flex flex-col sm:flex-row sm:items-center gap-4">
-                <button
-                  type="submit"
-                  disabled={status === 'loading'}
-                  className="group inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-b from-white via-[#e7e7e7] to-[#cfcfcf] text-black border border-white text-[14.5px] font-medium px-7 h-[50px] hover:shadow-[0_0_22px_rgba(186,208,255,0.3)] active:scale-[0.98] transition-[box-shadow,transform] duration-300 disabled:opacity-50"
-                >
+                <button type="submit" disabled={status === 'loading'} className="btn-primary group h-[50px] px-7 text-[14.5px]">
                   {status === 'loading' ? 'Sending…' : contact.cta}
-                  {status !== 'loading' && <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />}
+                  {status !== 'loading' && <ArrowRight className="w-4 h-4 transition-transform duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-1" strokeWidth={2} />}
                 </button>
-                <p className="text-[13.5px] text-white/55">No obligation. We reply within one business day.</p>
+                <p className="text-[14px] text-fg/65">No obligation. We reply within one business day.</p>
               </div>
 
               {status === 'error' && (
-                <p className="mt-4 text-[14px] text-red-400">
-                  Something went wrong — please try again, or email {contact.email}.
+                <p className="mt-4 text-[14px] text-danger" role="alert">
+                  Something went wrong. Please try again, or email {contact.email}.
                 </p>
               )}
             </form>
@@ -201,29 +188,32 @@ export default function Contact() {
       <style>{`
         .field {
           width: 100%;
-          border: 1px solid rgba(255,255,255,0.14);
+          border: 1px solid rgb(var(--fg) / 0.14);
           border-radius: 10px;
           padding: 12px 14px;
-          font-size: 14.5px;
-          font-family: 'Inter', system-ui, sans-serif;
-          background: rgba(255,255,255,0.04);
-          color: #ffffff;
-          transition: border-color 150ms ease, background-color 150ms ease;
+          font-size: 15px;
+          font-family: inherit;
+          background: rgb(var(--fg) / 0.035);
+          color: rgb(var(--fg));
+          transition: border-color 180ms cubic-bezier(0.32, 0.72, 0, 1), background-color 180ms cubic-bezier(0.32, 0.72, 0, 1), box-shadow 180ms cubic-bezier(0.32, 0.72, 0, 1);
         }
-        .field::placeholder { color: rgba(255,255,255,0.35); }
+        .field::placeholder { color: rgb(var(--fg) / 0.45); }
+        .field:hover { border-color: rgb(var(--fg) / 0.26); }
         .field:focus {
           outline: none;
-          border-color: rgba(255,255,255,0.55);
-          background: rgba(255,255,255,0.07);
+          border-color: rgb(var(--fg) / 0.6);
+          background: rgb(var(--panel));
+          box-shadow: 0 0 0 3px rgb(var(--fg) / 0.08);
         }
         .field-select {
           appearance: none;
-          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none'%3E%3Cpath d='M4 6l4 4 4-4' stroke='rgba(255,255,255,0.5)' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+          background-image: linear-gradient(45deg, transparent 50%, rgb(var(--fg) / 0.6) 50%), linear-gradient(135deg, rgb(var(--fg) / 0.6) 50%, transparent 50%);
+          background-size: 5px 5px, 5px 5px;
+          background-position: right 20px center, right 15px center;
           background-repeat: no-repeat;
-          background-position: right 14px center;
           padding-right: 40px;
         }
-        .field-select option { background: #0d0d0d; color: #fff; }
+        .field-select option { background: rgb(var(--panel)); color: rgb(var(--fg)); }
       `}</style>
     </section>
   );
@@ -232,8 +222,8 @@ export default function Contact() {
 function Field({ label, required, children }) {
   return (
     <label className="block">
-      <span className="block text-[13.5px] font-medium text-white/70 mb-1.5">
-        {label} {required && <span className="text-white">*</span>}
+      <span className="block text-[13.5px] font-medium text-fg/80 mb-1.5">
+        {label} {required && <span className="text-fg">*</span>}
       </span>
       {children}
     </label>

@@ -68,7 +68,7 @@ export default function ChatBooking({ onLayoutChange }) {
       });
       const data = await res.json();
       if (!res.ok || !data.ok) {
-        setFormError(data?.error || "That time isn't available anymore — please pick another.");
+        setFormError(data?.error || "That time isn't available anymore. Please pick another.");
         setSubmitting(false);
         if (data && /taken|no longer available/i.test(data.error || '')) {
           loadAvailability();
@@ -77,22 +77,22 @@ export default function ChatBooking({ onLayoutChange }) {
       }
       setStep('success');
     } catch {
-      setFormError('Something went wrong — please try again.');
+      setFormError('Something went wrong. Please try again.');
       setSubmitting(false);
     }
   }
 
   return (
-    <div className="max-w-[92%] rounded-[16px] border border-white/[0.07] bg-white/[0.06] p-4">
-      {step === 'loading' && <p className="text-[13.5px] text-white/60">Loading available times…</p>}
+    <div className="max-w-[92%] rounded-[16px] border border-fg/[0.07] bg-fg/[0.06] p-4">
+      {step === 'loading' && <p className="text-[13.5px] text-fg/60">Loading available times…</p>}
 
       {step === 'error' && (
         <div>
-          <p className="text-[13.5px] text-white/60 mb-3">Couldn’t load times just now.</p>
+          <p className="text-[13.5px] text-fg/60 mb-3">Couldn’t load times just now.</p>
           <button
             type="button"
             onClick={loadAvailability}
-            className="inline-flex items-center rounded-full bg-white text-black text-[13px] font-medium px-4 h-[34px] hover:shadow-[0_0_16px_rgba(200,214,255,0.3)] active:scale-[0.98] transition-[box-shadow,transform] duration-200"
+            className="inline-flex items-center rounded-full bg-fg text-bg text-[13px] font-medium px-4 h-[34px] hover:shadow-[0_0_16px_rgba(200,214,255,0.3)] active:scale-[0.98] transition-[box-shadow,transform] duration-200"
           >
             Try again
           </button>
@@ -101,11 +101,11 @@ export default function ChatBooking({ onLayoutChange }) {
 
       {step === 'slots' && (
         <div>
-          <p className="text-[13.5px] font-medium text-white mb-3">Pick a free 20-minute call time</p>
+          <p className="text-[13.5px] font-medium text-fg mb-3">Pick a free 20-minute call time</p>
           <div className="flex flex-col gap-3 max-h-[280px] overflow-y-auto pr-1">
             {days.map((day) => (
               <div key={day.date}>
-                <p className="text-[10.5px] font-semibold tracking-[0.08em] uppercase text-white/45 mb-1.5">
+                <p className="text-[10.5px] font-semibold tracking-[0.08em] uppercase text-fg/45 mb-1.5">
                   {day.dateLabel}
                 </p>
                 <div className="flex flex-wrap gap-1.5">
@@ -117,8 +117,8 @@ export default function ChatBooking({ onLayoutChange }) {
                       onClick={() => pickSlot(s, day.dateLabel)}
                       className={
                         s.available
-                          ? 'rounded-[8px] border border-white/[0.16] bg-transparent text-white/85 text-[12px] px-2.5 h-[30px] hover:border-white/45 hover:bg-white/[0.05] active:scale-[0.97] transition-[border-color,background-color,transform] duration-150'
-                          : 'rounded-[8px] border border-white/[0.06] bg-transparent text-white/25 text-[12px] px-2.5 h-[30px] line-through cursor-default'
+                          ? 'rounded-[8px] border border-fg/[0.16] bg-transparent text-fg/85 text-[12px] px-2.5 h-[30px] hover:border-fg/45 hover:bg-fg/[0.05] active:scale-[0.97] transition-[border-color,background-color,transform] duration-150'
+                          : 'rounded-[8px] border border-fg/[0.06] bg-transparent text-fg/25 text-[12px] px-2.5 h-[30px] line-through cursor-default'
                       }
                     >
                       {s.label}
@@ -133,7 +133,7 @@ export default function ChatBooking({ onLayoutChange }) {
 
       {step === 'form' && slot && (
         <div>
-          <p className="text-[13.5px] font-medium text-white mb-3">
+          <p className="text-[13.5px] font-medium text-fg mb-3">
             {dateLabel} at {slot.label}
           </p>
           <div className="flex flex-col gap-2">
@@ -142,7 +142,7 @@ export default function ChatBooking({ onLayoutChange }) {
               onChange={(e) => setName(e.target.value)}
               placeholder="Your name"
               autoComplete="name"
-              className="h-[38px] rounded-[8px] border border-white/[0.14] bg-white/[0.04] px-3 text-[13.5px] text-white placeholder:text-white/40 focus:outline-none focus:border-white/45 transition-colors duration-150"
+              className="h-[38px] rounded-[8px] border border-fg/[0.14] bg-fg/[0.04] px-3 text-[13.5px] text-fg placeholder:text-fg/40 focus:outline-none focus:border-fg/45 transition-colors duration-150"
             />
             <input
               value={phone}
@@ -150,7 +150,7 @@ export default function ChatBooking({ onLayoutChange }) {
               placeholder="WhatsApp number"
               autoComplete="tel"
               inputMode="tel"
-              className="h-[38px] rounded-[8px] border border-white/[0.14] bg-white/[0.04] px-3 text-[13.5px] text-white placeholder:text-white/40 focus:outline-none focus:border-white/45 transition-colors duration-150"
+              className="h-[38px] rounded-[8px] border border-fg/[0.14] bg-fg/[0.04] px-3 text-[13.5px] text-fg placeholder:text-fg/40 focus:outline-none focus:border-fg/45 transition-colors duration-150"
             />
           </div>
           {formError && <p className="text-[12px] text-red-400 mt-2">{formError}</p>}
@@ -159,7 +159,7 @@ export default function ChatBooking({ onLayoutChange }) {
               type="button"
               disabled={submitting}
               onClick={confirmBooking}
-              className="inline-flex items-center rounded-full bg-white text-black text-[13px] font-medium px-4 h-[34px] hover:shadow-[0_0_16px_rgba(200,214,255,0.3)] active:scale-[0.98] transition-[box-shadow,transform] duration-200 disabled:opacity-50"
+              className="inline-flex items-center rounded-full bg-fg text-bg text-[13px] font-medium px-4 h-[34px] hover:shadow-[0_0_16px_rgba(200,214,255,0.3)] active:scale-[0.98] transition-[box-shadow,transform] duration-200 disabled:opacity-50"
             >
               {submitting ? 'Booking…' : 'Confirm'}
             </button>
@@ -169,7 +169,7 @@ export default function ChatBooking({ onLayoutChange }) {
                 setFormError('');
                 loadAvailability();
               }}
-              className="text-[12px] text-white/55 underline hover:text-white/80 transition-colors duration-150"
+              className="text-[12px] text-fg/55 underline hover:text-fg/80 transition-colors duration-150"
             >
               Choose another time
             </button>
@@ -179,10 +179,10 @@ export default function ChatBooking({ onLayoutChange }) {
 
       {step === 'success' && (
         <div>
-          <p className="text-[13.5px] font-medium text-white mb-1">
-            ✓ Booked — {dateLabel} at {slot.label}
+          <p className="text-[13.5px] font-medium text-fg mb-1">
+            Booked for {dateLabel} at {slot.label}
           </p>
-          <p className="text-[12.5px] text-white/60">Jad will call you then. He has your number if anything changes.</p>
+          <p className="text-[12.5px] text-fg/60">Jad will call you then. He has your number if anything changes.</p>
         </div>
       )}
     </div>

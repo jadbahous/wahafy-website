@@ -82,7 +82,7 @@ export default function Loader({ onDone }) {
           initial={{ y: 0 }}
           exit={{ y: '-100%' }}
           transition={{ duration: 0.85, ease: [0.76, 0, 0.24, 1] }}
-          className="fixed inset-0 z-[100] bg-[#07080b] text-white overflow-hidden"
+          className="fixed inset-0 z-[100] zone-dark bg-bg text-fg overflow-hidden"
           aria-live="polite"
           aria-busy="true"
         >
@@ -93,7 +93,7 @@ export default function Loader({ onDone }) {
               backgroundSize: '26px 26px',
             }}
           />
-          <div className="absolute top-0 left-0 right-0 h-[3px] bg-white/5">
+          <div className="absolute top-0 left-0 right-0 h-[3px] bg-fg/5">
             <div
               className="h-full bg-[#dfe6ff] transition-[width] duration-150 ease-out"
               style={{ width: `${pct}%` }}

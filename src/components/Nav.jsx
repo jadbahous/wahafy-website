@@ -7,7 +7,11 @@ import { nav, navCta } from '../data.js';
 export default function Nav() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  // Over the hero the bar is night glass with the white lockup; past it, on
+  // the daylight look, it becomes paper glass with the ink lockup. On the
+  // night look both states are the same, so nothing changes there.
   const { pathname } = useLocation();
+  const [overHero, setOverHero] = useState(pathname === '/');
 
   // Transparent over the hero; a quiet dark glass once the page moves.
   useEffect(() => {
@@ -22,6 +26,27 @@ export default function Nav() {
   useEffect(() => {
     setOpen(false);
   }, [pathname]);
+
+  useEffect(() => {
+    const hero = document.getElementById('hero');
+    if (!hero) {
+      setOverHero(false);
+      return;
+    }
+    setOverHero(true);
+    // The bar is over the hero while any of the hero is still under it —
+    // measured against the bar's own height, not the viewport.
+    const io = new IntersectionObserver(
+      ([e]) => setOverHero(e.isIntersecting),
+      { rootMargin: '-72px 0px 0px 0px', threshold: 0 },
+    );
+    io.observe(hero);
+    return () => io.disconnect();
+  }, [pathname]);
+
+  const daylight = typeof document !== 'undefined' && document.documentElement.dataset.theme === 'daylight';
+  const onDark = !daylight || overHero || open;
+  const lockup = onDark ? '/brand/lockup-white.png' : '/brand/lockup-dark.png';
 
   useEffect(() => {
     document.body.classList.toggle('menu-open', open);
@@ -46,14 +71,14 @@ export default function Nav() {
         initial={{ y: -40, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        className={`fixed top-0 left-0 right-0 z-50 border-b transition-[background-color,border-color,backdrop-filter] duration-500 ${
-          scrolled || open ? 'bg-black/70 backdrop-blur-md border-white/10' : 'bg-transparent border-transparent'
+        className={`${onDark ? 'zone-dark' : ''} fixed top-0 left-0 right-0 z-50 border-b transition-[background-color,border-color,backdrop-filter] duration-500 ${
+          scrolled || open ? 'bg-bg/70 backdrop-blur-md border-fg/10' : 'bg-transparent border-transparent'
         }`}
       >
         <div className={`section-wrap grid grid-cols-[1fr_auto_1fr] items-center transition-[height] duration-500 ${scrolled ? 'h-[64px]' : 'h-[72px]'}`}>
-          <Link to="/" className="justify-self-start flex items-center group" aria-label="Marhab AI — home">
+          <Link to="/" className="justify-self-start flex items-center group" aria-label="Marhab AI, home">
             <img
-              src="/brand/lockup-white.png"
+              src={lockup}
               alt="Marhab"
               className="h-[30px] w-auto select-none"
               draggable="false"
@@ -73,17 +98,14 @@ export default function Nav() {
           </nav>
 
           <div className="justify-self-end flex items-center gap-3">
-            <Link
-              to={navCta.href}
-              className="hidden sm:inline-flex items-center rounded-full text-black text-[14px] font-medium px-5 py-2.5 bg-gradient-to-b from-white via-[#e7e7e7] to-[#cfcfcf] border border-white hover:shadow-[0_0_20px_rgba(186,208,255,0.35)] active:scale-[0.98] transition-[box-shadow,transform] duration-300"
-            >
+            <Link to={navCta.href} className="btn-primary hidden sm:inline-flex h-[42px] px-5 text-[14px]">
               {navCta.label}
             </Link>
 
             <button
               type="button"
               onClick={() => setOpen((v) => !v)}
-              className="md:hidden grid place-items-center w-10 h-10 rounded-md border border-white/15 text-white bg-black/40"
+              className="md:hidden grid place-items-center w-11 h-11 rounded-full border border-fg/15 text-fg bg-bg/40 hover:border-fg/40 active:scale-95 transition-[border-color,transform] duration-200"
               aria-controls="mobile-nav"
               aria-expanded={open}
               aria-label={open ? 'Close menu' : 'Open menu'}
@@ -101,7 +123,7 @@ export default function Nav() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.28 }}
-            className="md:hidden fixed inset-0 z-40 bg-black/80 backdrop-blur-2xl"
+            className="md:hidden fixed inset-0 z-40 bg-bg/80 backdrop-blur-2xl"
           >
             <nav
               id="mobile-nav"
@@ -118,7 +140,11 @@ export default function Nav() {
                 >
                   <NavLink
                     to={item.href}
-                    className="flex items-center justify-center w-full h-14 rounded-[10px] text-[19px] text-white/85 border border-white/10 bg-white/[0.03]"
+                    className={({ isActive }) =>
+                      `flex items-center justify-center w-full h-14 rounded-full font-display text-[19px] border transition-[border-color,background-color,color,transform] duration-200 active:scale-[0.985] ${
+                        isActive ? 'text-fg border-fg/30 bg-fg/[0.06]' : 'text-fg/85 border-fg/10 bg-fg/[0.03] hover:border-fg/30 hover:text-fg'
+                      }`
+                    }
                   >
                     {item.label}
                   </NavLink>
@@ -130,10 +156,7 @@ export default function Nav() {
                 transition={{ delay: 0.06 + nav.length * 0.05, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                 className="w-full max-w-[320px] mt-3"
               >
-                <Link
-                  to={navCta.href}
-                  className="flex items-center justify-center w-full h-14 rounded-[10px] text-[16px] font-medium text-black bg-gradient-to-b from-white via-[#e7e7e7] to-[#cfcfcf]"
-                >
+                <Link to={navCta.href} className="btn-primary flex w-full h-14 text-[16px]">
                   {navCta.label}
                 </Link>
               </motion.div>
@@ -149,10 +172,10 @@ export default function Nav() {
           align-items: center;
           height: 40px;
           padding: 0 2px;
-          color: rgba(255,255,255,0.68);
+          color: rgb(var(--fg) / 0.72);
           font-size: 14.5px;
-          font-weight: 450;
-          letter-spacing: -0.005em;
+          font-weight: 500;
+          letter-spacing: 0;
           white-space: nowrap;
           transition: color 0.25s ease;
         }
@@ -170,7 +193,7 @@ export default function Nav() {
         }
         .nav-link:hover,
         .nav-link:focus-visible {
-          color: #ffffff;
+          color: rgb(var(--fg));
           outline: none;
         }
         .nav-link:hover::after,
@@ -179,7 +202,7 @@ export default function Nav() {
           transform-origin: left;
         }
         .nav-link.active {
-          color: #ffffff;
+          color: rgb(var(--fg));
         }
         .nav-link.active::after {
           transform: scaleX(1);

@@ -77,7 +77,7 @@ export default function ProductDemo() {
   }
 
   return (
-    <section id="demo" className="relative bg-ink text-white py-28 md:py-36 border-t border-white/[0.08] scroll-mt-16">
+    <section id="demo" className="relative bg-matte text-fg py-28 md:py-36 scroll-mt-16">
       <div className="section-wrap">
         <SectionHeading eyebrow={demo.eyebrow} heading={demo.heading} sub={demo.sub} max="21ch" subMax="54ch" className="mb-14 md:mb-20" />
 
@@ -117,11 +117,11 @@ export default function ProductDemo() {
                   )}
                 </AnimatePresence>
               </div>
-              <div className="flex items-center gap-2 px-3 py-3 border-t border-white/[0.08]">
-                <div className="flex-1 h-[40px] rounded-full border border-white/[0.12] bg-white/[0.03] px-4 text-[13.5px] text-white/45 flex items-center">
+              <div className="flex items-center gap-2 px-3 py-3 border-t border-fg/[0.08]">
+                <div className="flex-1 h-[40px] rounded-full border border-fg/[0.12] bg-fg/[0.03] px-4 text-[13.5px] text-fg/60 flex items-center">
                   Type a message…
                 </div>
-                <span className="grid place-items-center w-[40px] h-[40px] rounded-full bg-white/[0.08] text-white/55">
+                <span className="grid place-items-center w-[40px] h-[40px] rounded-full bg-fg/[0.08] text-fg/65">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
                 </span>
               </div>
@@ -137,14 +137,14 @@ export default function ProductDemo() {
             viewport={viewportOnce}
             className="lg:col-span-5 flex flex-col gap-5"
           >
-            <div className="rounded-[22px] border border-white/[0.12] bg-[#0b0b0b] px-6 py-5">
+            <div className="rounded-[22px] surface-2 px-6 py-5">
               <div className="flex items-center justify-between mb-2">
-                <p className="text-[12px] uppercase tracking-[0.18em] text-white/55">What just happened</p>
-                <span className={`text-[12px] tabular-nums transition-colors duration-300 ${finished ? 'text-[#9fe7bb]' : 'text-white/45'}`}>
+                <p className="font-display text-[12.5px] font-medium uppercase tracking-[0.16em] text-fg/65">What just happened</p>
+                <span className={`text-[12.5px] tabular-nums transition-colors duration-300 ${finished ? 'text-ok' : 'text-fg/60'}`}>
                   {done}/{pipeTotal}
                 </span>
               </div>
-              <div className="divide-y divide-white/[0.06]">
+              <div className="divide-y divide-fg/[0.06]">
                 {demo.pipeline.map((p, i) => (
                   <StatusRow
                     key={p.label}
@@ -157,28 +157,19 @@ export default function ProductDemo() {
             </div>
 
             <div className="flex flex-wrap items-center gap-3">
-              <button
-                type="button"
-                onClick={openChat}
-                className="inline-flex items-center gap-2 h-[44px] px-5 rounded-full bg-white text-black text-[14px] font-medium hover:shadow-[0_0_22px_rgba(186,208,255,0.3)] active:scale-[0.98] transition-[box-shadow,transform] duration-300"
-              >
+              <button type="button" onClick={openChat} className="btn-primary h-[46px] px-5 text-[14px]">
                 <MessageCircle className="w-4 h-4" strokeWidth={1.8} />
                 {demo.tryLabel}
               </button>
               {!prefersReducedMotion && (
-                <button
-                  type="button"
-                  onClick={() => setRun((r) => r + 1)}
-                  disabled={!finished}
-                  className="inline-flex items-center gap-2 h-[44px] px-5 rounded-full border border-white/20 text-[14px] text-white/75 hover:text-white hover:border-white/50 disabled:opacity-35 disabled:cursor-default transition-[color,border-color,opacity] duration-300"
-                >
+                <button type="button" onClick={() => setRun((r) => r + 1)} disabled={!finished} className="btn-secondary h-[46px] px-5 text-[14px]">
                   <RotateCcw className="w-4 h-4" strokeWidth={1.8} />
                   {demo.replayLabel}
                 </button>
               )}
             </div>
-            <p className="text-[13.5px] leading-relaxed text-white/55 max-w-[40ch]">
-              The same reception runs on this site. Ask it anything about your business — it’s the experience your customers would get.
+            <p className="text-[14px] leading-relaxed text-fg/65 max-w-[40ch]">
+              The same reception runs on this site. Ask it anything about your business. It’s the experience your customers would get.
             </p>
           </motion.div>
         </div>
@@ -186,13 +177,13 @@ export default function ProductDemo() {
 
       <style>{`
         .mock-dots { display: inline-flex; gap: 4px; }
-        .mock-dots span { width: 5px; height: 5px; border-radius: 50%; background: rgba(255,255,255,0.7); opacity: .3; animation: mockBlink 1.1s infinite ease-in-out; }
+        .mock-dots span { width: 5px; height: 5px; border-radius: 50%; background: rgb(var(--fg) / 0.7); opacity: .3; animation: mockBlink 1.1s infinite ease-in-out; }
         .mock-dots span:nth-child(2) { animation-delay: .15s; }
         .mock-dots span:nth-child(3) { animation-delay: .3s; }
         @keyframes mockBlink { 0%, 80%, 100% { opacity: .25; } 40% { opacity: .9; } }
-        .mock-scroll { scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.12) transparent; }
+        .mock-scroll { scrollbar-width: thin; scrollbar-color: rgb(var(--fg) / 0.12) transparent; }
         .mock-scroll::-webkit-scrollbar { width: 6px; }
-        .mock-scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 999px; }
+        .mock-scroll::-webkit-scrollbar-thumb { background: rgb(var(--fg) / 0.12); border-radius: 999px; }
       `}</style>
     </section>
   );

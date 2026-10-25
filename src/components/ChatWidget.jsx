@@ -10,7 +10,7 @@ import ChatBooking from './ChatBooking.jsx';
 
 const STORE_KEY = 'marhab:chat';
 const GREETING =
-  "Marhaba — I'm the Marhab assistant. Ask me anything about what we build, or tell me about your business and I'll set up a free demo.";
+  "Marhaba. I'm the Marhab assistant. Ask me anything about what we build, or tell me about your business and I'll set up a free demo.";
 const SUGGESTIONS = [
   'What does Marhab AI do?',
   'Standard vs. Premium?',
@@ -116,27 +116,27 @@ export default function ChatWidget() {
             {...panelMotion}
             role="dialog"
             aria-label="Chat with Marhab"
-            className="mw-panel fixed z-[80] right-4 bottom-[88px] sm:right-6 sm:bottom-[92px] w-[calc(100vw-32px)] sm:w-[380px] h-[min(600px,calc(100dvh-120px))] flex flex-col overflow-hidden rounded-[20px] border border-white/[0.12] bg-[#0a0a0a] text-white origin-bottom-right"
+            className="mw-panel fixed z-[80] right-4 bottom-[88px] sm:right-6 sm:bottom-[92px] w-[calc(100vw-32px)] sm:w-[380px] h-[min(600px,calc(100dvh-120px))] flex flex-col overflow-hidden rounded-[20px] zone-dark border border-fg/[0.12] bg-matte text-fg origin-bottom-right"
           >
             <div className="noise-overlay" />
 
             {/* Header */}
-            <header className="relative flex items-center justify-between gap-4 px-5 pt-[18px] pb-4 border-b border-white/[0.08]">
+            <header className="relative flex items-center justify-between gap-4 px-5 pt-[18px] pb-4 border-b border-fg/[0.08]">
               <div className="flex items-center gap-3">
-                <div className="relative grid place-items-center w-9 h-9 rounded-full border border-white/[0.14] bg-white/[0.04]">
+                <div className="relative grid place-items-center w-9 h-9 rounded-full border border-fg/[0.14] bg-fg/[0.04]">
                   <img src="/brand/mark-white.png" alt="" className="h-[18px] w-auto select-none" draggable="false" />
-                  <span className="absolute -right-0.5 -bottom-0.5 w-2.5 h-2.5 rounded-full bg-[#5ad88a] ring-2 ring-[#0a0a0a]" />
+                  <span className="absolute -right-0.5 -bottom-0.5 w-2.5 h-2.5 rounded-full bg-ok-dot ring-2 ring-matte" />
                 </div>
                 <div>
                   <p className="text-[14px] font-medium leading-tight">Marhab</p>
-                  <p className="text-[12px] tracking-[0.04em] text-white/60 mt-0.5">AI assistant · replies in seconds</p>
+                  <p className="text-[12px] tracking-[0.04em] text-fg/60 mt-0.5">AI assistant · replies in seconds</p>
                 </div>
               </div>
               <button
                 type="button"
                 onClick={() => setOpen(false)}
                 aria-label="Close chat"
-                className="grid place-items-center w-8 h-8 rounded-full text-white/65 hover:text-white hover:bg-white/[0.06] transition-colors duration-200"
+                className="grid place-items-center w-8 h-8 rounded-full text-fg/65 hover:text-fg hover:bg-fg/[0.06] transition-colors duration-200"
               >
                 <X className="w-4 h-4" strokeWidth={1.8} />
               </button>
@@ -149,8 +149,8 @@ export default function ChatWidget() {
                   <div
                     className={`max-w-[84%] px-[14px] py-[10px] text-[14px] leading-[1.55] whitespace-pre-wrap break-words ${
                       m.role === 'user'
-                        ? 'bg-white text-black rounded-[16px] rounded-br-[5px]'
-                        : 'bg-white/[0.06] border border-white/[0.07] text-white/85 rounded-[16px] rounded-bl-[5px]'
+                        ? 'bg-fg text-bg rounded-[16px] rounded-br-[5px]'
+                        : 'bg-fg/[0.06] border border-fg/[0.07] text-fg/85 rounded-[16px] rounded-bl-[5px]'
                     }`}
                   >
                     {m.content}
@@ -173,23 +173,23 @@ export default function ChatWidget() {
                 <div className="flex justify-start">
                   <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#5ad88a]/30 bg-[#5ad88a]/10 text-[12.5px] text-[#9fe7bb]">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#5ad88a]" />
-                    Saved — Jad has your details
+                    Saved. Jad has your details
                   </div>
                 </div>
               )}
 
               {busy && (
                 <div className="flex justify-start">
-                  <div className="mw-dots px-[14px] py-[12px] bg-white/[0.06] border border-white/[0.07] rounded-[16px] rounded-bl-[5px]">
+                  <div className="mw-dots px-[14px] py-[12px] bg-fg/[0.06] border border-fg/[0.07] rounded-[16px] rounded-bl-[5px]">
                     <span /><span /><span />
                   </div>
                 </div>
               )}
 
               {error && (
-                <p className="text-[13px] text-white/60 px-1">
+                <p className="text-[13px] text-fg/60 px-1">
                   Couldn’t reach the assistant just now.{' '}
-                  <button type="button" onClick={() => send(messages[messages.length - 1]?.content)} className="underline hover:text-white">
+                  <button type="button" onClick={() => send(messages[messages.length - 1]?.content)} className="underline hover:text-fg">
                     Try again
                   </button>
                 </p>
@@ -202,7 +202,7 @@ export default function ChatWidget() {
                       key={s}
                       type="button"
                       onClick={() => send(s)}
-                      className="px-3 py-1.5 rounded-full border border-white/[0.16] bg-transparent text-[13.5px] text-white/70 hover:text-white hover:border-white/40 hover:bg-white/[0.04] active:scale-[0.98] transition-[color,border-color,background-color,transform] duration-200"
+                      className="px-3 py-1.5 rounded-full border border-fg/[0.16] bg-transparent text-[13.5px] text-fg/70 hover:text-fg hover:border-fg/40 hover:bg-fg/[0.04] active:scale-[0.98] transition-[color,border-color,background-color,transform] duration-200"
                     >
                       {s}
                     </button>
@@ -217,7 +217,7 @@ export default function ChatWidget() {
                 e.preventDefault();
                 send();
               }}
-              className="relative flex items-center gap-2 px-3 py-3 border-t border-white/[0.08] bg-[#0a0a0a]"
+              className="relative flex items-center gap-2 px-3 py-3 border-t border-fg/[0.08] bg-matte"
             >
               <input
                 ref={inputRef}
@@ -225,13 +225,13 @@ export default function ChatWidget() {
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Ask about your business…"
                 autoComplete="off"
-                className="flex-1 h-[42px] rounded-full border border-white/[0.14] bg-white/[0.04] px-4 text-[14px] text-white placeholder:text-white/50 focus:outline-none focus:border-white/50 focus:bg-white/[0.06] transition-[border-color,background-color] duration-150"
+                className="flex-1 h-[42px] rounded-full border border-fg/[0.14] bg-fg/[0.04] px-4 text-[14px] text-fg placeholder:text-fg/50 focus:outline-none focus:border-fg/50 focus:bg-fg/[0.06] transition-[border-color,background-color] duration-150"
               />
               <button
                 type="submit"
                 disabled={busy || !input.trim()}
                 aria-label="Send"
-                className="grid place-items-center w-[42px] h-[42px] rounded-full bg-white text-black disabled:opacity-35 disabled:cursor-default hover:shadow-[0_0_18px_rgba(200,214,255,0.35)] active:scale-95 transition-[opacity,box-shadow,transform] duration-200"
+                className="grid place-items-center w-[42px] h-[42px] rounded-full bg-fg text-bg disabled:opacity-35 disabled:cursor-default hover:shadow-[0_0_18px_rgba(200,214,255,0.35)] active:scale-95 transition-[opacity,box-shadow,transform] duration-200"
               >
                 <ArrowUp className="w-[18px] h-[18px]" strokeWidth={2} />
               </button>
@@ -246,10 +246,11 @@ export default function ChatWidget() {
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
         aria-label={open ? 'Close chat' : 'Chat with Marhab'}
-        className="mw-launch fixed z-[80] right-4 bottom-4 sm:right-6 sm:bottom-6 inline-flex items-center gap-2.5 h-[46px] pl-[14px] pr-[18px] rounded-full border border-white/25 bg-black/70 backdrop-blur-md text-white text-[14px] font-medium hover:border-white/55 hover:bg-white/[0.08] hover:shadow-[0_0_22px_rgba(170,200,255,0.2)] active:scale-[0.98] transition-[border-color,background-color,box-shadow,transform] duration-300"
+        className="mw-launch zone-dark fixed z-[80] right-4 bottom-4 sm:right-6 sm:bottom-6 inline-flex items-center gap-2.5 h-[46px] pl-[14px] pr-[18px] rounded-full border border-fg/25 bg-bg/80 backdrop-blur-md text-fg text-[14px] font-medium hover:border-fg/55 hover:bg-fg/[0.08] active:scale-[0.98] transition-[border-color,background-color,box-shadow,transform] duration-300 ease-[cubic-bezier(0.32,0.72,0,1)]"
+        style={{ boxShadow: 'var(--shadow-2)' }}
       >
-        <span className="relative inline-flex w-2 h-2 rounded-full bg-[#5ad88a]">
-          {unread && !open && <span className="absolute inset-0 rounded-full bg-[#5ad88a] animate-ping" />}
+        <span className="relative inline-flex w-2 h-2 rounded-full bg-ok-dot">
+          {unread && !open && <span className="absolute inset-0 rounded-full bg-ok-dot animate-ping" />}
         </span>
         {open ? 'Close' : 'Ask Marhab'}
       </button>

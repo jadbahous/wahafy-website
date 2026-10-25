@@ -46,9 +46,13 @@ export default function AuroraField({ className = '' }) {
     resize();
     window.addEventListener('resize', resize);
 
+    // The trails must fade toward the surface they sit on, or the canvas
+    // blackens whatever the page is: read the zone's --bg once.
+    const base = getComputedStyle(canvas).getPropertyValue('--bg').trim().split(/\s+/).join(',') || '0,0,0';
+    const fade = `rgba(${base},0.16)`;
     function frame() {
       ctx.globalCompositeOperation = 'source-over';
-      ctx.fillStyle = 'rgba(0,0,0,0.16)';
+      ctx.fillStyle = fade;
       ctx.fillRect(0, 0, w, h);
 
       ctx.globalCompositeOperation = 'lighter';
@@ -87,7 +91,7 @@ export default function AuroraField({ className = '' }) {
 
     function frameStep() {
       ctx.globalCompositeOperation = 'source-over';
-      ctx.fillStyle = 'rgba(0,0,0,0.16)';
+      ctx.fillStyle = fade;
       ctx.fillRect(0, 0, w, h);
       ctx.globalCompositeOperation = 'lighter';
       for (const b of BLOBS) {

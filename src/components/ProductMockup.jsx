@@ -40,7 +40,7 @@ export default function ProductMockup({ scrollYProgress, prefersReducedMotion })
             <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F57]" />
             <span className="w-2.5 h-2.5 rounded-full bg-[#FEBC2E]" />
             <span className="w-2.5 h-2.5 rounded-full bg-[#28C840]" />
-            <span className="ml-3 text-[11px] text-black/40 truncate">pearl-and-bloom-demo.vercel.app</span>
+            <span className="ml-3 text-[12px] text-black/40 truncate">pearl-and-bloom-demo.vercel.app</span>
           </div>
 
           {/* simplified page body, real client palette */}
@@ -69,15 +69,15 @@ export default function ProductMockup({ scrollYProgress, prefersReducedMotion })
               className="absolute bottom-4 right-4 sm:bottom-5 sm:right-5 w-[178px] sm:w-[210px] rounded-2xl bg-[#16231F] shadow-xl p-3 sm:p-3.5"
             >
               <div className="flex items-center gap-2 mb-2">
-                <span className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-gold flex items-center justify-center text-white text-[9px] sm:text-[10px] font-bold shrink-0">
+                <span className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-gold flex items-center justify-center text-white text-[9px] sm:text-[11.5px] font-bold shrink-0">
                   W
                 </span>
-                <span className="text-[10px] sm:text-[11px] text-white/70 truncate">Pearl &amp; Bloom Assist</span>
+                <span className="text-[11.5px] sm:text-[12px] text-white/70 truncate">Pearl &amp; Bloom Assist</span>
               </div>
-              <div className="text-[10px] sm:text-[11px] text-white/85 bg-white/10 rounded-lg rounded-tl-sm px-2 sm:px-2.5 py-1.5 sm:py-2 mb-1.5 sm:mb-2 leading-snug">
+              <div className="text-[11.5px] sm:text-[12px] text-white/85 bg-white/10 rounded-lg rounded-tl-sm px-2 sm:px-2.5 py-1.5 sm:py-2 mb-1.5 sm:mb-2 leading-snug">
                 Want to book a whitening consult this week?
               </div>
-              <div className="text-[10px] sm:text-[11px] text-white bg-gold rounded-lg rounded-tr-sm px-2 sm:px-2.5 py-1.5 sm:py-2 ml-auto w-fit">
+              <div className="text-[11.5px] sm:text-[12px] text-white bg-gold rounded-lg rounded-tr-sm px-2 sm:px-2.5 py-1.5 sm:py-2 ml-auto w-fit">
                 Thursday works
               </div>
             </motion.div>
@@ -93,8 +93,8 @@ export default function ProductMockup({ scrollYProgress, prefersReducedMotion })
                 </svg>
               </span>
               <div>
-                <p className="text-[10.5px] sm:text-[11.5px] font-medium text-ink leading-tight">New lead captured</p>
-                <p className="text-[9.5px] sm:text-[10.5px] text-ink/45 leading-tight">Sarah M. · just now</p>
+                <p className="text-[11.5px] sm:text-[12.5px] font-medium text-ink leading-tight">New lead captured</p>
+                <p className="text-[9.5px] sm:text-[11.5px] text-ink/45 leading-tight">Sarah M. · just now</p>
               </div>
             </motion.div>
           </div>

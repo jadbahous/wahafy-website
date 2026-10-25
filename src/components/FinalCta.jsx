@@ -12,7 +12,7 @@ export default function FinalCta() {
     window.dispatchEvent(new CustomEvent('marhab:open-chat'));
   }
   return (
-    <section className="relative bg-ink text-white py-32 md:py-44 border-t border-white/[0.08] overflow-hidden">
+    <section className="zone-dark relative bg-bg text-fg py-32 md:py-44 border-t border-fg/[0.08] overflow-hidden">
       <div className="absolute inset-0 opacity-60">
         <AuroraField />
       </div>
@@ -34,7 +34,7 @@ export default function FinalCta() {
           initial="hidden"
           whileInView="visible"
           viewport={viewportOnce}
-          className="mt-6 text-[17px] leading-relaxed text-white/75 max-w-[36ch] [text-shadow:0_1px_18px_rgba(0,0,0,0.5)]"
+          className="mt-6 text-[17px] leading-relaxed text-fg/80 max-w-[36ch] [text-shadow:0_1px_18px_rgba(0,0,0,0.5)]"
         >
           {finalCta.sub}
         </motion.p>
@@ -46,18 +46,11 @@ export default function FinalCta() {
           viewport={viewportOnce}
           className="mt-10 flex flex-wrap items-center justify-center gap-3"
         >
-          <Link
-            to={finalCta.primary.href}
-            className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-b from-white via-[#e7e7e7] to-[#cfcfcf] text-black border border-white text-[15px] font-medium px-7 h-[52px] hover:shadow-[0_0_26px_rgba(186,208,255,0.4)] active:scale-[0.98] transition-[box-shadow,transform] duration-300"
-          >
+          <Link to={finalCta.primary.href} className="btn-primary group h-[52px] px-7 text-[15px]">
             {finalCta.primary.label}
-            <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+            <ArrowRight className="w-4 h-4 transition-transform duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-1" strokeWidth={2} />
           </Link>
-          <button
-            type="button"
-            onClick={openChat}
-            className="inline-flex items-center rounded-full border border-white/25 bg-white/[0.04] backdrop-blur-md text-white text-[15px] font-medium px-7 h-[52px] hover:border-white/50 hover:bg-white/[0.08] active:scale-[0.98] transition-[border-color,background-color,transform] duration-300"
-          >
+          <button type="button" onClick={openChat} className="btn-secondary h-[52px] px-7 text-[15px] backdrop-blur-md">
             {finalCta.secondary.label}
           </button>
         </motion.div>

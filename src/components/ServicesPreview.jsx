@@ -9,28 +9,28 @@ import SectionHeading from './SectionHeading.jsx';
 // the Services page rather than five more cards.
 export default function ServicesPreview() {
   return (
-    <section className="bg-ink text-white py-28 md:py-36 border-t border-white/[0.08]">
+    <section className="bg-bg text-fg py-28 md:py-36 border-t border-fg/[0.08]">
       <div className="section-wrap">
-        <SectionHeading eyebrow={servicesPreview.eyebrow} heading={servicesPreview.heading} cta={servicesPreview.cta} max="20ch" className="mb-14 md:mb-20" />
+        <SectionHeading heading={servicesPreview.heading} cta={servicesPreview.cta} max="20ch" className="mb-14 md:mb-20" />
 
-        <ul className="border-t border-white/10">
+        <ul className="border-t border-fg/10">
           {servicesPreview.items.map((s, i) => (
             <motion.li key={s.title} variants={fadeUp} custom={i + 1} initial="hidden" whileInView="visible" viewport={viewportOnce}>
               <Link
                 to="/services"
-                className="group grid grid-cols-[auto_1fr_auto] items-center gap-5 md:gap-8 py-6 md:py-7 border-b border-white/10 hover:border-white/30 transition-colors duration-300"
+                className="group grid grid-cols-[auto_1fr_auto] items-center gap-5 md:gap-8 py-6 md:py-7 border-b border-fg/10 hover:border-fg/35 transition-colors duration-300"
               >
-                <span className="font-display text-[13px] tabular-nums text-white/45 group-hover:text-white/70 transition-colors duration-300">
+                <span className="font-display text-[13.5px] font-medium tabular-nums text-fg/60 group-hover:text-fg transition-colors duration-300">
                   0{i + 1}
                 </span>
                 <span className="min-w-0">
-                  <span className="block font-display font-semibold text-[20px] md:text-[24px] leading-tight tracking-[-0.02em] text-white">
+                  <span className="block font-display font-semibold text-[20px] md:text-[24px] leading-tight tracking-[-0.02em] text-fg">
                     {s.title}
                   </span>
-                  <span className="block mt-1.5 text-[14.5px] leading-relaxed text-white/65 max-w-[54ch]">{s.text}</span>
+                  <span className="block mt-1.5 text-[15px] leading-relaxed text-fg/70 max-w-[54ch]">{s.text}</span>
                 </span>
-                <span className="grid place-items-center w-10 h-10 rounded-full border border-white/[0.12] text-white/65 group-hover:text-black group-hover:bg-white group-hover:border-white transition-[color,background-color,border-color] duration-300">
-                  <ArrowUpRight className="w-4 h-4" strokeWidth={1.8} />
+                <span className="grid place-items-center w-11 h-11 rounded-full border border-fg/[0.14] text-fg/70 group-hover:text-bg group-hover:bg-fg group-hover:border-fg transition-[color,background-color,border-color] duration-300">
+                  <ArrowUpRight className="w-4 h-4 transition-transform duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-px group-hover:-translate-y-px" strokeWidth={1.8} />
                 </span>
               </Link>
             </motion.li>
