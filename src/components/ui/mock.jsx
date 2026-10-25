@@ -33,12 +33,12 @@ export function Panel({ title, sub, children, className = '', level = 3 }) {
   );
 }
 
-export function Bubble({ role, children, className = '' }) {
+export function Bubble({ role, children, className = '', dense = false }) {
   const me = role === 'customer';
   return (
     <div className={`flex ${me ? 'justify-end' : 'justify-start'} ${className}`}>
       <div
-        className={`max-w-[84%] px-[14px] py-[10px] text-[14px] leading-[1.5] ${
+        className={`max-w-[84%] ${dense ? 'px-3 py-2 text-[13.5px] leading-[1.45]' : 'px-[14px] py-[10px] text-[14px] leading-[1.5]'} ${
           me
             ? 'bg-fg text-bg rounded-[16px] rounded-br-[5px]'
             : 'bg-fg/[0.06] border border-fg/[0.07] text-fg/90 rounded-[16px] rounded-bl-[5px]'
