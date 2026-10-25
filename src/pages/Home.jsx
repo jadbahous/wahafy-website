@@ -1,4 +1,5 @@
-import Loader from '../components/Loader.jsx';
+import { useCallback, useState } from 'react';
+import Loader, { loaderWillPlay } from '../components/Loader.jsx';
 import Hero from '../components/Hero.jsx';
 import HeroDive from '../components/HeroDive.jsx';
 import ProductDemo from '../components/ProductDemo.jsx';
@@ -20,10 +21,16 @@ import FinalCta from '../components/FinalCta.jsx';
 const daylight = typeof document !== 'undefined' && document.documentElement.dataset.theme === 'daylight';
 
 export default function Home() {
+  // The loader hands the opening to the hero: `intro` is known at mount (so
+  // the hero can set up the close-up behind the counter), `ready` when the
+  // loader lets go.
+  const [intro] = useState(loaderWillPlay);
+  const [ready, setReady] = useState(false);
+  const onLoaderDone = useCallback(() => setReady(true), []);
   return (
     <>
-      <Loader />
-      {daylight ? <Hero /> : <HeroDive />}
+      <Loader onDone={onLoaderDone} />
+      {daylight ? <Hero ready={ready} intro={intro} /> : <HeroDive />}
       <ProductDemo />
       <Outcomes />
       <Journey />
