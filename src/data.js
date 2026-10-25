@@ -1,5 +1,5 @@
 // All public-facing copy for the Marhab site lives here.
-// Principle: say WHAT Marhab does and the RESULT it creates — never HOW it is built.
+// Principle: say WHAT Marhab does and the RESULT it creates, never HOW it is built.
 
 export const nav = [
   { label: 'Services', href: '/services' },
@@ -8,29 +8,29 @@ export const nav = [
   { label: 'Contact', href: '/contact' },
 ];
 
-export const navCta = { label: 'Book a Demo', href: '/contact' };
+export const navCta = { label: 'Book a free demo', href: '/contact' };
 
 /* ------------------------------------------------------------------ home */
 
 export const hero = {
   headline: ['Every customer who reaches out,', 'answered.'],
   support: 'Websites. AI reception. Automation. One connected customer experience.',
-  sub: 'We build intelligent websites and customer systems that answer enquiries, capture leads, book appointments and follow up — automatically, 24/7.',
+  sub: 'We build intelligent websites and customer systems that answer enquiries, capture leads, book appointments and follow up. Automatically, 24/7.',
   primaryCta: { label: 'See it in action', href: '#demo' },
   secondaryCta: { label: 'Book a free demo', href: '/contact' },
   meta: ['Premium websites', 'AI reception, 24/7', 'Built for Qatar'],
   numbers: [
-    { value: 24, suffix: '/7', label: 'Answering enquiries, capturing leads and booking appointments — around the clock.' },
+    { value: 24, suffix: '/7', label: 'Answering enquiries, capturing leads and booking appointments, around the clock.' },
     { text: 'Every lead, in one place.', label: 'Enquiries captured and sent to you the moment they arrive.' },
-    { value: 2, suffix: '', label: 'Languages — Arabic and English, in the same conversation.' },
+    { value: 2, suffix: '', label: 'Languages. Arabic and English, in the same conversation.' },
   ],
-  lines: ['Answers questions.', 'Books appointments.', 'Follows up — automatically.'],
+  lines: ['Answers questions.', 'Books appointments.', 'Follows up, automatically.'],
 };
 
 export const demo = {
   eyebrow: 'See it in action',
   heading: 'A customer asks at 11pm. By 11:01, they’re booked.',
-  sub: 'This is what your customers experience — on your website, on WhatsApp, on Instagram. No waiting for morning, no missed message.',
+  sub: 'This is what your customers experience, on your website, on WhatsApp, on Instagram. No waiting for morning, no missed message.',
   tryLabel: 'Try it yourself',
   replayLabel: 'Replay',
   business: 'Pearl & Bloom Dental',
@@ -40,7 +40,7 @@ export const demo = {
     { role: 'customer', text: '6 PM.' },
     { role: 'marhab', text: 'Perfect. What name should I book it under?' },
     { role: 'customer', text: 'Sara.' },
-    { role: 'marhab', text: 'Booked — tomorrow at 6:00 PM, Sara. A confirmation is on its way to your WhatsApp.' },
+    { role: 'marhab', text: 'Booked for tomorrow at 6:00 PM, Sara. A confirmation is on its way to your WhatsApp.' },
   ],
   pipeline: [
     { label: 'Appointment booked', detail: 'Tomorrow · 6:00 PM' },
@@ -54,7 +54,7 @@ export const demo = {
 export const outcomes = {
   eyebrow: 'Why Marhab',
   heading: 'The customers are already there. Most businesses just don’t catch them.',
-  sub: 'Enquiries arrive every day — on the website, on WhatsApp, on Instagram — and most go unanswered until it’s too late. Marhab is built to catch the customers you already have.',
+  sub: 'Enquiries arrive every day, on the website, on WhatsApp, on Instagram, and most go unanswered until it’s too late. Marhab is built to catch the customers you already have.',
   items: [
     { title: 'Never miss a lead', text: 'Respond to enquiries even when your team is unavailable.' },
     { title: 'Turn enquiries into bookings', text: 'Help customers move from a question to an appointment without unnecessary delays.' },
@@ -78,7 +78,7 @@ export const servicesPreview = {
   cta: { label: 'Explore all services', href: '/services' },
   items: [
     { title: 'Premium websites', text: 'Digital experiences designed around conversion, credibility and customer experience.' },
-    { title: 'AI reception', text: 'Your 24/7 AI receptionist — answers common enquiries instantly and guides customers toward the right next step.' },
+    { title: 'AI reception', text: 'Your 24/7 AI receptionist answers common enquiries instantly and guides customers toward the right next step.' },
     { title: 'Booking & lead systems', text: 'Turn website and customer conversations into structured leads and appointments.' },
     { title: 'Customer automation', text: 'Automate reminders, follow-ups and repetitive customer communication.' },
     { title: 'Growth & insights', text: 'Understand how visitors, conversations and bookings move through the journey.' },
@@ -94,19 +94,19 @@ export const processHome = {
 export const qatar = {
   eyebrow: 'Built for businesses in Qatar',
   heading: 'International standard. Local understanding.',
-  origin: 'Marhab comes from marhaba — the first word a customer hears in Doha. We built the system so that welcome never stops at the door.',
+  origin: 'Marhab comes from marhaba, the first word a customer hears in Doha. We built the system so that welcome never stops at the door.',
   points: [
-    { title: 'Arabic and English', text: 'Customers are answered in the language they write in — in the same conversation.' },
+    { title: 'Arabic and English', text: 'Customers are answered in the language they write in, in the same conversation.' },
     { title: 'WhatsApp-first journeys', text: 'Confirmations, reminders and follow-ups arrive where your customers already are.' },
     { title: 'Local context', text: 'Operating hours, weekends, local schedules and the way business is actually done here.' },
-    { title: 'Support in Doha', text: 'A team you can meet — not a ticket queue in another time zone.' },
+    { title: 'Support in Doha', text: 'A team you can meet, not a ticket queue in another time zone.' },
   ],
 };
 
 export const finalCta = {
   heading: 'Your next customer shouldn’t have to wait.',
   sub: 'See what Marhab could do for your business.',
-  primary: { label: 'Book your free demo', href: '/contact' },
+  primary: { label: 'Book a free demo', href: '/contact' },
   secondary: { label: 'Talk to Marhab' },
 };
 
@@ -115,7 +115,7 @@ export const finalCta = {
 export const services = {
   eyebrow: 'Services',
   heading: 'What your business receives.',
-  sub: 'Not a list of deliverables — a working customer system. Every engagement is built around how your customers reach you and what should happen next.',
+  sub: 'Not a list of deliverables: a working customer system. Every engagement is built around how your customers reach you and what should happen next.',
   categories: [
     {
       n: '01',
@@ -126,25 +126,25 @@ export const services = {
     {
       n: '02',
       title: 'AI reception',
-      lead: 'An AI receptionist for your business — immediate, 24/7 assistance for every customer, including the ones who write at midnight.',
+      lead: 'An AI receptionist for your business: immediate, 24/7 assistance for every customer, including the ones who write at midnight.',
       points: ['Answers common questions instantly', 'Guides customers to the right service', 'Collects customer details naturally', 'Handles enquiries outside opening hours', 'Directs customers to book or get in touch', 'Arabic and English'],
     },
     {
       n: '03',
       title: 'Booking & lead capture',
-      lead: 'Connect every enquiry with the next step — an appointment, a callback, a visit.',
+      lead: 'Connect every enquiry with the next step: an appointment, a callback, a visit.',
       points: ['Appointment requests and live booking', 'Availability that reflects your real calendar', 'Every lead logged and sent to you instantly', 'Customer information collected once', 'Structured enquiry management', 'Nothing lost between channels'],
     },
     {
       n: '04',
       title: 'Follow-up automation',
-      lead: 'The messages your team never has time to send — sent every time.',
+      lead: 'The messages your team never has time to send, sent every time.',
       points: ['Appointment reminders', 'Lead follow-ups', 'Missed-enquiry follow-up', 'Post-visit review requests', 'Customer check-ins', 'Delivered on WhatsApp'],
     },
     {
       n: '05',
       title: 'Reporting & insights',
-      lead: 'Know what is actually happening — without asking anyone.',
+      lead: 'Know what is actually happening, without asking anyone.',
       points: ['Enquiries by day and channel', 'Conversations and what customers ask', 'Bookings and no-shows', 'Customer interest by service', 'Website activity', 'One clear view, updated live'],
     },
   ],
@@ -177,7 +177,7 @@ export const services = {
         'Live appointment booking synced to your calendar',
         'Automated WhatsApp appointment reminders',
         'Automated review requests after every visit',
-        'Live dashboard — leads, bookings, trends',
+        'Live dashboard: leads, bookings, trends',
         'Priority support and monthly tune-ups',
       ],
       cta: { label: 'Book a free demo', href: '/contact' },
@@ -185,8 +185,8 @@ export const services = {
     },
   ],
   note: [
-    'Setup prices are starting points — the final quote depends on the scope of the site and is confirmed after a free discovery call.',
-    'The setup fee covers the design and build of your website and customer system. The monthly plan covers what keeps it running — hosting, the AI reception, monitoring, updates and support — with Marhab managing the system on your behalf.',
+    'Setup prices are starting points. The final quote depends on the scope of the site and is confirmed after a free discovery call.',
+    'The setup fee covers the design and build of your website and customer system. The monthly plan covers what keeps it running (hosting, the AI reception, monitoring, updates and support), with Marhab managing the system on your behalf.',
     'Plans run on a 12-month term. The full terms, including what happens at the end of a plan, are explained clearly before anything is signed.',
   ],
 };
@@ -196,7 +196,7 @@ export const services = {
 export const work = {
   eyebrow: 'Work',
   heading: 'Two businesses, two complete systems.',
-  sub: 'Demo builds that show exactly what a Marhab system does for a business — not a gallery of screenshots. As we launch with clients, this page will grow with real outcomes.',
+  sub: 'Demo builds that show exactly what a Marhab system does for a business, not a gallery of screenshots. As we launch with clients, this page will grow with real outcomes.',
   demoLabel: 'Marhab Demo',
   projects: [
     {
@@ -205,7 +205,7 @@ export const work = {
       type: 'Dental clinic',
       location: 'The Pearl, Doha',
       tier: 'Premium system',
-      description: 'A boutique dental practice where every enquiry — a price question, a toothache at night, a new patient — becomes a booked appointment without the front desk lifting a finger.',
+      description: 'A boutique dental practice where every enquiry, a price question, a toothache at night, a new patient, becomes a booked appointment without the front desk lifting a finger.',
       challenge: 'Clinics lose patients in the gap between “how much is a cleaning?” and an actual appointment. Enquiries arrive after hours, on WhatsApp and Instagram, and by the time someone replies the patient has booked elsewhere.',
       experience: 'A calm, premium website with an AI reception that answers treatment and price questions, shows real availability, books the appointment, sends the WhatsApp confirmation and reminder, and asks for a review after the visit. The clinic sees every conversation and booking in one dashboard.',
       journey: ['Premium website', 'AI reception', 'Appointment booking', 'Lead capture', 'WhatsApp reminder', 'Review request'],
@@ -227,8 +227,8 @@ export const work = {
       type: 'Café & roastery',
       location: 'Al Sadd, Doha',
       tier: 'Standard system',
-      description: 'A specialty roastery whose customers ask the same twenty questions a day — hours, menu, parking, wholesale — and whose owner was answering them by hand.',
-      challenge: 'A café’s Instagram inbox is a support desk nobody staffs. Menu questions, opening hours on Fridays, catering requests — each one answered late or not at all, and the catering leads never written down.',
+      description: 'A specialty roastery whose customers ask the same twenty questions a day (hours, menu, parking, wholesale) and whose owner was answering them by hand.',
+      challenge: 'A café’s Instagram inbox is a support desk nobody staffs. Menu questions, opening hours on Fridays, catering requests: each one answered late or not at all, and the catering leads never written down.',
       experience: 'A warm, editorial website with the full menu, and an AI reception that answers hours, menu and location questions instantly, captures catering and wholesale enquiries with a name and number, and sends each one to the owner the moment it lands.',
       journey: ['Premium website', 'AI reception', 'Menu & hours answered', 'Lead capture', 'Owner notified'],
       href: 'https://dune-and-bean-demo.vercel.app',
@@ -244,7 +244,7 @@ export const work = {
       },
     },
   ],
-  future: 'Real client outcomes, testimonials and before/after comparisons will be added here as they exist — never before.',
+  future: 'Real client outcomes, testimonials and before/after comparisons will be added here as they exist, never before.',
 };
 
 /* --------------------------------------------------------------- process */
@@ -254,11 +254,11 @@ export const process = {
   heading: 'Working with Marhab is simple.',
   sub: 'Six steps, one point of contact, and a clear path from first conversation to launch.',
   steps: [
-    { n: '01', title: 'Discover', text: 'We learn how your business receives enquiries, customers and bookings today — and where they slip through.', get: 'A short call and a clear summary of what’s being lost.' },
+    { n: '01', title: 'Discover', text: 'We learn how your business receives enquiries, customers and bookings today, and where they slip through.', get: 'A short call and a clear summary of what’s being lost.' },
     { n: '02', title: 'Plan', text: 'We define what the customer experience should look like, from the first message to the review.', get: 'A one-page plan of the journey we’ll build.' },
-    { n: '03', title: 'Design', text: 'We create the visual and interaction experience around your business — your services, your tone, your customers.', get: 'A design you approve before anything is built.' },
+    { n: '03', title: 'Design', text: 'We create the visual and interaction experience around your business: your services, your tone, your customers.', get: 'A design you approve before anything is built.' },
     { n: '04', title: 'Build', text: 'We develop the complete customer-facing system: website, reception, bookings and follow-ups.', get: 'A working system you can try before launch.' },
-    { n: '05', title: 'Launch', text: 'We test every path a customer could take, refine, and go live — connected to your calendar and your inbox.', get: 'A live system and a walkthrough for your team.' },
+    { n: '05', title: 'Launch', text: 'We test every path a customer could take, refine, and go live, connected to your calendar and your inbox.', get: 'A live system and a walkthrough for your team.' },
     { n: '06', title: 'Optimize', text: 'We monitor what customers ask and where they hesitate, and keep improving the journey as the business grows.', get: 'Monthly improvements, without you asking.' },
   ],
 };
@@ -268,7 +268,7 @@ export const process = {
 export const contact = {
   eyebrow: 'Contact',
   heading: 'Let’s build a better customer experience.',
-  sub: 'Tell us about your business and where customers currently reach you. We’ll explore how Marhab could improve the journey — no obligation.',
+  sub: 'Tell us about your business and where customers currently reach you. We’ll explore how Marhab could improve the journey. No obligation.',
   cta: 'Book a free demo',
   email: 'jad@marhab.agency',
   // Set to the Marhab WhatsApp number in international format without "+", e.g. '97455512345'.

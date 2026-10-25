@@ -1,6 +1,165 @@
+/*
+ * The two looks of marhab.agency, as variables.
+ *
+ *   night     — the original: black glass, white type, the indigo nebula in
+ *               the hero and the closing band.
+ *   daylight  — porcelain paper and ink, cards as raised white surfaces held
+ *               by a hairline and a faint indigo-tinted shadow; the hero's
+ *               window and the closing band stay night, so the page opens and
+ *               closes in the dark and reads in the light. The champagne mark
+ *               is the only colour that is the brand's own.
+ *
+ * `--fg` writes on `--bg`. `--panel` is raised, `--matte` is sunk. All three
+ * are "r g b" triplets so Tailwind can apply opacity on top (`text-fg/60`).
+ * A `.zone-dark` keeps the night values whatever the page look is.
+ *
+ * Depth is a ladder, not a drop shadow: `--shadow-1` (a card you can see),
+ * `--shadow-2` (a card you could pick up), `--shadow-3` (a window or a phone
+ * floating in front of the page). Each is stacked from two or three offsets
+ * and tinted toward the night indigo so it reads as light, not soot.
+ */
+
+/* ------------------------------------------------------------------ type */
+/* Self-hosted so the page never waits on a third party for its letters. */
+@font-face {
+  font-family: 'Schibsted Grotesk';
+  font-style: normal;
+  font-weight: 400 900;
+  font-display: swap;
+  src: url('/fonts/schibsted-grotesk-latin-wght-normal.woff2') format('woff2-variations');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Schibsted Grotesk';
+  font-style: italic;
+  font-weight: 400 900;
+  font-display: swap;
+  src: url('/fonts/schibsted-grotesk-latin-wght-italic.woff2') format('woff2-variations');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Schibsted Grotesk';
+  font-style: normal;
+  font-weight: 400 900;
+  font-display: swap;
+  src: url('/fonts/schibsted-grotesk-latin-ext-wght-normal.woff2') format('woff2-variations');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Instrument Sans';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('/fonts/instrument-sans-latin-wght-normal.woff2') format('woff2-variations');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Instrument Sans';
+  font-style: italic;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('/fonts/instrument-sans-latin-wght-italic.woff2') format('woff2-variations');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Instrument Sans';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('/fonts/instrument-sans-latin-ext-wght-normal.woff2') format('woff2-variations');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* ---------------------------------------------------------------- tokens */
+:root,
+[data-theme='night'] {
+  --fg: 255 255 255;
+  --bg: 0 0 0;
+  --panel: 13 13 13;
+  --matte: 10 10 10;
+  --muted: 154 154 154;
+  --stat: 216 216 216;
+  --btn-top: 255 255 255;
+  --btn-mid: 231 231 231;
+  --btn-bot: 207 207 207;
+  --btn-text: 0 0 0;
+  --btn-glow: 186 208 255;
+  --btn-shadow: inset 0 1px 0 rgb(255 255 255 / 0.95);
+  --btn-shadow-hover: inset 0 1px 0 rgb(255 255 255), 0 0 24px rgb(186 208 255 / 0.35), 0 8px 18px rgb(0 0 0 / 0.4);
+  --ring: 0 0 0 1px rgb(255 255 255 / 0.1);
+  --shadow-1: 0 0 0 1px rgb(255 255 255 / 0.06);
+  --shadow-2: 0 0 0 1px rgb(255 255 255 / 0.08), 0 10px 30px -10px rgb(0 0 0 / 0.6);
+  --shadow-3: 0 0 0 1px rgb(255 255 255 / 0.1), 0 30px 80px -20px rgb(0 0 0 / 0.7);
+  --card-shadow: var(--shadow-1);
+  --glow: 0 0 60px -15px rgba(255, 255, 255, 0.22);
+  --spot: 190 205 255;
+  --ok: 159 231 187;
+  --ok-dot: 90 216 138;
+  --danger: 255 141 141;
+}
+
+[data-theme='daylight'] {
+  --fg: 18 20 24;
+  --bg: 243 242 238;
+  --panel: 255 255 255;
+  --matte: 235 234 229;
+  --muted: 92 98 108;
+  --stat: 40 44 52;
+  --btn-top: 44 48 58;
+  --btn-mid: 24 27 34;
+  --btn-bot: 14 16 20;
+  --btn-text: 255 255 255;
+  --btn-glow: 88 96 220;
+  --btn-shadow: inset 0 1px 0 rgb(255 255 255 / 0.14), 0 1px 2px rgb(24 28 60 / 0.2);
+  --btn-shadow-hover: inset 0 1px 0 rgb(255 255 255 / 0.18), 0 10px 24px -8px rgb(24 28 60 / 0.45), 0 2px 6px rgb(24 28 60 / 0.16);
+  --ring: 0 0 0 1px rgb(24 28 60 / 0.1);
+  --shadow-1: 0 0 0 1px rgb(24 28 60 / 0.08), 0 1px 2px rgb(24 28 60 / 0.04);
+  --shadow-2: 0 0 0 1px rgb(24 28 60 / 0.08), 0 2px 4px rgb(24 28 60 / 0.04), 0 12px 32px -12px rgb(24 28 60 / 0.18);
+  --shadow-3: 0 0 0 1px rgb(24 28 60 / 0.1), 0 2px 6px rgb(24 28 60 / 0.06), 0 40px 90px -30px rgb(24 28 60 / 0.4);
+  --card-shadow: var(--shadow-1);
+  --glow: 0 24px 60px -24px rgb(24 28 60 / 0.35);
+  --spot: 88 96 220;
+  --ok: 23 122 72;
+  --ok-dot: 42 168 102;
+  --danger: 180 35 24;
+}
+
+.zone-dark,
+[data-theme='daylight'] .zone-dark {
+  --fg: 255 255 255;
+  --bg: 7 8 14;
+  --panel: 17 19 28;
+  --matte: 12 14 22;
+  --muted: 160 164 176;
+  --stat: 216 218 226;
+  --btn-top: 255 255 255;
+  --btn-mid: 231 231 231;
+  --btn-bot: 207 207 207;
+  --btn-text: 0 0 0;
+  --btn-glow: 186 208 255;
+  --btn-shadow: inset 0 1px 0 rgb(255 255 255 / 0.95);
+  --btn-shadow-hover: inset 0 1px 0 rgb(255 255 255), 0 0 24px rgb(186 208 255 / 0.35), 0 8px 18px rgb(0 0 0 / 0.4);
+  --ring: 0 0 0 1px rgb(255 255 255 / 0.1);
+  --shadow-1: 0 0 0 1px rgb(255 255 255 / 0.06);
+  --shadow-2: 0 0 0 1px rgb(255 255 255 / 0.08), 0 10px 30px -10px rgb(0 0 0 / 0.6);
+  --shadow-3: 0 0 0 1px rgb(255 255 255 / 0.1), 0 30px 80px -20px rgb(0 0 0 / 0.7);
+  --card-shadow: var(--shadow-1);
+  --glow: 0 0 60px -15px rgba(255, 255, 255, 0.22);
+  --spot: 190 205 255;
+  --ok: 159 231 187;
+  --ok-dot: 90 216 138;
+  --danger: 255 141 141;
+}
+[data-theme='night'] .zone-dark,
+:root:not([data-theme]) .zone-dark {
+  --bg: 0 0 0;
+  --panel: 13 13 13;
+  --matte: 10 10 10;
+}
+
 html, body {
-  background: #000000 !important;
-  color: #ffffff;
+  background: rgb(var(--bg)) !important;
+  color: rgb(var(--fg));
 }
 
 @tailwind base;
@@ -8,8 +167,8 @@ html, body {
 @tailwind utilities;
 
 html, body {
-  background: #000000;
-  color: #ffffff;
+  background: rgb(var(--bg));
+  color: rgb(var(--fg));
 }
 
 html {
@@ -30,33 +189,139 @@ html {
 }
 
 body {
-  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: 'Instrument Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 }
 
 ::selection {
-  background: #ffffff;
-  color: #000000;
+  background: rgb(var(--fg));
+  color: rgb(var(--bg));
 }
 
 h1, h2, h3, h4, .font-display {
-  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: 'Schibsted Grotesk', 'Instrument Sans', system-ui, sans-serif;
+  font-feature-settings: 'kern', 'liga';
+  text-wrap: balance;
 }
 
-.section-wrap {
-  max-width: 1240px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 24px;
-  padding-right: 24px;
+/* Every link and button shows where the keyboard is; the mouse never sees it. */
+a:focus-visible,
+button:focus-visible,
+[role='button']:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid rgb(var(--fg) / 0.7);
+  outline-offset: 3px;
+}
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline-offset: 0;
 }
 
-@media (min-width: 768px) {
+/* ------------------------------------------------------------ components */
+@layer components {
   .section-wrap {
-    padding-left: 48px;
-    padding-right: 48px;
+    max-width: 1240px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+  @media (min-width: 768px) {
+    .section-wrap {
+      padding-left: 48px;
+      padding-right: 48px;
+    }
+  }
+
+  /* The one primary button: ink on paper, bone on night. Hover lifts it on
+     the tinted shadow; press settles it. Only shadow and transform move. */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full whitespace-nowrap font-medium select-none;
+    color: rgb(var(--btn-text));
+    background-image: linear-gradient(to bottom, rgb(var(--btn-top)), rgb(var(--btn-mid)) 55%, rgb(var(--btn-bot)));
+    border: 1px solid rgb(var(--btn-top));
+    box-shadow: var(--btn-shadow);
+    transition: box-shadow 0.35s cubic-bezier(0.32, 0.72, 0, 1), transform 0.35s cubic-bezier(0.32, 0.72, 0, 1);
+  }
+  .btn-primary:hover {
+    box-shadow: var(--btn-shadow-hover);
+    transform: translateY(-1px);
+  }
+  .btn-primary:active {
+    transform: translateY(0) scale(0.985);
+    transition-duration: 0.12s;
+  }
+  .btn-primary:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  /* The secondary: a hairline pill that fills a little on hover. */
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full whitespace-nowrap font-medium select-none;
+    color: rgb(var(--fg) / 0.85);
+    border: 1px solid rgb(var(--fg) / 0.22);
+    background: rgb(var(--fg) / 0.03);
+    transition: border-color 0.3s cubic-bezier(0.32, 0.72, 0, 1), background-color 0.3s cubic-bezier(0.32, 0.72, 0, 1), color 0.3s cubic-bezier(0.32, 0.72, 0, 1), transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+  }
+  .btn-secondary:hover {
+    color: rgb(var(--fg));
+    border-color: rgb(var(--fg) / 0.5);
+    background: rgb(var(--fg) / 0.07);
+  }
+  .btn-secondary:active {
+    transform: scale(0.985);
+    transition-duration: 0.12s;
+  }
+  .btn-secondary:disabled {
+    opacity: 0.4;
+    pointer-events: none;
+  }
+
+  /* Surfaces: a card you can see, a card you could lift, a thing in front of the page. */
+  .surface-1 {
+    background: rgb(var(--panel));
+    box-shadow: var(--shadow-1);
+  }
+  .surface-2 {
+    background: rgb(var(--panel));
+    box-shadow: var(--shadow-2);
+  }
+  .surface-3 {
+    background: rgb(var(--panel));
+    box-shadow: var(--shadow-3);
+  }
+  .surface-lift {
+    transition: box-shadow 0.45s cubic-bezier(0.32, 0.72, 0, 1), transform 0.45s cubic-bezier(0.32, 0.72, 0, 1);
+  }
+  .surface-lift:hover {
+    box-shadow: var(--shadow-2);
+    transform: translateY(-2px);
+  }
+
+  /* A window of night cut into the paper: the hero, the work, the close. */
+  .night-window {
+    position: relative;
+    overflow: hidden;
+    /* The hero field's own blues, held still. */
+    background:
+      radial-gradient(100% 75% at 16% 108%, rgb(36 66 217 / 0.36), transparent 62%),
+      radial-gradient(70% 55% at 90% 4%, rgb(133 122 255 / 0.16), transparent 58%),
+      rgb(7 8 14);
+  }
+  .night-window::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.12);
   }
 }
 
