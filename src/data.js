@@ -30,7 +30,7 @@ export const hero = {
 
 export const demo = {
   eyebrow: 'See it in action',
-  heading: 'A customer asks at 11pm. By 11:01, they’re booked.',
+  heading: ['It’s 11:02 PM.', 'Everyone has gone home.', 'By 11:03, Sara is booked.'],
   sub: 'This is what your customers experience, on your website, on WhatsApp, on Instagram. No waiting for morning, no missed message.',
   tryLabel: 'Try it yourself',
   replayLabel: 'Replay',
@@ -86,7 +86,7 @@ export const story = {
       when: 'Tuesday, 11:02 PM',
       channel: 'Website chat',
       title: 'Never miss a lead',
-      text: 'A question at midnight is answered at midnight. The common questions are handled instantly, so nobody waits for morning and nothing is typed twice.',
+      text: 'A question at 11:02 PM is answered at 11:02 PM. The common questions are handled instantly, so nobody waits for morning and nothing is typed twice.',
       lines: [
         { role: 'customer', text: 'Do you have an appointment tomorrow at 6 PM?' },
         { role: 'marhab', text: 'Yes. We have 6:00 PM and 7:30 PM available. Which would you prefer?' },
