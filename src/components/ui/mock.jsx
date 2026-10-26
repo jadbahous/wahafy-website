@@ -7,7 +7,7 @@ import { Check } from 'lucide-react';
 
 function themedMark() {
   const dark = document.documentElement.dataset.theme !== 'daylight';
-  return dark ? '/brand/mark-white.png' : '/brand/mark-dark.png';
+  return dark ? '/brand/mark-white@2x.webp' : '/brand/mark-dark@2x.webp';
 }
 
 export function Panel({ title, sub, children, className = '', level = 3 }) {
@@ -19,8 +19,8 @@ export function Panel({ title, sub, children, className = '', level = 3 }) {
       {title && (
         <div className="flex items-center gap-3 px-5 py-4 border-b border-fg/[0.08]">
           <div className="relative grid place-items-center w-8 h-8 rounded-full border border-fg/[0.14] bg-fg/[0.04]">
-            <img src={themedMark()} alt="" className="h-[15px] w-auto select-none" draggable="false" />
-            <span className="absolute -right-0.5 -bottom-0.5 w-2 h-2 rounded-full bg-ok-dot ring-2 ring-panel" />
+            <img src={themedMark()} alt="" width="20" height="15" className="h-[15px] w-auto select-none" draggable="false" />
+            <span className="absolute -end-0.5 -bottom-0.5 w-2 h-2 rounded-full bg-ok-dot ring-2 ring-panel" />
           </div>
           <div className="min-w-0">
             <p className="text-[14px] font-medium leading-tight text-fg truncate">{title}</p>
@@ -40,8 +40,8 @@ export function Bubble({ role, children, className = '', dense = false }) {
       <div
         className={`max-w-[84%] ${dense ? 'px-3 py-2 text-[13.5px] leading-[1.45]' : 'px-[14px] py-[10px] text-[14px] leading-[1.5]'} ${
           me
-            ? 'bg-fg text-bg rounded-[16px] rounded-br-[5px]'
-            : 'bg-fg/[0.06] border border-fg/[0.07] text-fg/90 rounded-[16px] rounded-bl-[5px]'
+            ? 'bg-fg text-bg rounded-[16px] rounded-ee-[5px]'
+            : 'bg-fg/[0.06] border border-fg/[0.07] text-fg/90 rounded-[16px] rounded-es-[5px]'
         }`}
       >
         {children}
@@ -53,7 +53,7 @@ export function Bubble({ role, children, className = '', dense = false }) {
 export function TypingDots() {
   return (
     <div className="flex justify-start">
-      <div className="mock-dots px-[14px] py-[12px] bg-fg/[0.06] border border-fg/[0.07] rounded-[16px] rounded-bl-[5px]">
+      <div className="mock-dots px-[14px] py-[12px] bg-fg/[0.06] border border-fg/[0.07] rounded-[16px] rounded-es-[5px]">
         <span />
         <span />
         <span />
@@ -85,7 +85,7 @@ export function StatusRow({ label, detail, state = 'idle' }) {
         <span className={`text-[14px] transition-colors duration-300 ${state === 'idle' ? 'text-fg/60' : 'text-fg'}`}>
           {label}
         </span>
-        <span className={`text-[13px] tabular-nums truncate transition-colors duration-300 ${state === 'idle' ? 'text-fg/30' : 'text-fg/65'}`}>
+        <span className={`text-[13px] tabular-nums truncate transition-colors duration-300 ${state === 'idle' ? 'text-fg/60' : 'text-fg/65'}`}>
           {detail}
         </span>
       </div>
@@ -117,11 +117,10 @@ export function BrowserFrame({ src, alt, className = '' }) {
         <span className="w-2 h-2 rounded-full bg-fg/15" />
         <span className="w-2 h-2 rounded-full bg-fg/15" />
         <span className="w-2 h-2 rounded-full bg-fg/15" />
-        <span className="ml-3 h-4 flex-1 max-w-[220px] rounded-full bg-fg/[0.05]" />
+        <span className="ms-3 h-4 flex-1 max-w-[220px] rounded-full bg-fg/[0.05]" />
       </div>
       <div className="relative aspect-[16/10] bg-gradient-to-br from-[#1b1d2b] to-[#0b0c14]">
-        <img src={src} alt={alt} loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-t from-bg/60 via-bg/10 to-transparent" />
+        <img src={src} srcSet={src.startsWith('/work/') ? `${src.replace('.webp', '-800.webp')} 800w, ${src} 1445w` : undefined} sizes="(min-width: 1024px) 560px, 92vw" alt={alt} loading="lazy" decoding="async" width="1445" height="812" className="absolute inset-0 w-full h-full object-cover object-top" />
       </div>
     </div>
   );

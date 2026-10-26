@@ -15,7 +15,7 @@ export default function Words({ text, delay = 0, stagger = 0.045, duration = 0.8
   const words = String(text).split(' ');
   return words.map((w, i) => (
     <Fragment key={`${w}-${i}`}>
-      <span className={`inline-block overflow-hidden align-bottom pb-[0.1em] -mb-[0.1em] ${className}`}>
+      <span className={`word-clip inline-block overflow-hidden align-bottom pb-[0.1em] -mb-[0.1em] ${className}`}>
         <motion.span
           className="inline-block will-change-transform"
           variants={{
