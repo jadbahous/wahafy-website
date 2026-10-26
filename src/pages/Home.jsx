@@ -1,6 +1,7 @@
 import { lazy, startTransition, Suspense, useCallback, useEffect, useState } from 'react';
 import Loader, { loaderWillPlay } from '../components/Loader.jsx';
 import Hero from '../components/Hero.jsx';
+import SkipIntro from '../components/SkipIntro.jsx';
 const HeroDive = lazy(() => import('../components/HeroDive.jsx'));
 import ProductDemo from '../components/ProductDemo.jsx';
 import ScrollStory from '../components/ScrollStory.jsx';
@@ -32,22 +33,16 @@ export default function Home() {
     if (!daylight) setIntroDone(true);
   }, []);
   const onHeroSettled = useCallback(() => setIntroDone(true), []);
+  // Where the hero's opening is (wait → hold → zoom → settled).
+  const [heroPhase, setHeroPhase] = useState(intro ? 'wait' : 'settled');
 
-  // The opening can be skipped: any click, tap, scroll or key while it plays
-  // goes straight to the page (the loader lets go at once and the hero is
-  // simply there, its headline rising).
+  // The opening can be skipped, deliberately: a "Skip intro" button while
+  // it plays (nothing else skips it, so a stray scroll or tap never does).
+  // The loader lets go at once and the hero is simply there, headline rising.
   const [skipped, setSkipped] = useState(false);
-  useEffect(() => {
-    if (!intro || introDone || skipped) return;
-    const skip = (e) => {
-      if (e.type === 'keydown' && ['Shift', 'Control', 'Alt', 'Meta', 'CapsLock'].includes(e.key)) return;
-      setSkipped(true);
-    };
-    const events = ['pointerdown', 'wheel', 'touchmove', 'keydown'];
-    const opts = { passive: true, capture: true };
-    events.forEach((ev) => window.addEventListener(ev, skip, opts));
-    return () => events.forEach((ev) => window.removeEventListener(ev, skip, opts));
-  }, [intro, introDone, skipped]);
+  const skip = useCallback(() => setSkipped(true), []);
+  const showSkip =
+    intro && !skipped && !introDone && (daylight ? heroPhase === 'wait' || heroPhase === 'hold' : !ready);
 
   // Everything below the demo is built after the first paint, in small
   // interruptible slices (a transition), so the page never freezes for half
@@ -64,8 +59,9 @@ export default function Home() {
   return (
     <>
       <Loader onDone={onLoaderDone} skip={skipped} />
+      <SkipIntro show={showSkip} onSkip={skip} />
       {daylight ? (
-        <Hero ready={ready} intro={intro} skipped={skipped} onSettled={onHeroSettled} />
+        <Hero ready={ready} intro={intro} skipped={skipped} onSettled={onHeroSettled} onPhase={setHeroPhase} />
       ) : (
         <Suspense fallback={<div className="min-h-[100dvh] bg-bg" />}>
           <HeroDive />
