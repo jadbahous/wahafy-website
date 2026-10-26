@@ -46,24 +46,44 @@ export default async function handler(req, res) {
       return;
     }
 
-    const upstream = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json',
-        'x-api-key': apiKey,
-        'anthropic-version': '2023-06-01',
-      },
-      body: JSON.stringify({
-        model: MODEL,
-        max_tokens: 350,
-        system: SYSTEM_PROMPT,
-        messages: trimmed,
-      }),
-    });
+    const call = () =>
+      fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+          'x-api-key': apiKey,
+          'anthropic-version': '2023-06-01',
+        },
+        body: JSON.stringify({
+          model: MODEL,
+          max_tokens: 350,
+          system: SYSTEM_PROMPT,
+          messages: trimmed,
+        }),
+      });
+
+    // One quiet retry when the service is busy (rate limit / overloaded).
+    let upstream = await call();
+    if (upstream.status === 429 || upstream.status >= 500) {
+      await new Promise((r) => setTimeout(r, 900));
+      upstream = await call();
+    }
 
     if (!upstream.ok) {
-      console.error('Anthropic error', upstream.status, await upstream.text());
-      res.status(502).json({ error: 'Upstream error' });
+      const text = await upstream.text();
+      console.error('Anthropic error', upstream.status, text);
+      // A short, provider-neutral reason, so a failure can be diagnosed from
+      // the browser without reading the server logs.
+      const s = upstream.status;
+      const reason =
+        s === 401 ? 'auth'
+        : s === 403 ? 'permission'
+        : s === 404 ? 'model'
+        : s === 429 ? 'rate_limit'
+        : s === 400 && /credit|billing|balance/i.test(text) ? 'billing'
+        : s === 400 ? 'bad_request'
+        : 'unavailable';
+      res.status(502).json({ error: 'Upstream error', reason });
       return;
     }
 
