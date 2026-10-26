@@ -114,6 +114,7 @@ export const story = {
     {
       id: 'reminder',
       short: 'تذكير',
+      focus: 0,
       when: 'الأربعاء، 3:00 مساءً',
       channel: 'واتساب',
       title: 'تابع تلقائياً',

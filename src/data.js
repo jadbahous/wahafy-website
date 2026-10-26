@@ -113,6 +113,7 @@ export const story = {
     {
       id: 'reminder',
       short: 'Reminder',
+      focus: 0, // on a small screen, keep the reminder itself
       when: 'Wednesday, 3:00 PM',
       channel: 'WhatsApp',
       title: 'Follow up automatically',
