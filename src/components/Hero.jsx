@@ -21,7 +21,7 @@ import Words from './ui/Words.jsx';
 // place on the page, the paper comes up behind it, and the headline rises
 // word by word where "Client booked." stood. Nothing loops. Only transform
 // and opacity move, and the page does not scroll until the window has landed.
-// Any click, tap, scroll or key skips it: the hero is simply there.
+// "Skip intro" (see Home) ends it: the hero is simply there.
 //
 // On scroll the window drifts a little slower than the page, so the hero has
 // depth on the way out. Reduced motion skips the zoom, the drift and the
@@ -35,7 +35,7 @@ const HOLD = 2.0; // seconds the close-up holds, "Client booked." on it, before 
 function closeUpBox(vw, vh, rtl) {
   if (vw >= 1024) {
     const w = vw * 0.5;
-    return { left: rtl ? vw * 0.03 : vw * 0.47, top: vh * 0.06, width: w, height: vh * 0.88 };
+    return { left: rtl ? vw * 0.03 : vw * 0.47, top: vh * 0.1, width: w, height: vh * 0.84 };
   }
   return { left: vw * 0.04, top: vh * 0.3, width: vw * 0.92, height: vh * 0.66 };
 }
@@ -63,7 +63,7 @@ function Conversation() {
   );
 }
 
-export default function Hero({ ready = true, intro = false, skipped = false, onSettled }) {
+export default function Hero({ ready = true, intro = false, skipped = false, onSettled, onPhase }) {
   const { hero, demo, ui } = useCopy();
   const reduced = useReducedMotion();
   const zoom = intro && !reduced;
@@ -91,8 +91,8 @@ export default function Hero({ ready = true, intro = false, skipped = false, onS
     });
   }, [zoom]);
 
-  // Once the loader lets go: hold the close-up, then zoom out. Skipped (a
-  // click, tap, scroll or key, caught by the page): straight to the end.
+  // Once the loader lets go: hold the close-up, then zoom out. Skipped
+  // ("Skip intro", see Home): straight to the end.
   useEffect(() => {
     if (!zoom) return;
     if (skipped) {
@@ -106,8 +106,9 @@ export default function Hero({ ready = true, intro = false, skipped = false, onS
   }, [zoom, ready, skipped]);
 
   useEffect(() => {
+    onPhase?.(phase);
     if (settled) onSettled?.();
-  }, [settled, onSettled]);
+  }, [phase, settled, onPhase, onSettled]);
 
   // No scrolling until the window has landed (the close-up is a transform of
   // the window in its place on the page, so scrolling would carry it off).
@@ -136,7 +137,7 @@ export default function Hero({ ready = true, intro = false, skipped = false, onS
   return (
     <section ref={sectionRef} className="relative bg-bg overflow-hidden">
       {/* The dark the loader fades onto: gone once the window has zoomed out.
-          It takes the click that skips the opening, so nothing under it is hit. */}
+          It catches stray clicks, so nothing under it is hit while it plays. */}
       {zoom && !settled && (
         <motion.div
           className="fixed inset-0 z-[82] zone-dark bg-bg"

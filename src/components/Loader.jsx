@@ -11,8 +11,8 @@ import { useCopy } from '../i18n.jsx';
 // onto is the hero's window of night already filling the screen, so the dark
 // of the loader becomes the dark of the product (see Hero). `onDone(played)`
 // tells the page whether that handoff is happening or the loader was skipped
-// (second visit in the session, or reduced motion). `skip` (a click, tap,
-// scroll or key, caught by the page) ends it at once with a short fade.
+// (second visit in the session, or reduced motion). `skip` (the "Skip intro"
+// button, see Home) ends it at once with a short fade.
 
 const KEY = 'marhab:loaded';
 const MINUTES = ['10:56', '10:57', '10:58', '10:59', '11:00', '11:01', '11:02'];
@@ -120,7 +120,7 @@ export default function Loader({ onDone, skip = false }) {
     if (!visible) document.body.style.overflow = '';
   }, [visible]);
 
-  // Skipped (a click, tap, scroll or key): let go now.
+  // Skipped ("Skip intro"): let go now.
   useEffect(() => {
     if (!skip || !visible || doneRef.current) return;
     doneRef.current = true;
