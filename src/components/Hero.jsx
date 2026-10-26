@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 import { ArrowDown, ArrowRight } from 'lucide-react';
 import Link from './ui/Link.jsx';
@@ -14,17 +14,30 @@ import Words from './ui/Words.jsx';
 // in it, the whole conversation already there, booked. The conversation is
 // still here on purpose: the next section is where it unfolds.
 //
-// The entrance, once per session: the loader's counter reaches 100 and its
-// dark sheet fades onto this same window, which at that moment fills the
-// screen, the phone close up. Then the window zooms out into its place on
-// the page, the paper comes up behind it, and the headline rises word by
-// word. Nothing loops. Only transform and opacity move.
+// The entrance, once per session: the loader's clock reaches 11:02 PM and its
+// dark sheet fades onto this same window, which at that moment fills most of
+// the screen, the phone close up, beside it in large type: "Client booked."
+// That holds for a beat. Then the line fades, the window zooms out into its
+// place on the page, the paper comes up behind it, and the headline rises
+// word by word where "Client booked." stood. Nothing loops. Only transform
+// and opacity move, and the page does not scroll until the window has landed.
 //
 // On scroll the window drifts a little slower than the page, so the hero has
 // depth on the way out. Reduced motion skips the zoom, the drift and the
 // word-rise; the page is simply there.
 
 const ease = [0.16, 1, 0.3, 1];
+const HOLD = 2.0; // seconds the close-up holds, "Client booked." on it, before the zoom-out
+
+// Where the window sits in the close-up: beside the line on wide screens,
+// under it on narrow ones (mirrored for Arabic).
+function closeUpBox(vw, vh, rtl) {
+  if (vw >= 1024) {
+    const w = vw * 0.5;
+    return { left: rtl ? vw * 0.03 : vw * 0.47, top: vh * 0.06, width: w, height: vh * 0.88 };
+  }
+  return { left: vw * 0.04, top: vh * 0.3, width: vw * 0.92, height: vh * 0.66 };
+}
 
 function Conversation() {
   const { demo, ui } = useCopy();
@@ -56,30 +69,53 @@ export default function Hero({ ready = true, intro = false }) {
 
   const sectionRef = useRef(null);
   const winRef = useRef(null);
-  // The transform that puts the window in the middle of the screen, as large
-  // as fits: measured once from its resting place, before the loader lets go.
+  // The transform that puts the window in its close-up place, as large as
+  // fits: measured once from its resting place, before the loader lets go.
   const [from, setFrom] = useState(null);
-  const [settled, setSettled] = useState(!zoom);
+  // wait (behind the loader) → hold (close-up, "Client booked.") → zoom → settled
+  const [phase, setPhase] = useState(zoom ? 'wait' : 'settled');
+  const settled = phase === 'settled';
 
   useLayoutEffect(() => {
     if (!zoom || !winRef.current) return;
     const r = winRef.current.getBoundingClientRect();
     const vw = window.innerWidth;
     const vh = window.innerHeight;
-    const scale = Math.min((vw * 0.92) / r.width, (vh * 0.9) / r.height);
+    const box = closeUpBox(vw, vh, document.documentElement.dir === 'rtl');
+    const scale = Math.min(box.width / r.width, box.height / r.height);
     setFrom({
-      x: vw / 2 - (r.left + r.width / 2),
-      y: vh / 2 - (r.top + r.height / 2),
+      x: box.left + box.width / 2 - (r.left + r.width / 2),
+      y: box.top + box.height / 2 - (r.top + r.height / 2),
       scale,
     });
   }, [zoom]);
+
+  // Once the loader lets go: hold the close-up, then zoom out.
+  useEffect(() => {
+    if (!zoom || !ready) return;
+    setPhase('hold');
+    const t = setTimeout(() => setPhase('zoom'), HOLD * 1000);
+    return () => clearTimeout(t);
+  }, [zoom, ready]);
+
+  // No scrolling until the window has landed (the close-up is a transform of
+  // the window in its place on the page, so scrolling would carry it off).
+  useEffect(() => {
+    if (!zoom || settled) return;
+    const el = document.documentElement;
+    const prev = el.style.overflow;
+    el.style.overflow = 'hidden';
+    return () => {
+      el.style.overflow = prev;
+    };
+  }, [zoom, settled]);
 
   // On the way out, the window lags the page a little.
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start start', 'end start'] });
   const drift = useTransform(scrollYProgress, [0, 1], [0, -72]);
   const copyDrift = useTransform(scrollYProgress, [0, 1], [0, 28]);
 
-  const base = zoom ? 1.05 : 0.05; // when the words start, after the loader
+  const base = zoom ? HOLD + 0.1 : 0.05; // when the words start, after the close-up
   const rise = (delay) => ({
     hidden: { opacity: 0, y: 14 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease, delay: base + delay } },
@@ -91,11 +127,34 @@ export default function Hero({ ready = true, intro = false }) {
       {/* The dark the loader fades onto: gone once the window has zoomed out. */}
       {zoom && !settled && (
         <motion.div
-          className="fixed inset-0 z-[65] zone-dark bg-bg pointer-events-none"
+          className="fixed inset-0 z-[82] zone-dark bg-bg pointer-events-none"
           initial={{ opacity: 1 }}
-          animate={{ opacity: ready ? 0 : 1 }}
-          transition={{ duration: 0.9, ease: [0.4, 0, 0.2, 1], delay: ready ? 0.95 : 0 }}
+          animate={{ opacity: phase === 'zoom' ? 0 : 1 }}
+          transition={{ duration: 0.9, ease: [0.4, 0, 0.2, 1] }}
         />
+      )}
+
+      {/* The result, in large type beside the phone while it is close up. */}
+      {zoom && !settled && (
+        <div
+          className="fixed z-[86] pointer-events-none zone-dark inset-x-0 top-0 h-[30vh] flex items-end px-6 pb-[3vh] lg:inset-y-0 lg:end-auto lg:h-auto lg:w-[44vw] lg:items-center lg:ps-[6vw] lg:pe-0 lg:pb-0"
+          aria-hidden="true"
+        >
+          <motion.div
+            initial={false}
+            animate={{ opacity: phase === 'zoom' ? 0 : 1 }}
+            transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
+          >
+            <motion.p
+              className="font-display font-semibold text-fg leading-[1.0] tracking-[-0.04em] text-balance"
+              style={{ fontSize: 'clamp(2.9rem, 6.4vw, 6.75rem)' }}
+              initial="hidden"
+              animate={phase === 'wait' ? 'hidden' : 'visible'}
+            >
+              <Words text={ui.clientBooked} delay={0.45} stagger={0.08} duration={0.9} />
+            </motion.p>
+          </motion.div>
+        </div>
       )}
 
       <div className="section-wrap pt-[104px] md:pt-[120px] pb-14 md:pb-20">
@@ -141,13 +200,13 @@ export default function Hero({ ready = true, intro = false }) {
           <div className="lg:col-span-6 lg:justify-self-end w-full max-w-[520px]">
             <motion.div
               ref={winRef}
-              className={`zone-dark relative rounded-[28px] overflow-hidden ${settled ? '' : 'z-[70]'}`}
+              className={`zone-dark relative rounded-[28px] overflow-hidden ${settled ? '' : 'z-[84]'}`}
               style={{ boxShadow: 'var(--shadow-3)', transformOrigin: '50% 50%' }}
               initial={false}
-              animate={zoom && !ready && from ? from : { x: 0, y: 0, scale: 1 }}
-              transition={zoom && ready ? { duration: 1.2, ease, delay: 0.95 } : { duration: 0 }}
+              animate={zoom && (phase === 'wait' || phase === 'hold') && from ? from : { x: 0, y: 0, scale: 1 }}
+              transition={zoom && phase === 'zoom' ? { duration: 1.2, ease } : { duration: 0 }}
               onAnimationComplete={() => {
-                if (zoom && ready) setSettled(true);
+                if (phase === 'zoom') setPhase('settled');
               }}
             >
               <motion.div style={reduced || !settled ? undefined : { y: drift }} className="relative">

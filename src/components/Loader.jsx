@@ -1,19 +1,25 @@
 import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import { useCopy } from '../i18n.jsx';
 
 // Full-screen entry loader: black field with a faint dot grid, a thin
-// progress bar along the top edge, and a giant clock in the bottom-left that
-// runs from ten o'clock to 11:02 PM, the minute the customer in the hero
-// writes. The count is tied to real readiness (fonts) with a
-// minimum duration so it never flashes. At 100 the sheet does not wipe: it
-// fades, and what it fades onto is the hero's window of night already filling
-// the screen, so the dark of the loader becomes the dark of the product before
-// the page zooms out around it (see Hero). `onDone(played)` tells the page
-// whether that handoff is happening or the loader was skipped (second visit
-// in the session, or reduced motion).
+// progress bar along the top edge, and a giant clock in the bottom corner,
+// "It is" above it. The clock ticks one minute at a time, slowly, from
+// 10:56 PM to 11:02 PM, the minute the customer in the hero writes; each
+// changed digit rolls up into place. It never finishes before the fonts are
+// ready. At the end the sheet does not wipe: it fades, and what it fades
+// onto is the hero's window of night already filling the screen, so the dark
+// of the loader becomes the dark of the product (see Hero). `onDone(played)`
+// tells the page whether that handoff is happening or the loader was skipped
+// (second visit in the session, or reduced motion).
 
 const KEY = 'marhab:loaded';
-const MIN_MS = 2100;
+const MINUTES = ['10:56', '10:57', '10:58', '10:59', '11:00', '11:01', '11:02'];
+const FIRST_HOLD = 500; // ms on 10:56 before the first tick
+const STEP = 600; // ms per minute
+const END_HOLD = 700; // ms on 11:02 before the sheet fades
+const TOTAL = FIRST_HOLD + (MINUTES.length - 1) * STEP + END_HOLD;
+const roll = [0.22, 1, 0.36, 1];
 
 /** Whether the loader will show on this page view: first visit in the session, motion allowed. */
 export function loaderWillPlay() {
@@ -26,17 +32,44 @@ export function loaderWillPlay() {
   }
 }
 
-/** 0..100 → "10:00" … "11:02": sixty-two minutes, the last one the customer's. */
-function clock(pct) {
-  const m = Math.min(62, Math.round((pct / 100) * 62));
-  const h = m >= 60 ? 11 : 10;
-  const mm = m >= 60 ? m - 60 : m;
-  return `${h}:${String(mm).padStart(2, '0')}`;
+/** Which minute is showing, `elapsed` ms in: 0 (10:56) … 6 (11:02). */
+function minuteAt(elapsed) {
+  if (elapsed < FIRST_HOLD) return 0;
+  return Math.min(MINUTES.length - 1, 1 + Math.floor((elapsed - FIRST_HOLD) / STEP));
+}
+
+/** The time, one slot per digit; a digit that changes slides up and
+ *  crossfades into the next (the colon stays put). */
+function Clock({ time }) {
+  return time.split('').map((ch, i) =>
+    ch === ':' ? (
+      <span key={i} className="inline-block mx-[0.04em] [font-variant-numeric:normal]">
+        :
+      </span>
+    ) : (
+      <span key={i} className="relative inline-block">
+        <AnimatePresence mode="popLayout" initial={false}>
+          <motion.span
+            key={ch}
+            className="inline-block"
+            initial={{ y: '0.3em', opacity: 0 }}
+            animate={{ y: '0em', opacity: 1 }}
+            exit={{ y: '-0.3em', opacity: 0 }}
+            transition={{ duration: 0.42, ease: roll }}
+          >
+            {ch}
+          </motion.span>
+        </AnimatePresence>
+      </span>
+    ),
+  );
 }
 
 export default function Loader({ onDone }) {
+  const { ui } = useCopy();
   const [visible, setVisible] = useState(loaderWillPlay);
   const [pct, setPct] = useState(0);
+  const [minute, setMinute] = useState(0);
   const doneRef = useRef(false);
   const playedRef = useRef(visible);
 
@@ -59,21 +92,19 @@ export default function Loader({ onDone }) {
 
     function tick(now) {
       const elapsed = now - start;
-      // Ease toward 92% on the timer; the last stretch waits for readiness.
-      const t = Math.min(elapsed / MIN_MS, 1);
-      const eased = 1 - Math.pow(1 - t, 3);
-      let target = Math.floor(eased * 92);
+      // The bar follows the clock; its last stretch waits for readiness.
+      const t = Math.min(elapsed / TOTAL, 1);
+      let target = Math.floor(t * 96);
       if (ready && t >= 1) target = 100;
       setPct((p) => (target > p ? target : p));
+      setMinute(minuteAt(elapsed));
       if (target >= 100) {
         if (!doneRef.current) {
           doneRef.current = true;
-          setTimeout(() => {
-            try {
-              sessionStorage.setItem(KEY, '1');
-            } catch {}
-            setVisible(false);
-          }, 420);
+          try {
+            sessionStorage.setItem(KEY, '1');
+          } catch {}
+          setVisible(false);
         }
         return;
       }
@@ -97,9 +128,9 @@ export default function Loader({ onDone }) {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.55, ease: [0.4, 0, 0.2, 1] }}
           className="fixed inset-0 z-[100] zone-dark bg-bg text-fg overflow-hidden"
-          aria-live="polite"
           aria-busy="true"
         >
+          <span className="sr-only">{ui.loading}</span>
           <div
             className="absolute inset-0 opacity-[0.35]"
             style={{
@@ -121,12 +152,23 @@ export default function Loader({ onDone }) {
           <motion.div
             exit={{ opacity: 0, y: 24 }}
             transition={{ duration: 0.3 }}
-            className="absolute left-6 md:left-10 bottom-4 md:bottom-6 select-none text-[#dfe6ef]"
-            dir="ltr"
+            className="absolute start-6 md:start-10 bottom-4 md:bottom-6 select-none text-[#dfe6ef]"
+            aria-hidden="true"
           >
-            <p className="font-display font-medium leading-none tracking-[-0.05em] tabular-nums" style={{ fontSize: 'clamp(5.5rem, 17vw, 15rem)' }}>
-              {clock(pct)}
-              <span className="ml-3 align-top text-[0.22em] font-medium tracking-[0.02em] text-[#dfe6ef]/70">PM</span>
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: roll, delay: 0.1 }}
+              className="font-display font-medium leading-none tracking-[-0.02em] text-[#dfe6ef]/70 ms-[0.06em] mb-[0.2em] md:mb-[0.1em]"
+              style={{ fontSize: 'clamp(1.5rem, 3.4vw, 3rem)' }}
+            >
+              {ui.itIs}
+            </motion.p>
+            <p className="font-display font-medium leading-none tracking-[-0.05em] tabular-nums whitespace-nowrap" style={{ fontSize: 'clamp(5.5rem, 17vw, 15rem)' }}>
+              <span dir="ltr" className="inline-block">
+                <Clock time={MINUTES[minute]} />
+              </span>
+              <span className="ms-3 align-top text-[0.22em] font-medium tracking-[0.02em] text-[#dfe6ef]/70">{ui.pm}</span>
             </p>
           </motion.div>
         </motion.div>
