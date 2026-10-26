@@ -3,7 +3,6 @@ import Loader, { loaderWillPlay } from '../components/Loader.jsx';
 import Hero from '../components/Hero.jsx';
 import SkipIntro from '../components/SkipIntro.jsx';
 const HeroDive = lazy(() => import('../components/HeroDive.jsx'));
-import ProductDemo from '../components/ProductDemo.jsx';
 import ScrollStory from '../components/ScrollStory.jsx';
 import ServicesPreview from '../components/ServicesPreview.jsx';
 import WorkPreview from '../components/WorkPreview.jsx';
@@ -11,9 +10,9 @@ import ProcessPreview from '../components/ProcessPreview.jsx';
 import QatarBand from '../components/QatarBand.jsx';
 import FinalCta from '../components/FinalCta.jsx';
 
-// Home is the sales page. Hero → the product working → one customer's week,
-// pinned and scrolled → what we build → what it looks like → how it goes →
-// here → go.
+// Home is the sales page. Hero (the result) → one client's week, told once,
+// step by step as the page scrolls (how it happened) → what we build → what
+// it looks like → how it goes → here → go.
 //
 // Two openings, one per look: the night look keeps the five-screen dive
 // through the indigo field; the daylight look opens on one screen — the
@@ -44,7 +43,7 @@ export default function Home() {
   const showSkip =
     intro && !skipped && !introDone && (daylight ? heroPhase === 'wait' || heroPhase === 'hold' : !ready);
 
-  // Everything below the demo is built after the first paint, in small
+  // Everything below the story is built after the first paint, in small
   // interruptible slices (a transition), so the page never freezes for half
   // a second while eight sections of motion mount at once. A visitor who
   // lands on an anchor further down gets it at once.
@@ -67,10 +66,9 @@ export default function Home() {
           <HeroDive />
         </Suspense>
       )}
-      <ProductDemo />
+      <ScrollStory />
       {rest ? (
         <>
-          <ScrollStory />
           <ServicesPreview />
           <WorkPreview />
           <ProcessPreview />
