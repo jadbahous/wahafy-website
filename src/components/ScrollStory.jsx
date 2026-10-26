@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, useMotionValueEvent, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 import { Check, Star } from 'lucide-react';
 import { useCopy } from '../i18n.jsx';
@@ -51,6 +51,62 @@ function Header({ stage }) {
   );
 }
 
+/**
+ * Which of a container's children fit whole in its height: measured with
+ * every child shown, then the ones that do not fit are hidden, so a message
+ * is never cut in half. The run kept always holds `focus` (the message the
+ * step is about; 'last' for the newest), then as many of the ones after it
+ * as fit, then the ones before it. Measured again when the container is
+ * resized or the fonts arrive.
+ */
+function useWholeFit(ref, focus) {
+  const [keep, setKeep] = useState(null); // null: measuring, all shown
+
+  useLayoutEffect(() => {
+    const el = ref.current;
+    if (!el || keep !== null) return;
+    const cs = getComputedStyle(el);
+    const room = el.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
+    const gap = parseFloat(cs.rowGap) || 0;
+    const kids = [...el.children];
+    const n = kids.length;
+    if (!n) return setKeep(new Set());
+    const f = focus === 'last' ? n - 1 : Math.min(Math.max(0, focus), n - 1);
+    const fits = new Set([f]);
+    let used = kids[f].offsetHeight;
+    const tryAdd = (i) => {
+      const h = kids[i].offsetHeight + gap;
+      if (used + h > room + 0.5) return false;
+      used += h;
+      fits.add(i);
+      return true;
+    };
+    for (let i = f + 1; i < n && tryAdd(i); i++);
+    for (let i = f - 1; i >= 0 && tryAdd(i); i--);
+    setKeep(fits);
+  }, [keep, focus, ref]);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    let w = el.clientWidth;
+    let h = el.clientHeight;
+    const again = () => setKeep(null);
+    const ro = typeof ResizeObserver === 'undefined' ? null : new ResizeObserver(() => {
+      if (el.clientWidth !== w || el.clientHeight !== h) {
+        w = el.clientWidth;
+        h = el.clientHeight;
+        again();
+      }
+    });
+    ro?.observe(el);
+    document.fonts?.ready.then(again);
+    return () => ro?.disconnect();
+  }, [ref]);
+
+  return (i) => keep === null || keep.has(i);
+}
+
 function Stars({ n = 5 }) {
   return (
     <span className="inline-flex items-center gap-0.5 mt-1.5" aria-label={`${n} stars`}>
@@ -66,12 +122,15 @@ function Screen({ stage, still = false }) {
   const { ui } = useCopy();
   const anim = still ? {} : { variants: reveal, initial: 'hidden', animate: 'visible' };
   const item = still ? {} : { variants: part };
+  const box = useRef(null);
+  const owner = stage.id === 'owner';
+  const shows = useWholeFit(box, owner ? 0 : stage.focus ?? 'last');
 
-  if (stage.id === 'owner') {
+  if (owner) {
     return (
       <div className="h-full flex flex-col text-start">
         <Header stage={stage} />
-        <motion.div {...anim} className="px-3 pb-3">
+        <motion.div {...anim} className="flex-1 min-h-0 flex flex-col px-3 pb-3">
           <motion.p {...item} className="px-1 pt-1 pb-2 font-display text-[11px] font-medium uppercase tracking-[0.14em] text-fg/60">
             {ui.thisWeek}
           </motion.p>
@@ -83,9 +142,9 @@ function Screen({ stage, still = false }) {
               </motion.div>
             ))}
           </div>
-          <div className="mt-2 px-1 divide-y divide-fg/[0.06]">
-            {stage.rows.map((r) => (
-              <motion.div key={r.label} {...item} className="[&>div]:py-2">
+          <div ref={box} className="flex-1 min-h-0 mt-2 px-1 overflow-hidden divide-y divide-fg/[0.06]">
+            {stage.rows.map((r, i) => (
+              <motion.div key={r.label} {...item} hidden={!shows(i)} className="[&>div]:py-2">
                 <StatusRow label={r.label} detail={r.detail} state={r.state} />
               </motion.div>
             ))}
@@ -95,19 +154,15 @@ function Screen({ stage, still = false }) {
     );
   }
 
-  // A chat: newest at the bottom, like the real thing; if the screen is
-  // short, the oldest line slips under the header rather than the newest
-  // being cut off.
+  // A chat: newest at the bottom, like the real thing. If the screen is too
+  // short for all of it, the oldest whole messages are left out (as if
+  // scrolled away), never half a message.
   return (
     <div className="h-full flex flex-col text-start">
       <Header stage={stage} />
-      <motion.div
-        {...anim}
-        className="flex-1 min-h-0 flex flex-col justify-end gap-2 px-3 pb-3 overflow-hidden"
-        style={{ maskImage: 'linear-gradient(to bottom, transparent 0, #000 28px)', WebkitMaskImage: 'linear-gradient(to bottom, transparent 0, #000 28px)' }}
-      >
+      <motion.div {...anim} ref={box} className="flex-1 min-h-0 flex flex-col justify-end gap-2 px-3 pb-3 overflow-hidden">
         {stage.lines.map((line, i) => (
-          <motion.div key={i} {...item}>
+          <motion.div key={i} {...item} hidden={!shows(i)}>
             <Bubble role={line.role} dense>
               {line.text}
               {line.stars && (
@@ -128,8 +183,8 @@ function Screen({ stage, still = false }) {
           </motion.div>
         ))}
         {stage.card && (
-          <motion.div {...item} className="pt-1">
-            <BookingCard title={stage.card.title} line1={stage.card.line1} line2={stage.card.line2} />
+          <motion.div {...item} hidden={!shows(stage.lines.length)} className="pt-1">
+            <BookingCard compact title={stage.card.title} line1={stage.card.line1} />
           </motion.div>
         )}
       </motion.div>
