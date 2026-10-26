@@ -26,7 +26,28 @@ export default function Home() {
   // loader lets go.
   const [intro] = useState(loaderWillPlay);
   const [ready, setReady] = useState(false);
-  const onLoaderDone = useCallback(() => setReady(true), []);
+  const [introDone, setIntroDone] = useState(!intro);
+  const onLoaderDone = useCallback(() => {
+    setReady(true);
+    if (!daylight) setIntroDone(true);
+  }, []);
+  const onHeroSettled = useCallback(() => setIntroDone(true), []);
+
+  // The opening can be skipped: any click, tap, scroll or key while it plays
+  // goes straight to the page (the loader lets go at once and the hero is
+  // simply there, its headline rising).
+  const [skipped, setSkipped] = useState(false);
+  useEffect(() => {
+    if (!intro || introDone || skipped) return;
+    const skip = (e) => {
+      if (e.type === 'keydown' && ['Shift', 'Control', 'Alt', 'Meta', 'CapsLock'].includes(e.key)) return;
+      setSkipped(true);
+    };
+    const events = ['pointerdown', 'wheel', 'touchmove', 'keydown'];
+    const opts = { passive: true, capture: true };
+    events.forEach((ev) => window.addEventListener(ev, skip, opts));
+    return () => events.forEach((ev) => window.removeEventListener(ev, skip, opts));
+  }, [intro, introDone, skipped]);
 
   // Everything below the demo is built after the first paint, in small
   // interruptible slices (a transition), so the page never freezes for half
@@ -42,9 +63,9 @@ export default function Home() {
 
   return (
     <>
-      <Loader onDone={onLoaderDone} />
+      <Loader onDone={onLoaderDone} skip={skipped} />
       {daylight ? (
-        <Hero ready={ready} intro={intro} />
+        <Hero ready={ready} intro={intro} skipped={skipped} onSettled={onHeroSettled} />
       ) : (
         <Suspense fallback={<div className="min-h-[100dvh] bg-bg" />}>
           <HeroDive />
