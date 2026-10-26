@@ -14,6 +14,7 @@ export const navCta = { label: 'Book a free demo', href: '/contact' };
 
 export const hero = {
   headline: ['Every customer who reaches out,', 'answered.'],
+  eyebrow: 'Websites. AI reception. Automation.',
   support: 'Websites. AI reception. Automation. One connected customer experience.',
   sub: 'We build intelligent websites and customer systems that answer enquiries, capture leads, book appointments and follow up. Automatically, 24/7.',
   primaryCta: { label: 'See it in action', href: '#demo' },
@@ -42,6 +43,7 @@ export const demo = {
     { role: 'customer', text: 'Sara.' },
     { role: 'marhab', text: 'Booked for tomorrow at 6:00 PM, Sara. A confirmation is on its way to your WhatsApp.' },
   ],
+  card: { title: 'Appointment booked', line1: 'Tomorrow · 6:00 PM · Sara', line2: 'Confirmation sent on WhatsApp' },
   pipeline: [
     { label: 'Appointment booked', detail: 'Tomorrow · 6:00 PM' },
     { label: 'Lead captured', detail: 'Sara · new patient' },
@@ -70,6 +72,83 @@ export const journey = {
   heading: 'From first message to five-star review.',
   sub: 'One connected journey, handled end to end.',
   steps: ['Visitor', 'Conversation', 'Qualified lead', 'Booking', 'Reminder', 'Customer', 'Review'],
+};
+
+/* The showpiece: one customer's week, scrubbed by scroll. Each stage is a
+   screen on the same phone and one outcome the business gets from it. */
+export const story = {
+  heading: 'From first message to five-star review.',
+  sub: 'One customer, one week, nothing missed.',
+  business: 'Pearl & Bloom Dental',
+  stages: [
+    {
+      id: 'enquiry',
+      when: 'Tuesday, 11:02 PM',
+      channel: 'Website chat',
+      title: 'Never miss a lead',
+      text: 'A question at midnight is answered at midnight. The common questions are handled instantly, so nobody waits for morning and nothing is typed twice.',
+      lines: [
+        { role: 'customer', text: 'Do you have an appointment tomorrow at 6 PM?' },
+        { role: 'marhab', text: 'Yes. We have 6:00 PM and 7:30 PM available. Which would you prefer?' },
+      ],
+    },
+    {
+      id: 'booking',
+      when: 'Tuesday, 11:03 PM',
+      channel: 'Website chat',
+      title: 'Turn enquiries into bookings',
+      text: 'Real availability, a name, a confirmation on WhatsApp. From a question to an appointment in one minute, with no one at the desk.',
+      lines: [
+        { role: 'customer', text: '6 PM.' },
+        { role: 'marhab', text: 'Perfect. What name should I book it under?' },
+        { role: 'customer', text: 'Sara.' },
+        { role: 'marhab', text: 'Booked for tomorrow at 6:00 PM, Sara. A confirmation is on its way to your WhatsApp.' },
+      ],
+      card: { title: 'Appointment booked', line1: 'Wednesday, 6:00 PM · Sara', line2: 'Confirmation sent on WhatsApp' },
+    },
+    {
+      id: 'reminder',
+      when: 'Wednesday, 3:00 PM',
+      channel: 'WhatsApp',
+      title: 'Follow up automatically',
+      text: 'The reminder goes out the afternoon before, and the customer confirms with one tap. Fewer no-shows, and none of your staff\u2019s time.',
+      lines: [
+        { role: 'marhab', text: 'Hi Sara, a reminder of your appointment today at 6:00 PM at Pearl & Bloom, The Pearl. Reply 1 to confirm or 2 to reschedule.' },
+        { role: 'customer', text: '1' },
+        { role: 'marhab', text: 'Confirmed. See you at 6:00 PM.' },
+      ],
+    },
+    {
+      id: 'review',
+      when: 'Wednesday, 7:40 PM',
+      channel: 'WhatsApp',
+      title: 'Generate more reviews',
+      text: 'An hour after the visit, a short message asks how it went. Happy customers are invited to say so on Google, while the visit is still fresh.',
+      lines: [
+        { role: 'marhab', text: 'Thank you for visiting today, Sara. How was it?' },
+        { role: 'customer', text: 'Really good, thank you.', stars: 5 },
+        { role: 'marhab', text: 'We\u2019re glad. Would you share that on Google? It takes a minute.', action: 'Leave a review' },
+      ],
+    },
+    {
+      id: 'owner',
+      when: 'Friday, 9:00 AM',
+      channel: 'Your dashboard',
+      title: 'Understand what is happening',
+      text: 'Every conversation, lead and booking in one place, so you see the week at a glance without asking anyone.',
+      stats: [
+        { value: '27', label: 'enquiries' },
+        { value: '19', label: 'bookings' },
+        { value: '6', label: 'reviews' },
+      ],
+      rows: [
+        { label: 'Sara', detail: 'Booked · Wed 6:00 PM', state: 'done' },
+        { label: 'Omar', detail: 'Asked about whitening', state: 'active' },
+        { label: 'Layla', detail: 'Review · 5 stars', state: 'done' },
+        { label: 'Khalid', detail: 'Reminder sent', state: 'done' },
+      ],
+    },
+  ],
 };
 
 export const servicesPreview = {
@@ -211,8 +290,9 @@ export const work = {
       journey: ['Premium website', 'AI reception', 'Appointment booking', 'Lead capture', 'WhatsApp reminder', 'Review request'],
       href: 'https://pearl-and-bloom-demo.vercel.app',
       accent: '#4F7C6C',
-      image: 'https://images.unsplash.com/photo-1609207825181-52d3214556dd?q=80&w=1600&auto=format&fit=crop',
-      imageAlt: 'Boutique treatment room with a stone wall and pool view',
+      image: '/work/pearl-and-bloom-desktop.webp',
+      imagePhone: '/work/pearl-and-bloom-phone.webp',
+      imageAlt: 'The Pearl & Bloom website, home page',
       mock: {
         chat: [
           { role: 'customer', text: 'How much is teeth whitening?' },
@@ -233,8 +313,9 @@ export const work = {
       journey: ['Premium website', 'AI reception', 'Menu & hours answered', 'Lead capture', 'Owner notified'],
       href: 'https://dune-and-bean-demo.vercel.app',
       accent: '#B08655',
-      image: 'https://images.unsplash.com/photo-1445116572660-236099ec97a0?q=80&w=1600&auto=format&fit=crop',
-      imageAlt: 'Window-side café table with a plant and a french press',
+      image: '/work/dune-and-bean-desktop.webp',
+      imagePhone: '/work/dune-and-bean-phone.webp',
+      imageAlt: 'The Dune & Bean website, home page',
       mock: {
         chat: [
           { role: 'customer', text: 'Are you open Friday morning?' },
@@ -293,10 +374,79 @@ export const contact = {
     'Professional services',
     'Other',
   ],
+  form: {
+    name: 'Your name',
+    namePlaceholder: 'Full name',
+    business: 'Business name',
+    businessPlaceholder: 'Your business',
+    type: 'Business type',
+    typePlaceholder: 'Select…',
+    phone: 'Phone / WhatsApp',
+    phonePlaceholder: '+974 …',
+    email: 'Email',
+    emailPlaceholder: 'you@business.com',
+    website: 'Website or Instagram',
+    websitePlaceholder: 'Optional',
+    message: 'What would you like to improve?',
+    messagePlaceholder: 'Where do customers reach you today, and what gets missed?',
+    sending: 'Sending…',
+    note: 'No obligation. We reply within one business day.',
+    successTitle: 'Thank you. We’ll be in touch.',
+    successText: 'Jad will reply within one business day to arrange your free demo.',
+    error: 'Something went wrong. Please try again, or email',
+    whatsappUs: 'WhatsApp us',
+    talk: 'Talk to Marhab',
+  },
 };
 
 export const footer = {
   brand: 'Marhab AI',
   tagline: 'Every customer who reaches out, answered.',
   location: 'Doha, Qatar',
+  backToTop: 'Back to top',
+};
+
+/* ------------------------------------------------------------ chat widget */
+
+export const chat = {
+  greeting: "Marhaba. I'm the Marhab assistant. Ask me anything about what we build, or tell me about your business and I'll set up a free demo.",
+  suggestions: ['What does Marhab AI do?', 'Standard vs. Premium?', 'How much does it cost?', 'I run a restaurant in Doha'],
+  placeholder: 'Ask about your business…',
+  send: 'Send',
+  open: 'Ask Marhab',
+  close: 'Close',
+  saved: 'Saved. Jad has your details',
+  error: 'Could not connect. Please try again.',
+};
+
+/* --------------------------------------------------------------- shared */
+
+export const ui = {
+  liveDemo: 'Live demo',
+  viewSystem: 'View the system',
+  openDemo: 'Open the live demo',
+  challenge: 'The challenge',
+  experience: 'The experience',
+  journeyLabel: 'The customer journey',
+  whatHappened: 'What just happened',
+  sameReception: 'The same reception runs on this site. Ask it anything about your business. It’s the experience your customers would get.',
+  typeMessage: 'Type a message…',
+  replies: 'AI reception · replies in seconds',
+  aiReception: 'AI reception',
+  thisWeek: 'This week',
+  from: 'From',
+  then: 'Then',
+  qar: 'QAR',
+  qarMonth: 'QAR / month',
+  oneTime: 'one-time setup',
+  twelveMonths: '12-month plan',
+  monthlyCovers: 'Monthly covers:',
+  mostPopular: 'Most popular',
+  youGet: 'You get:',
+  menu: 'Menu',
+  closeMenu: 'Close menu',
+  openMenu: 'Open menu',
+  fullCaseStudies: 'See the full case studies',
+  switchTo: 'عربي',
+  switchHref: '/ar',
 };
