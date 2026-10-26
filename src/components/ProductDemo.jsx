@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, useInView, useReducedMotion } from 'framer-motion';
 import { RotateCcw, MessageCircle } from 'lucide-react';
-import { demo } from '../data.js';
+import { useCopy } from '../i18n.jsx';
 import { EASE, fadeUp, viewportOnce } from '../lib/motion.js';
 import SectionHeading from './SectionHeading.jsx';
 import { Panel, Bubble, TypingDots, StatusRow } from './ui/mock.jsx';
@@ -16,6 +16,7 @@ const READ_MS = 700;
 const PIPE_MS = 520;
 
 export default function ProductDemo() {
+  const { demo, ui } = useCopy();
   const prefersReducedMotion = useReducedMotion();
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-25% 0px -25% 0px' });
@@ -91,7 +92,7 @@ export default function ProductDemo() {
             viewport={viewportOnce}
             className="lg:col-span-7"
           >
-            <Panel title={demo.business} sub="AI reception · replies in seconds">
+            <Panel title={demo.business} sub={ui.replies}>
               <div ref={listRef} className="h-[380px] sm:h-[400px] overflow-y-auto px-4 py-5 flex flex-col gap-2.5 mock-scroll">
                 <AnimatePresence initial={false}>
                   {demo.conversation.slice(0, shown).map((m, i) => (
@@ -119,7 +120,7 @@ export default function ProductDemo() {
               </div>
               <div className="flex items-center gap-2 px-3 py-3 border-t border-fg/[0.08]">
                 <div className="flex-1 h-[40px] rounded-full border border-fg/[0.12] bg-fg/[0.03] px-4 text-[13.5px] text-fg/60 flex items-center">
-                  Type a message…
+                  {ui.typeMessage}
                 </div>
                 <span className="grid place-items-center w-[40px] h-[40px] rounded-full bg-fg/[0.08] text-fg/65">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
@@ -139,7 +140,7 @@ export default function ProductDemo() {
           >
             <div className="rounded-[22px] surface-2 px-6 py-5">
               <div className="flex items-center justify-between mb-2">
-                <p className="font-display text-[12.5px] font-medium uppercase tracking-[0.16em] text-fg/65">What just happened</p>
+                <p className="font-display text-[12.5px] font-medium uppercase tracking-[0.16em] text-fg/65">{ui.whatHappened}</p>
                 <span className={`text-[12.5px] tabular-nums transition-colors duration-300 ${finished ? 'text-ok' : 'text-fg/60'}`}>
                   {done}/{pipeTotal}
                 </span>
@@ -169,7 +170,7 @@ export default function ProductDemo() {
               )}
             </div>
             <p className="text-[14px] leading-relaxed text-fg/65 max-w-[40ch]">
-              The same reception runs on this site. Ask it anything about your business. It’s the experience your customers would get.
+              {ui.sameReception}
             </p>
           </motion.div>
         </div>

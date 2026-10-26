@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import Link from './ui/Link.jsx';
 import { ArrowRight } from 'lucide-react';
 import { fadeUp, viewportOnce } from '../lib/motion.js';
 import Words from './ui/Words.jsx';
@@ -49,7 +49,7 @@ export default function SectionHeading({
           className="group mt-7 inline-flex items-center gap-2 rounded-full text-[14.5px] font-medium text-fg/85 hover:text-fg transition-colors duration-200"
         >
           {cta.label}
-          <ArrowRight className="w-4 h-4 transition-transform duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-1" strokeWidth={1.8} />
+          <ArrowRight className="w-4 h-4 transition-transform duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1" strokeWidth={1.8} />
         </Link>
       )}
     </motion.div>

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Mail, MessageCircle, Phone } from 'lucide-react';
-import { contact } from '../data.js';
+import { useCopy } from '../i18n.jsx';
 import { fadeUp, viewportOnce } from '../lib/motion.js';
 import SectionHeading from './SectionHeading.jsx';
 
@@ -10,6 +10,8 @@ const initialForm = { name: '', business: '', type: '', phone: '', email: '', we
 // The beginning of a consultation, not a contact form: what happens next
 // on the left, a short form on the right, WhatsApp and email as side doors.
 export default function Contact() {
+  const { contact } = useCopy();
+  const f = contact.form;
   const [form, setForm] = useState(initialForm);
   const [status, setStatus] = useState('idle'); // idle | loading | success | error
 
@@ -88,12 +90,12 @@ export default function Contact() {
             {contact.whatsapp && (
               <a href={`https://wa.me/${contact.whatsapp}`} target="_blank" rel="noopener noreferrer" className="btn-secondary h-[46px] px-5 text-[14px]">
                 <MessageCircle className="w-4 h-4" strokeWidth={1.8} />
-                WhatsApp us
+                {f.whatsappUs}
               </a>
             )}
             <button type="button" onClick={openChat} className="btn-secondary h-[46px] px-5 text-[14px]">
               <MessageCircle className="w-4 h-4" strokeWidth={1.8} />
-              Talk to Marhab
+              {f.talk}
             </button>
             {contact.phone && (
               <a
@@ -122,45 +124,43 @@ export default function Contact() {
                   <path d="M5 13l4 4L19 7" stroke="rgb(var(--fg))" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </div>
-              <h3 className="font-display font-semibold text-[22px] mb-2 text-fg">Thank you. We’ll be in touch.</h3>
-              <p className="text-[15.5px] text-fg/70 max-w-[38ch] mx-auto">
-                Jad will reply within one business day to arrange your free demo.
-              </p>
+              <h3 className="font-display font-semibold text-[22px] mb-2 text-fg">{f.successTitle}</h3>
+              <p className="text-[15.5px] text-fg/70 max-w-[38ch] mx-auto">{f.successText}</p>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="rounded-[22px] surface-2 p-7 sm:p-10">
               <div className="grid sm:grid-cols-2 gap-5">
-                <Field label="Your name" required>
-                  <input required value={form.name} onChange={update('name')} placeholder="Full name" className="field" autoComplete="name" />
+                <Field label={f.name} required>
+                  <input required value={form.name} onChange={update('name')} placeholder={f.namePlaceholder} className="field" autoComplete="name" />
                 </Field>
-                <Field label="Business name">
-                  <input value={form.business} onChange={update('business')} placeholder="Your business" className="field" autoComplete="organization" />
+                <Field label={f.business}>
+                  <input value={form.business} onChange={update('business')} placeholder={f.businessPlaceholder} className="field" autoComplete="organization" />
                 </Field>
-                <Field label="Business type">
+                <Field label={f.type}>
                   <select value={form.type} onChange={update('type')} className="field field-select">
-                    <option value="">Select…</option>
+                    <option value="">{f.typePlaceholder}</option>
                     {contact.businessTypes.map((t) => (
                       <option key={t} value={t}>{t}</option>
                     ))}
                   </select>
                 </Field>
-                <Field label="Phone / WhatsApp" required>
-                  <input required value={form.phone} onChange={update('phone')} placeholder="+974 …" className="field" autoComplete="tel" inputMode="tel" />
+                <Field label={f.phone} required>
+                  <input required value={form.phone} onChange={update('phone')} placeholder={f.phonePlaceholder} className="field" autoComplete="tel" inputMode="tel" dir="ltr" />
                 </Field>
-                <Field label="Email">
-                  <input type="email" value={form.email} onChange={update('email')} placeholder="you@business.com" className="field" autoComplete="email" />
+                <Field label={f.email}>
+                  <input type="email" value={form.email} onChange={update('email')} placeholder={f.emailPlaceholder} className="field" autoComplete="email" dir="ltr" />
                 </Field>
-                <Field label="Website or Instagram">
-                  <input value={form.website} onChange={update('website')} placeholder="Optional" className="field" />
+                <Field label={f.website}>
+                  <input value={form.website} onChange={update('website')} placeholder={f.websitePlaceholder} className="field" />
                 </Field>
               </div>
 
               <div className="mt-5">
-                <Field label="What would you like to improve?">
+                <Field label={f.message}>
                   <textarea
                     value={form.message}
                     onChange={update('message')}
-                    placeholder="Where do customers reach you today, and what gets missed?"
+                    placeholder={f.messagePlaceholder}
                     rows={4}
                     className="field resize-none"
                   />
@@ -169,15 +169,15 @@ export default function Contact() {
 
               <div className="mt-7 flex flex-col sm:flex-row sm:items-center gap-4">
                 <button type="submit" disabled={status === 'loading'} className="btn-primary group h-[50px] px-7 text-[14.5px]">
-                  {status === 'loading' ? 'Sending…' : contact.cta}
-                  {status !== 'loading' && <ArrowRight className="w-4 h-4 transition-transform duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-1" strokeWidth={2} />}
+                  {status === 'loading' ? f.sending : contact.cta}
+                  {status !== 'loading' && <ArrowRight className="w-4 h-4 transition-transform duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1" strokeWidth={2} />}
                 </button>
-                <p className="text-[14px] text-fg/65">No obligation. We reply within one business day.</p>
+                <p className="text-[14px] text-fg/65">{f.note}</p>
               </div>
 
               {status === 'error' && (
                 <p className="mt-4 text-[14px] text-danger" role="alert">
-                  Something went wrong. Please try again, or email {contact.email}.
+                  {f.error} {contact.email}.
                 </p>
               )}
             </form>
@@ -210,6 +210,11 @@ export default function Contact() {
           background-image: linear-gradient(45deg, transparent 50%, rgb(var(--fg) / 0.6) 50%), linear-gradient(135deg, rgb(var(--fg) / 0.6) 50%, transparent 50%);
           background-size: 5px 5px, 5px 5px;
           background-position: right 20px center, right 15px center;
+        }
+        [dir='rtl'] .field-select {
+          background-position: left 15px center, left 20px center;
+          padding-right: 14px;
+          padding-left: 40px;
           background-repeat: no-repeat;
           padding-right: 40px;
         }

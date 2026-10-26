@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
-import { work } from '../data.js';
+import { useCopy } from '../i18n.jsx';
 import { fadeUp, viewportOnce } from '../lib/motion.js';
 import SectionHeading from './SectionHeading.jsx';
 import { BrowserFrame, PhoneFrame, Panel, Bubble, BookingCard } from './ui/mock.jsx';
@@ -11,6 +11,7 @@ import { JourneyChips, DemoTag } from './WorkPreview.jsx';
 // the same window of night the home page opens with. Demo systems are
 // labelled as such; nothing here pretends to be a paying client.
 export default function Work() {
+  const { work, ui } = useCopy();
   return (
     <section id="work" className="bg-bg text-fg pt-36 md:pt-44 pb-24 md:pb-32">
       <div className="section-wrap">
@@ -67,15 +68,15 @@ export default function Work() {
                     <div className="w-full max-w-[250px] sm:max-w-none">
                       <PhoneFrame>
                         <div className="relative aspect-[9/16] bg-[#111]">
-                          <img src={p.image} alt="" loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
-                          <div className="absolute inset-0 bg-gradient-to-t from-bg via-bg/40 to-transparent" />
-                          <div className="absolute left-3 right-3 bottom-3">
+                          <img src={p.imagePhone ?? p.image} alt="" loading="lazy" className="absolute inset-0 w-full h-full object-cover object-top" />
+                          <div className="absolute inset-0 bg-gradient-to-t from-bg via-bg/30 to-transparent" />
+                          <div className="absolute inset-x-3 bottom-3">
                             <BookingCard title={p.mock.booking.title} line1={p.mock.booking.line1} line2={p.mock.booking.line2} />
                           </div>
                         </div>
                       </PhoneFrame>
                     </div>
-                    <Panel title={p.name.split(' ').slice(0, 3).join(' ')} sub="AI reception">
+                    <Panel title={p.name.split(' ').slice(0, 3).join(' ')} sub={ui.aiReception}>
                       <div className="px-3.5 py-4 flex flex-col gap-2.5">
                         {p.mock.chat.map((m, k) => (
                           <Bubble key={k} role={m.role}>{m.text}</Bubble>
@@ -89,11 +90,11 @@ export default function Work() {
               {/* Story */}
               <div className="grid md:grid-cols-2 gap-px bg-fg/10 rounded-2xl overflow-hidden mt-8 md:mt-10" style={{ boxShadow: 'var(--shadow-1)' }}>
                 <motion.div variants={fadeUp} custom={1} initial="hidden" whileInView="visible" viewport={viewportOnce} className="bg-panel p-7 md:p-9">
-                  <h4 className="font-display font-semibold text-[17px] mb-3">The challenge</h4>
+                  <h4 className="font-display font-semibold text-[17px] mb-3">{ui.challenge}</h4>
                   <p className="text-[15.5px] leading-[1.6] text-fg/72">{p.challenge}</p>
                 </motion.div>
                 <motion.div variants={fadeUp} custom={2} initial="hidden" whileInView="visible" viewport={viewportOnce} className="bg-panel p-7 md:p-9">
-                  <h4 className="font-display font-semibold text-[17px] mb-3">The experience</h4>
+                  <h4 className="font-display font-semibold text-[17px] mb-3">{ui.experience}</h4>
                   <p className="text-[15.5px] leading-[1.6] text-fg/72">{p.experience}</p>
                 </motion.div>
               </div>
@@ -107,12 +108,12 @@ export default function Work() {
                 className="mt-8 flex flex-col md:flex-row md:items-center justify-between gap-6"
               >
                 <div>
-                  <p className="font-display font-semibold text-[15px] mb-3">The customer journey</p>
+                  <p className="font-display font-semibold text-[15px] mb-3">{ui.journeyLabel}</p>
                   <JourneyChips steps={p.journey} />
                 </div>
                 <a href={p.href} target="_blank" rel="noopener noreferrer" className="btn-secondary group self-start md:self-auto h-[46px] px-5 text-[14px]">
-                  Open the live demo
-                  <ArrowUpRight className="w-4 h-4 transition-transform duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5" strokeWidth={1.8} />
+                  {ui.openDemo}
+                  <ArrowUpRight className="w-4 h-4 transition-transform duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 rtl:-scale-x-100 rtl:group-hover:-translate-x-0.5" strokeWidth={1.8} />
                 </a>
               </motion.div>
 

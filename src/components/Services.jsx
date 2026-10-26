@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import Link from './ui/Link.jsx';
 import { Check as CheckIcon } from 'lucide-react';
-import { services } from '../data.js';
+import { useCopy } from '../i18n.jsx';
 import { fadeUp, viewportOnce } from '../lib/motion.js';
 import SectionHeading from './SectionHeading.jsx';
 
@@ -13,6 +13,7 @@ function Check() {
 // each one a row with the outcome on the left and the capabilities on the
 // right — followed by the two plans.
 export default function Services() {
+  const { services, ui } = useCopy();
   return (
     <>
       <section id="services" className="bg-bg text-fg pt-36 md:pt-44 pb-24 md:pb-32">
@@ -31,9 +32,7 @@ export default function Services() {
                 className="grid lg:grid-cols-12 gap-8 lg:gap-10 py-12 md:py-16 border-b border-fg/10"
               >
                 <div className="lg:col-span-5">
-                  <span className="block font-display font-semibold text-[clamp(2.4rem,5vw,3.6rem)] leading-none tracking-[-0.03em] text-fg/15 mb-5">
-                    {c.n}
-                  </span>
+                  <span aria-hidden="true" data-n={c.n} className="numeral block font-display font-semibold text-[clamp(2.4rem,5vw,3.6rem)] leading-none tracking-[-0.03em] text-fg/15 mb-5" />
                   <h3 className="font-display font-semibold text-[clamp(1.6rem,3vw,2.2rem)] leading-[1.05] tracking-[-0.03em]">{c.title}</h3>
                   <p className="mt-4 text-[16.5px] leading-[1.6] text-fg/70 max-w-[40ch]">{c.lead}</p>
                 </div>
@@ -69,8 +68,8 @@ export default function Services() {
                 className={`relative rounded-[22px] p-8 md:p-9 flex flex-col ${tier.highlight ? 'surface-3' : 'surface-1'}`}
               >
                 {tier.highlight && (
-                  <span className="btn-primary absolute -top-3.5 left-8 md:left-9 h-7 px-3 font-display text-[12px] tracking-[0.08em] uppercase pointer-events-none">
-                    Most popular
+                  <span className="btn-primary absolute -top-3.5 start-8 md:start-9 h-7 px-3 font-display text-[12px] tracking-[0.08em] uppercase pointer-events-none">
+                    {ui.mostPopular}
                   </span>
                 )}
 
@@ -81,24 +80,24 @@ export default function Services() {
                   <div className="mt-7 pt-7 border-t border-fg/10">
                     <div className="flex flex-wrap items-end gap-x-6 gap-y-3">
                       <div>
-                        <p className="font-display text-[12px] font-medium uppercase tracking-[0.16em] text-fg/65 mb-1.5">From</p>
+                        <p className="font-display text-[12px] font-medium uppercase tracking-[0.16em] text-fg/65 mb-1.5">{ui.from}</p>
                         <p className="font-display font-semibold text-[clamp(2rem,3.4vw,2.6rem)] leading-none tracking-[-0.035em] text-fg">
                           {tier.price.setup}
-                          <span className="ml-1.5 font-body text-[14px] font-medium tracking-normal text-fg/70">QAR</span>
+                          <span className="ms-1.5 font-body text-[14px] font-medium tracking-normal text-fg/70">{ui.qar}</span>
                         </p>
-                        <p className="mt-1.5 text-[13.5px] text-fg/65">one-time setup</p>
+                        <p className="mt-1.5 text-[13.5px] text-fg/65">{ui.oneTime}</p>
                       </div>
                       <div className="pb-[3px]">
-                        <p className="font-display text-[12px] font-medium uppercase tracking-[0.16em] text-fg/65 mb-1.5">Then</p>
+                        <p className="font-display text-[12px] font-medium uppercase tracking-[0.16em] text-fg/65 mb-1.5">{ui.then}</p>
                         <p className="font-display font-semibold text-[22px] leading-none tracking-[-0.03em] text-fg/85">
                           {tier.price.monthly}
-                          <span className="ml-1 font-body text-[13.5px] font-medium tracking-normal text-fg/70">QAR / month</span>
+                          <span className="ms-1 font-body text-[13.5px] font-medium tracking-normal text-fg/70">{ui.qarMonth}</span>
                         </p>
-                        <p className="mt-1.5 text-[13.5px] text-fg/65">12-month plan</p>
+                        <p className="mt-1.5 text-[13.5px] text-fg/65">{ui.twelveMonths}</p>
                       </div>
                     </div>
                     <p className="mt-4 text-[14px] leading-relaxed text-fg/65 max-w-[40ch]">
-                      <span className="text-fg/80">Monthly covers:</span> {tier.monthlyCovers}
+                      <span className="text-fg/80">{ui.monthlyCovers}</span> {tier.monthlyCovers}
                     </p>
                   </div>
                 )}

@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { qatar } from '../data.js';
+import { useCopy } from '../i18n.jsx';
 import { fadeUp, viewportOnce } from '../lib/motion.js';
 import SectionHeading from './SectionHeading.jsx';
 
@@ -7,6 +7,7 @@ import SectionHeading from './SectionHeading.jsx';
 // named after, set in the display italic, and four plain facts about how it
 // works here.
 export default function QatarBand() {
+  const { qatar } = useCopy();
   return (
     <section className="bg-bg text-fg py-28 md:py-36 border-t border-fg/[0.08]">
       <div className="section-wrap grid lg:grid-cols-12 gap-12 lg:gap-8 items-start">

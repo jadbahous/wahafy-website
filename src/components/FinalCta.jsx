@@ -1,13 +1,14 @@
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import Link from './ui/Link.jsx';
 import { ArrowRight } from 'lucide-react';
 import AuroraField from './AuroraField.jsx';
-import { finalCta } from '../data.js';
+import { useCopy } from '../i18n.jsx';
 import { fadeUp, viewportOnce } from '../lib/motion.js';
 
 // The closing band, shared by every page except Contact. The aurora field
 // bookends the hero's fluid so the site ends the way it opened.
 export default function FinalCta() {
+  const { finalCta } = useCopy();
   function openChat() {
     window.dispatchEvent(new CustomEvent('marhab:open-chat'));
   }
@@ -48,7 +49,7 @@ export default function FinalCta() {
         >
           <Link to={finalCta.primary.href} className="btn-primary group h-[52px] px-7 text-[15px]">
             {finalCta.primary.label}
-            <ArrowRight className="w-4 h-4 transition-transform duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-1" strokeWidth={2} />
+            <ArrowRight className="w-4 h-4 transition-transform duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1" strokeWidth={2} />
           </Link>
           <button type="button" onClick={openChat} className="btn-secondary h-[52px] px-7 text-[15px] backdrop-blur-md">
             {finalCta.secondary.label}

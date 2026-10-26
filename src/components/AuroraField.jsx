@@ -36,7 +36,8 @@ export default function AuroraField({ className = '' }) {
     }));
 
     function resize() {
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      // Soft gradients gain nothing from extra pixels.
+      const dpr = 1;
       w = canvas.clientWidth;
       h = canvas.clientHeight;
       canvas.width = w * dpr;
@@ -50,7 +51,18 @@ export default function AuroraField({ className = '' }) {
     // blackens whatever the page is: read the zone's --bg once.
     const base = getComputedStyle(canvas).getPropertyValue('--bg').trim().split(/\s+/).join(',') || '0,0,0';
     const fade = `rgba(${base},0.16)`;
-    function frame() {
+    // 30 frames a second is plenty for a slow drift, and nothing at all is
+    // drawn while the band is off-screen or the tab is hidden.
+    const FRAME_MS = 1000 / 30;
+    let last = 0;
+    let onScreen = false;
+    function frame(now) {
+      if (!running || !onScreen) return;
+      if (now - last < FRAME_MS) {
+        raf = requestAnimationFrame(frame);
+        return;
+      }
+      last = now;
       ctx.globalCompositeOperation = 'source-over';
       ctx.fillStyle = fade;
       ctx.fillRect(0, 0, w, h);
@@ -79,7 +91,7 @@ export default function AuroraField({ className = '' }) {
         ctx.fill();
       }
 
-      t += 0.016;
+      t += 0.032;
       raf = requestAnimationFrame(frame);
     }
 
@@ -121,8 +133,19 @@ export default function AuroraField({ className = '' }) {
     if (reduce) {
       paintStatic();
     } else {
-      raf = requestAnimationFrame(frame);
+      // Paint a settled first frame so the band is never empty when it scrolls in.
+      paintStatic();
     }
+
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        onScreen = entry.isIntersecting;
+        cancelAnimationFrame(raf);
+        if (onScreen && running && !reduce) raf = requestAnimationFrame(frame);
+      },
+      { rootMargin: '120px 0px' }
+    );
+    io.observe(canvas);
 
     function onVisibility() {
       if (document.hidden) {
@@ -130,13 +153,14 @@ export default function AuroraField({ className = '' }) {
         cancelAnimationFrame(raf);
       } else if (!reduce && running === false) {
         running = true;
-        raf = requestAnimationFrame(frame);
+        if (onScreen) raf = requestAnimationFrame(frame);
       }
     }
     document.addEventListener('visibilitychange', onVisibility);
 
     return () => {
       running = false;
+      io.disconnect();
       cancelAnimationFrame(raf);
       window.removeEventListener('resize', resize);
       document.removeEventListener('visibilitychange', onVisibility);

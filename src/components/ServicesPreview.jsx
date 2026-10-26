@@ -1,13 +1,14 @@
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import Link from './ui/Link.jsx';
 import { ArrowUpRight } from 'lucide-react';
-import { servicesPreview } from '../data.js';
+import { useCopy } from '../i18n.jsx';
 import { fadeUp, viewportOnce } from '../lib/motion.js';
 import SectionHeading from './SectionHeading.jsx';
 
 // Five service categories as one hairline list — a table of contents for
 // the Services page rather than five more cards.
 export default function ServicesPreview() {
+  const { servicesPreview } = useCopy();
   return (
     <section className="bg-bg text-fg py-28 md:py-36 border-t border-fg/[0.08]">
       <div className="section-wrap">
@@ -30,7 +31,7 @@ export default function ServicesPreview() {
                   <span className="block mt-1.5 text-[15px] leading-relaxed text-fg/70 max-w-[54ch]">{s.text}</span>
                 </span>
                 <span className="grid place-items-center w-11 h-11 rounded-full border border-fg/[0.14] text-fg/70 group-hover:text-bg group-hover:bg-fg group-hover:border-fg transition-[color,background-color,border-color] duration-300">
-                  <ArrowUpRight className="w-4 h-4 transition-transform duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-px group-hover:-translate-y-px" strokeWidth={1.8} />
+                  <ArrowUpRight className="w-4 h-4 transition-transform duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-px group-hover:-translate-y-px rtl:-scale-x-100 rtl:group-hover:-translate-x-px" strokeWidth={1.8} />
                 </span>
               </Link>
             </motion.li>

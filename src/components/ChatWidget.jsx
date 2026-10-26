@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { ArrowUp, X } from 'lucide-react';
 import ChatBooking from './ChatBooking.jsx';
+import { useCopy } from '../i18n.jsx';
 
 // The on-site concierge. It is both a feature and the demo: a visitor talking
 // to it is seeing exactly what their own customers would get. Black sheet,
@@ -9,27 +10,20 @@ import ChatBooking from './ChatBooking.jsx';
 // the site, nothing that reads as a third-party plugin.
 
 const STORE_KEY = 'marhab:chat';
-const GREETING =
-  "Marhaba. I'm the Marhab assistant. Ask me anything about what we build, or tell me about your business and I'll set up a free demo.";
-const SUGGESTIONS = [
-  'What does Marhab AI do?',
-  'Standard vs. Premium?',
-  'How much does it cost?',
-  'I run a restaurant in Doha',
-];
 
-function loadHistory() {
+function loadHistory(greeting) {
   try {
     const saved = JSON.parse(sessionStorage.getItem(STORE_KEY) || 'null');
     if (Array.isArray(saved) && saved.length) return saved;
   } catch {}
-  return [{ role: 'assistant', content: GREETING }];
+  return [{ role: 'assistant', content: greeting }];
 }
 
 export default function ChatWidget() {
+  const { chat } = useCopy();
   const prefersReducedMotion = useReducedMotion();
   const [open, setOpen] = useState(false);
-  const [messages, setMessages] = useState(loadHistory);
+  const [messages, setMessages] = useState(() => loadHistory(chat.greeting));
   const [input, setInput] = useState('');
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState(false);
@@ -64,6 +58,11 @@ export default function ChatWidget() {
     }
     window.addEventListener('keydown', onKey);
     window.addEventListener('marhab:open-chat', onOpen);
+    // Asked for before this widget had loaded: open now.
+    if (window.__marhabChatPending) {
+      window.__marhabChatPending = false;
+      setOpen(true);
+    }
     return () => {
       window.removeEventListener('keydown', onKey);
       window.removeEventListener('marhab:open-chat', onOpen);
@@ -116,7 +115,7 @@ export default function ChatWidget() {
             {...panelMotion}
             role="dialog"
             aria-label="Chat with Marhab"
-            className="mw-panel fixed z-[80] right-4 bottom-[88px] sm:right-6 sm:bottom-[92px] w-[calc(100vw-32px)] sm:w-[380px] h-[min(600px,calc(100dvh-120px))] flex flex-col overflow-hidden rounded-[20px] zone-dark border border-fg/[0.12] bg-matte text-fg origin-bottom-right"
+            className="mw-panel fixed z-[80] end-4 bottom-[88px] sm:end-6 sm:bottom-[92px] w-[calc(100vw-32px)] sm:w-[380px] h-[min(600px,calc(100dvh-120px))] flex flex-col overflow-hidden rounded-[20px] zone-dark border border-fg/[0.12] bg-matte text-fg origin-bottom-right rtl:origin-bottom-left"
           >
             <div className="noise-overlay" />
 
@@ -124,8 +123,8 @@ export default function ChatWidget() {
             <header className="relative flex items-center justify-between gap-4 px-5 pt-[18px] pb-4 border-b border-fg/[0.08]">
               <div className="flex items-center gap-3">
                 <div className="relative grid place-items-center w-9 h-9 rounded-full border border-fg/[0.14] bg-fg/[0.04]">
-                  <img src="/brand/mark-white.png" alt="" className="h-[18px] w-auto select-none" draggable="false" />
-                  <span className="absolute -right-0.5 -bottom-0.5 w-2.5 h-2.5 rounded-full bg-ok-dot ring-2 ring-matte" />
+                  <img src="/brand/mark-white@2x.webp" alt="" className="h-[18px] w-auto select-none" draggable="false" />
+                  <span className="absolute -end-0.5 -bottom-0.5 w-2.5 h-2.5 rounded-full bg-ok-dot ring-2 ring-matte" />
                 </div>
                 <div>
                   <p className="text-[14px] font-medium leading-tight">Marhab</p>
@@ -149,8 +148,8 @@ export default function ChatWidget() {
                   <div
                     className={`max-w-[84%] px-[14px] py-[10px] text-[14px] leading-[1.55] whitespace-pre-wrap break-words ${
                       m.role === 'user'
-                        ? 'bg-fg text-bg rounded-[16px] rounded-br-[5px]'
-                        : 'bg-fg/[0.06] border border-fg/[0.07] text-fg/85 rounded-[16px] rounded-bl-[5px]'
+                        ? 'bg-fg text-bg rounded-[16px] rounded-ee-[5px]'
+                        : 'bg-fg/[0.06] border border-fg/[0.07] text-fg/85 rounded-[16px] rounded-es-[5px]'
                     }`}
                   >
                     {m.content}
@@ -173,14 +172,14 @@ export default function ChatWidget() {
                 <div className="flex justify-start">
                   <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#5ad88a]/30 bg-[#5ad88a]/10 text-[12.5px] text-[#9fe7bb]">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#5ad88a]" />
-                    Saved. Jad has your details
+                    {chat.saved}
                   </div>
                 </div>
               )}
 
               {busy && (
                 <div className="flex justify-start">
-                  <div className="mw-dots px-[14px] py-[12px] bg-fg/[0.06] border border-fg/[0.07] rounded-[16px] rounded-bl-[5px]">
+                  <div className="mw-dots px-[14px] py-[12px] bg-fg/[0.06] border border-fg/[0.07] rounded-[16px] rounded-es-[5px]">
                     <span /><span /><span />
                   </div>
                 </div>
@@ -197,7 +196,7 @@ export default function ChatWidget() {
 
               {showSuggestions && (
                 <div className="mt-1 flex flex-wrap gap-2">
-                  {SUGGESTIONS.map((s) => (
+                  {chat.suggestions.map((s) => (
                     <button
                       key={s}
                       type="button"
@@ -223,14 +222,14 @@ export default function ChatWidget() {
                 ref={inputRef}
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                placeholder="Ask about your business…"
+                placeholder={chat.placeholder}
                 autoComplete="off"
                 className="flex-1 h-[42px] rounded-full border border-fg/[0.14] bg-fg/[0.04] px-4 text-[14px] text-fg placeholder:text-fg/50 focus:outline-none focus:border-fg/50 focus:bg-fg/[0.06] transition-[border-color,background-color] duration-150"
               />
               <button
                 type="submit"
                 disabled={busy || !input.trim()}
-                aria-label="Send"
+                aria-label={chat.send}
                 className="grid place-items-center w-[42px] h-[42px] rounded-full bg-fg text-bg disabled:opacity-35 disabled:cursor-default hover:shadow-[0_0_18px_rgba(200,214,255,0.35)] active:scale-95 transition-[opacity,box-shadow,transform] duration-200"
               >
                 <ArrowUp className="w-[18px] h-[18px]" strokeWidth={2} />
@@ -245,14 +244,14 @@ export default function ChatWidget() {
         type="button"
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
-        aria-label={open ? 'Close chat' : 'Chat with Marhab'}
-        className="mw-launch zone-dark fixed z-[80] right-4 bottom-4 sm:right-6 sm:bottom-6 inline-flex items-center gap-2.5 h-[46px] pl-[14px] pr-[18px] rounded-full border border-fg/25 bg-bg/80 backdrop-blur-md text-fg text-[14px] font-medium hover:border-fg/55 hover:bg-fg/[0.08] active:scale-[0.98] transition-[border-color,background-color,box-shadow,transform] duration-300 ease-[cubic-bezier(0.32,0.72,0,1)]"
+        aria-label={open ? chat.close : chat.open}
+        className="mw-launch zone-dark fixed z-[80] end-4 bottom-4 sm:end-6 sm:bottom-6 inline-flex items-center gap-2.5 h-[46px] ps-[14px] pe-[18px] rounded-full border border-fg/25 bg-bg/80 backdrop-blur-md text-fg text-[14px] font-medium hover:border-fg/55 hover:bg-fg/[0.08] active:scale-[0.98] transition-[border-color,background-color,box-shadow,transform] duration-300 ease-[cubic-bezier(0.32,0.72,0,1)]"
         style={{ boxShadow: 'var(--shadow-2)' }}
       >
         <span className="relative inline-flex w-2 h-2 rounded-full bg-ok-dot">
           {unread && !open && <span className="absolute inset-0 rounded-full bg-ok-dot animate-ping" />}
         </span>
-        {open ? 'Close' : 'Ask Marhab'}
+        {open ? chat.close : chat.open}
       </button>
 
       <style>{`

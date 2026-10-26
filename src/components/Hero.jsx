@@ -1,8 +1,8 @@
 import { useLayoutEffect, useRef, useState } from 'react';
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 import { ArrowDown, ArrowRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import { hero, demo } from '../data.js';
+import Link from './ui/Link.jsx';
+import { useCopy } from '../i18n.jsx';
 import FluidField from './FluidField.jsx';
 import { Bubble, BookingCard, PhoneFrame } from './ui/mock.jsx';
 import Words from './ui/Words.jsx';
@@ -27,16 +27,17 @@ import Words from './ui/Words.jsx';
 const ease = [0.16, 1, 0.3, 1];
 
 function Conversation() {
+  const { demo, ui } = useCopy();
   return (
     <div className="px-3 pb-3 pt-1 space-y-2">
       <div className="flex items-center gap-2.5 px-1 pb-1.5">
         <span className="relative grid place-items-center w-7 h-7 rounded-full border border-fg/[0.14] bg-fg/[0.04]">
-          <img src="/brand/mark-white.png" alt="" className="h-[13px] w-auto select-none" draggable="false" />
-          <span className="absolute -right-0.5 -bottom-0.5 w-2 h-2 rounded-full bg-ok-dot ring-2 ring-bg" />
+          <img src="/brand/mark-white@2x.webp" alt="" width="17" height="13" className="h-[13px] w-auto select-none" draggable="false" />
+          <span className="absolute -end-0.5 -bottom-0.5 w-2 h-2 rounded-full bg-ok-dot ring-2 ring-bg" />
         </span>
         <div className="min-w-0 leading-tight">
           <p className="text-[12.5px] font-medium text-fg truncate">{demo.business}</p>
-          <p className="text-[10.5px] tracking-[0.06em] uppercase text-fg/60">AI reception · 11:02 pm</p>
+          <p className="text-[10.5px] tracking-[0.06em] uppercase text-fg/60">{ui.aiReception} · 11:02 PM</p>
         </div>
       </div>
       {demo.conversation.map((line, i) => (
@@ -49,6 +50,7 @@ function Conversation() {
 }
 
 export default function Hero({ ready = true, intro = false }) {
+  const { hero, demo, ui } = useCopy();
   const reduced = useReducedMotion();
   const zoom = intro && !reduced;
 
@@ -109,11 +111,11 @@ export default function Hero({ ready = true, intro = false }) {
               variants={rise(0)}
               className="font-display font-medium text-[12.5px] uppercase tracking-[0.16em] text-fg/65"
             >
-              {hero.support.replace(/\. One connected.*$/, '')}
+              {hero.eyebrow}
             </motion.p>
             <h1 className="mt-6 font-display font-semibold text-fg text-[clamp(2.5rem,4.9vw,4.5rem)] leading-[1.0] tracking-[-0.035em] max-w-[14ch] text-balance">
               <Words text={hero.headline[0]} delay={base + 0.05} />{' '}
-              <span className="text-fg/45">
+              <span className="text-fg/50">
                 <Words text={hero.headline[1]} delay={base + 0.05 + hero.headline[0].split(' ').length * 0.045} />
               </span>
             </h1>
@@ -126,7 +128,7 @@ export default function Hero({ ready = true, intro = false }) {
             <motion.div variants={rise(0.42)} className="mt-9 flex flex-wrap items-center gap-3">
               <Link to={hero.secondaryCta.href} className="btn-primary group h-[52px] px-7 text-[15px]">
                 {hero.secondaryCta.label}
-                <ArrowRight className="w-4 h-4 transition-transform duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-0.5" strokeWidth={2} />
+                <ArrowRight className="w-4 h-4 transition-transform duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-0.5 rtl:rotate-180 rtl:group-hover:-translate-x-0.5" strokeWidth={2} />
               </Link>
               <a href={hero.primaryCta.href} className="btn-secondary group h-[52px] px-6 text-[15px]">
                 {hero.primaryCta.label}
@@ -163,20 +165,16 @@ export default function Hero({ ready = true, intro = false }) {
 
                 {/* The result, beside the phone; only where there is room beside it. */}
                 <motion.div
-                  className="hidden xl:block absolute left-6 top-6 w-[190px]"
+                  className="hidden xl:block absolute start-6 top-6 w-[190px]"
                   initial={zoom ? { opacity: 0, y: -8 } : false}
                   animate={zoom ? (settled ? { opacity: 1, y: 0 } : { opacity: 0, y: -8 }) : { opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, ease }}
                 >
-                  <BookingCard
-                    title={demo.pipeline[0].label}
-                    line1={`${demo.pipeline[0].detail} · Sara`}
-                    line2={`${demo.pipeline[2].label} on WhatsApp`}
-                  />
+                  <BookingCard title={demo.card.title} line1={demo.card.line1} line2={demo.card.line2} />
                 </motion.div>
 
-                <p className="absolute right-5 bottom-4 sm:right-7 sm:bottom-5 font-display text-[11px] font-medium uppercase tracking-[0.16em] text-fg/60">
-                  Live demo
+                <p className="absolute end-5 bottom-4 sm:end-7 sm:bottom-5 font-display text-[11px] font-medium uppercase tracking-[0.16em] text-fg/60">
+                  {ui.liveDemo}
                 </p>
               </motion.div>
             </motion.div>
@@ -201,7 +199,7 @@ export default function Hero({ ready = true, intro = false }) {
                 ) : (
                   <span className="text-[clamp(2.6rem,4.4vw,3.6rem)] tabular-nums">
                     {n.value}
-                    <span className="text-fg/45">{n.suffix}</span>
+                    <span className="text-fg/50">{n.suffix}</span>
                   </span>
                 )}
               </div>

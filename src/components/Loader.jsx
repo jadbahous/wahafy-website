@@ -2,8 +2,9 @@ import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 
 // Full-screen entry loader: black field with a faint dot grid, a thin
-// progress bar along the top edge, and a giant percentage counting up in
-// the bottom-left. The count is tied to real readiness (fonts) with a
+// progress bar along the top edge, and a giant clock in the bottom-left that
+// runs from ten o'clock to 11:02 PM, the minute the customer in the hero
+// writes. The count is tied to real readiness (fonts) with a
 // minimum duration so it never flashes. At 100 the sheet does not wipe: it
 // fades, and what it fades onto is the hero's window of night already filling
 // the screen, so the dark of the loader becomes the dark of the product before
@@ -23,6 +24,14 @@ export function loaderWillPlay() {
   } catch {
     return true;
   }
+}
+
+/** 0..100 → "10:00" … "11:02": sixty-two minutes, the last one the customer's. */
+function clock(pct) {
+  const m = Math.min(62, Math.round((pct / 100) * 62));
+  const h = m >= 60 ? 11 : 10;
+  const mm = m >= 60 ? m - 60 : m;
+  return `${h}:${String(mm).padStart(2, '0')}`;
 }
 
 export default function Loader({ onDone }) {
@@ -106,16 +115,19 @@ export default function Loader({ onDone }) {
           </div>
 
           <div className="absolute top-6 left-0 right-0 flex justify-center">
-            <img src="/brand/lockup-white.png" alt="Marhab" className="h-[26px] w-auto opacity-90 select-none" draggable="false" />
+            <img src="/brand/lockup-white@2x.webp" alt="Marhab" className="h-[26px] w-auto opacity-90 select-none" draggable="false" />
           </div>
 
           <motion.div
             exit={{ opacity: 0, y: 24 }}
             transition={{ duration: 0.3 }}
-            className="absolute left-6 md:left-10 bottom-4 md:bottom-6 font-display font-medium leading-none tracking-[-0.05em] text-[#dfe6ef] tabular-nums select-none"
-            style={{ fontSize: 'clamp(5.5rem, 19vw, 17rem)' }}
+            className="absolute left-6 md:left-10 bottom-4 md:bottom-6 select-none text-[#dfe6ef]"
+            dir="ltr"
           >
-            {pct}%
+            <p className="font-display font-medium leading-none tracking-[-0.05em] tabular-nums" style={{ fontSize: 'clamp(5.5rem, 17vw, 15rem)' }}>
+              {clock(pct)}
+              <span className="ml-3 align-top text-[0.22em] font-medium tracking-[0.02em] text-[#dfe6ef]/70">PM</span>
+            </p>
           </motion.div>
         </motion.div>
       )}

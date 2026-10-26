@@ -12,6 +12,12 @@ import AuroraField from './AuroraField.jsx';
 // parallax. Frame rate is capped, DPR is capped, rendering pauses when the
 // tab is hidden or the canvas is off-screen, and reduced-motion renders a
 // single still frame. If WebGL is unavailable we fall back to the 2D field.
+//
+// Cost: the field is soft by nature, so it is drawn at a fraction of the
+// display resolution (`RES_SCALE`) and the browser upscales it; nobody can
+// tell, and the GPU does a quarter of the work. On devices that say they are
+// low on power (few cores, little memory, data saver) it draws one frame and
+// stops, which looks the same at a glance and costs nothing after.
 
 const VERT = `
 attribute vec2 a_pos;
@@ -116,6 +122,17 @@ function compile(gl, type, src) {
   return s;
 }
 
+const RES_SCALE = 0.5;
+const FPS = 30;
+
+function lowPower() {
+  if (typeof navigator === 'undefined') return false;
+  const cores = navigator.hardwareConcurrency || 8;
+  const mem = navigator.deviceMemory || 8;
+  const saveData = navigator.connection && navigator.connection.saveData;
+  return cores <= 2 || mem <= 2 || !!saveData;
+}
+
 export default function FluidField({ progress, className = '' }) {
   const canvasRef = useRef(null);
   const [failed, setFailed] = useState(false);
@@ -123,7 +140,7 @@ export default function FluidField({ progress, className = '' }) {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches || lowPower();
 
     let gl;
     try {
@@ -133,7 +150,7 @@ export default function FluidField({ progress, className = '' }) {
         depth: false,
         stencil: false,
         premultipliedAlpha: false,
-        powerPreference: 'high-performance',
+        powerPreference: 'low-power',
       });
     } catch {
       gl = null;
@@ -174,9 +191,9 @@ export default function FluidField({ progress, className = '' }) {
 
     let dpr = 1;
     function resize() {
-      dpr = Math.min(window.devicePixelRatio || 1, 1.5);
-      const w = Math.floor(canvas.clientWidth * dpr);
-      const h = Math.floor(canvas.clientHeight * dpr);
+      dpr = Math.min(window.devicePixelRatio || 1, 1.5) * RES_SCALE;
+      const w = Math.max(1, Math.floor(canvas.clientWidth * dpr));
+      const h = Math.max(1, Math.floor(canvas.clientHeight * dpr));
       if (canvas.width !== w || canvas.height !== h) {
         canvas.width = w;
         canvas.height = h;
@@ -186,7 +203,10 @@ export default function FluidField({ progress, className = '' }) {
       gl.uniform1f(uDpr, dpr);
     }
     resize();
-    window.addEventListener('resize', resize);
+    window.addEventListener('resize', () => {
+      resize();
+      if (reduce) gl.drawArrays(gl.TRIANGLES, 0, 3);
+    });
 
     // Mouse parallax, lerped.
     const mouse = { x: 0, y: 0, tx: 0, ty: 0 };
@@ -201,7 +221,7 @@ export default function FluidField({ progress, className = '' }) {
     let visible = true;
     let last = 0;
     const start = performance.now();
-    const FRAME_MS = 1000 / 45;
+    const FRAME_MS = 1000 / FPS;
 
     function draw(now) {
       if (!running || !visible) return;

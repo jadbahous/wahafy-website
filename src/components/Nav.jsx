@@ -1,17 +1,21 @@
 import { useEffect, useState } from 'react';
-import { Link, NavLink, useLocation } from 'react-router-dom';
+import { Link as RouterLink, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
-import { nav, navCta } from '../data.js';
+import Link, { NavLink } from './ui/Link.jsx';
+import { useCopy, useLocale, counterpart } from '../i18n.jsx';
 
 export default function Nav() {
+  const { nav, navCta, ui } = useCopy();
+  const locale = useLocale();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   // Over the hero the bar is night glass with the white lockup; past it, on
   // the daylight look, it becomes paper glass with the ink lockup. On the
   // night look both states are the same, so nothing changes there.
   const { pathname } = useLocation();
-  const [overHero, setOverHero] = useState(pathname === '/');
+  const other = counterpart(pathname, locale.code);
+  const [overHero, setOverHero] = useState(pathname === '/' || pathname === '/ar');
 
   // Transparent over the hero; a quiet dark glass once the page moves.
   useEffect(() => {
@@ -46,7 +50,7 @@ export default function Nav() {
 
   const daylight = typeof document !== 'undefined' && document.documentElement.dataset.theme === 'daylight';
   const onDark = !daylight || overHero || open;
-  const lockup = onDark ? '/brand/lockup-white.png' : '/brand/lockup-dark.png';
+  const lockup = onDark ? '/brand/lockup-white@2x.webp' : '/brand/lockup-dark@2x.webp';
 
   useEffect(() => {
     document.body.classList.toggle('menu-open', open);
@@ -76,10 +80,12 @@ export default function Nav() {
         }`}
       >
         <div className={`section-wrap grid grid-cols-[1fr_auto_1fr] items-center transition-[height] duration-500 ${scrolled ? 'h-[64px]' : 'h-[72px]'}`}>
-          <Link to="/" className="justify-self-start flex items-center group" aria-label="Marhab AI, home">
+          <Link to="/" className="justify-self-start flex items-center group" aria-label="Marhab AI">
             <img
               src={lockup}
               alt="Marhab"
+              width="154"
+              height="30"
               className="h-[30px] w-auto select-none"
               draggable="false"
             />
@@ -98,6 +104,13 @@ export default function Nav() {
           </nav>
 
           <div className="justify-self-end flex items-center gap-3">
+            <RouterLink
+              to={other}
+              hrefLang={locale.code === 'ar' ? 'en' : 'ar'}
+              className="lang-switch hidden sm:inline-flex items-center h-[42px] px-3 rounded-full text-[13.5px] font-medium text-fg/75 hover:text-fg border border-transparent hover:border-fg/20 transition-[color,border-color] duration-200"
+            >
+              {ui.switchTo}
+            </RouterLink>
             <Link to={navCta.href} className="btn-primary hidden sm:inline-flex h-[42px] px-5 text-[14px]">
               {navCta.label}
             </Link>
@@ -108,7 +121,7 @@ export default function Nav() {
               className="md:hidden grid place-items-center w-11 h-11 rounded-full border border-fg/15 text-fg bg-bg/40 hover:border-fg/40 active:scale-95 transition-[border-color,transform] duration-200"
               aria-controls="mobile-nav"
               aria-expanded={open}
-              aria-label={open ? 'Close menu' : 'Open menu'}
+              aria-label={open ? ui.closeMenu : ui.openMenu}
             >
               {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
@@ -159,6 +172,13 @@ export default function Nav() {
                 <Link to={navCta.href} className="btn-primary flex w-full h-14 text-[16px]">
                   {navCta.label}
                 </Link>
+                <RouterLink
+                  to={other}
+                  hrefLang={locale.code === 'ar' ? 'en' : 'ar'}
+                  className="mt-5 flex items-center justify-center w-full h-11 rounded-full text-[15px] font-medium text-fg/75 hover:text-fg"
+                >
+                  {ui.switchTo}
+                </RouterLink>
               </motion.div>
             </nav>
           </motion.div>
@@ -176,6 +196,7 @@ export default function Nav() {
           font-size: 14.5px;
           font-weight: 500;
           letter-spacing: 0;
+          font-family: var(--font-nav, inherit);
           white-space: nowrap;
           transition: color 0.25s ease;
         }

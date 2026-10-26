@@ -102,7 +102,7 @@ export default function ChatBooking({ onLayoutChange }) {
       {step === 'slots' && (
         <div>
           <p className="text-[13.5px] font-medium text-fg mb-3">Pick a free 20-minute call time</p>
-          <div className="flex flex-col gap-3 max-h-[280px] overflow-y-auto pr-1">
+          <div className="flex flex-col gap-3 max-h-[280px] overflow-y-auto pe-1">
             {days.map((day) => (
               <div key={day.date}>
                 <p className="text-[10.5px] font-semibold tracking-[0.08em] uppercase text-fg/45 mb-1.5">
