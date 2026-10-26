@@ -34,7 +34,7 @@ export const demo = {
   sub: 'This is what your customers experience, on your website, on WhatsApp, on Instagram. No waiting for morning, no missed message.',
   tryLabel: 'Try it yourself',
   replayLabel: 'Replay',
-  business: 'Pearl & Bloom Dental',
+  business: 'Lumière',
   conversation: [
     { role: 'customer', text: 'Do you have an appointment tomorrow at 6 PM?' },
     { role: 'marhab', text: 'Yes. We have 6:00 PM and 7:30 PM available. Which would you prefer?' },
@@ -46,7 +46,7 @@ export const demo = {
   card: { title: 'Appointment booked', line1: 'Tomorrow · 6:00 PM · Sara', line2: 'Confirmation sent on WhatsApp' },
   pipeline: [
     { label: 'Appointment booked', detail: 'Tomorrow · 6:00 PM' },
-    { label: 'Lead captured', detail: 'Sara · new patient' },
+    { label: 'Lead captured', detail: 'Sara · new client' },
     { label: 'Confirmation sent', detail: 'WhatsApp · just now' },
     { label: 'Reminder scheduled', detail: 'Tomorrow · 3:00 PM' },
     { label: 'Follow-up', detail: 'Review request · after visit' },
@@ -79,7 +79,7 @@ export const journey = {
 export const story = {
   heading: 'From first message to five-star review.',
   sub: 'One customer, one week, nothing missed.',
-  business: 'Pearl & Bloom Dental',
+  business: 'Lumière',
   stages: [
     {
       id: 'enquiry',
@@ -113,7 +113,7 @@ export const story = {
       title: 'Follow up automatically',
       text: 'The reminder goes out the afternoon before, and the customer confirms with one tap. Fewer no-shows, and none of your staff\u2019s time.',
       lines: [
-        { role: 'marhab', text: 'Hi Sara, a reminder of your appointment today at 6:00 PM at Pearl & Bloom, The Pearl. Reply 1 to confirm or 2 to reschedule.' },
+        { role: 'marhab', text: 'Hi Sara, a reminder of your appointment today at 6:00 PM at Lumière, The Pearl. Reply 1 to confirm or 2 to reschedule.' },
         { role: 'customer', text: '1' },
         { role: 'marhab', text: 'Confirmed. See you at 6:00 PM.' },
       ],
@@ -143,7 +143,7 @@ export const story = {
       ],
       rows: [
         { label: 'Sara', detail: 'Booked · Wed 6:00 PM', state: 'done' },
-        { label: 'Omar', detail: 'Asked about whitening', state: 'active' },
+        { label: 'Omar', detail: 'Asked about prices', state: 'active' },
         { label: 'Layla', detail: 'Review · 5 stars', state: 'done' },
         { label: 'Khalid', detail: 'Reminder sent', state: 'done' },
       ],

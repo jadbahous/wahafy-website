@@ -35,7 +35,7 @@ export const demo = {
   sub: 'هذا ما يعيشه عملاؤك، على موقعك وعلى واتساب وعلى إنستغرام. لا انتظار حتى الصباح، ولا رسالة تضيع.',
   tryLabel: 'جرّبه بنفسك',
   replayLabel: 'إعادة',
-  business: 'Pearl & Bloom Dental',
+  business: 'Lumière',
   conversation: [
     { role: 'customer', text: 'هل يوجد موعد غداً الساعة 6 مساءً؟' },
     { role: 'marhab', text: 'نعم. لدينا 6:00 و7:30 مساءً. أيهما تفضّل؟' },
@@ -47,7 +47,7 @@ export const demo = {
   card: { title: 'تم حجز الموعد', line1: 'غداً · 6:00 مساءً · سارة', line2: 'أُرسل التأكيد على واتساب' },
   pipeline: [
     { label: 'تم حجز الموعد', detail: 'غداً · 6:00 مساءً' },
-    { label: 'تم التقاط العميل', detail: 'سارة · مريضة جديدة' },
+    { label: 'تم التقاط العميل', detail: 'سارة · عميلة جديدة' },
     { label: 'أُرسل التأكيد', detail: 'واتساب · الآن' },
     { label: 'جُدول التذكير', detail: 'غداً · 3:00 مساءً' },
     { label: 'المتابعة', detail: 'طلب تقييم · بعد الزيارة' },
@@ -80,7 +80,7 @@ export const journey = {
 export const story = {
   heading: 'من أول رسالة إلى تقييم خمس نجوم.',
   sub: 'عميل واحد، أسبوع واحد، لا شيء يضيع.',
-  business: 'Pearl & Bloom Dental',
+  business: 'Lumière',
   stages: [
     {
       id: 'enquiry',
@@ -114,7 +114,7 @@ export const story = {
       title: 'تابع تلقائياً',
       text: 'يُرسل التذكير قبل الموعد بساعات، ويؤكد العميل بضغطة واحدة. غيابات أقل، ولا دقيقة من وقت موظفيك.',
       lines: [
-        { role: 'marhab', text: 'مرحباً سارة، نذكّرك بموعدك اليوم الساعة 6:00 مساءً في Pearl & Bloom، اللؤلؤة. أرسلي 1 للتأكيد أو 2 لتغيير الموعد.' },
+        { role: 'marhab', text: 'مرحباً سارة، نذكّرك بموعدك اليوم الساعة 6:00 مساءً في Lumière، اللؤلؤة. أرسلي 1 للتأكيد أو 2 لتغيير الموعد.' },
         { role: 'customer', text: '1' },
         { role: 'marhab', text: 'تم التأكيد. نراك الساعة 6:00 مساءً.' },
       ],
@@ -144,7 +144,7 @@ export const story = {
       ],
       rows: [
         { label: 'سارة', detail: 'حجز · الأربعاء 6:00 م', state: 'done' },
-        { label: 'عمر', detail: 'سأل عن التبييض', state: 'active' },
+        { label: 'عمر', detail: 'سأل عن الأسعار', state: 'active' },
         { label: 'ليلى', detail: 'تقييم · 5 نجوم', state: 'done' },
         { label: 'خالد', detail: 'أُرسل التذكير', state: 'done' },
       ],
