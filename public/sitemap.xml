@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://www.marhab.agency/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.marhab.agency/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.marhab.agency/ar"/>
+  </url>
+  <url>
+    <loc>https://www.marhab.agency/ar</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.marhab.agency/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.marhab.agency/ar"/>
+  </url>
+  <url>
+    <loc>https://www.marhab.agency/services</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.marhab.agency/services"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.marhab.agency/ar/services"/>
+  </url>
+  <url>
+    <loc>https://www.marhab.agency/ar/services</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.marhab.agency/services"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.marhab.agency/ar/services"/>
+  </url>
+  <url>
+    <loc>https://www.marhab.agency/work</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.marhab.agency/work"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.marhab.agency/ar/work"/>
+  </url>
+  <url>
+    <loc>https://www.marhab.agency/ar/work</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.marhab.agency/work"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.marhab.agency/ar/work"/>
+  </url>
+  <url>
+    <loc>https://www.marhab.agency/process</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.marhab.agency/process"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.marhab.agency/ar/process"/>
+  </url>
+  <url>
+    <loc>https://www.marhab.agency/ar/process</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.marhab.agency/process"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.marhab.agency/ar/process"/>
+  </url>
+  <url>
+    <loc>https://www.marhab.agency/contact</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.marhab.agency/contact"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.marhab.agency/ar/contact"/>
+  </url>
+  <url>
+    <loc>https://www.marhab.agency/ar/contact</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.marhab.agency/contact"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.marhab.agency/ar/contact"/>
+  </url>
+</urlset>
