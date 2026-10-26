@@ -93,18 +93,18 @@ export function StatusRow({ label, detail, state = 'idle' }) {
   );
 }
 
-export function BookingCard({ title, line1, line2, className = '' }) {
+export function BookingCard({ title, line1, line2, className = '', compact = false }) {
   return (
-    <div className={`rounded-[16px] bg-panel p-4 ${className}`} style={{ boxShadow: 'var(--shadow-2)' }}>
+    <div className={`rounded-[16px] bg-panel ${compact ? 'px-3.5 py-3' : 'p-4'} ${className}`} style={{ boxShadow: 'var(--shadow-2)' }}>
       <div className="flex items-center gap-2.5">
         <span className="grid place-items-center w-6 h-6 rounded-full bg-ok-dot/15 border border-ok-dot/40">
           <Check className="w-3.5 h-3.5 text-ok" strokeWidth={2.5} />
         </span>
         <p className="text-[14px] font-medium text-fg">{title}</p>
       </div>
-      <div className="mt-3 pt-3 border-t border-fg/[0.08] text-[13.5px] leading-relaxed">
+      <div className={`${compact ? 'mt-2 pt-2' : 'mt-3 pt-3'} border-t border-fg/[0.08] text-[13.5px] leading-relaxed`}>
         <p className="text-fg/85">{line1}</p>
-        <p className="text-fg/60">{line2}</p>
+        {line2 && <p className="text-fg/60">{line2}</p>}
       </div>
     </div>
   );
