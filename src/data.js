@@ -454,4 +454,6 @@ export const ui = {
   pm: 'PM',
   loading: 'Loading',
   clientBooked: 'Client booked.',
+  skipIntro: 'Skip intro',
+  skipIntroShort: 'Skip intro',
 };

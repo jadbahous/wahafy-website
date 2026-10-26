@@ -441,4 +441,6 @@ export const ui = {
   pm: 'مساءً',
   loading: 'جارٍ التحميل',
   clientBooked: 'حُجز موعد العميل.',
+  skipIntro: 'تخطَّ المقدمة',
+  skipIntroShort: 'تخطَّ',
 };
