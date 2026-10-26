@@ -436,4 +436,9 @@ export const ui = {
   fullCaseStudies: 'اطّلع على دراسات الحالة كاملة',
   switchTo: 'English',
   switchHref: '',
+  // الافتتاحية: الساعة في شاشة التحميل، ثم العبارة فوق الهاتف.
+  itIs: 'الساعة الآن',
+  pm: 'مساءً',
+  loading: 'جارٍ التحميل',
+  clientBooked: 'حُجز موعد العميل.',
 };

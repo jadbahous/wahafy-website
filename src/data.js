@@ -449,4 +449,9 @@ export const ui = {
   fullCaseStudies: 'See the full case studies',
   switchTo: 'عربي',
   switchHref: '/ar',
+  // The opening: the clock in the loader, then the line over the phone.
+  itIs: 'It is',
+  pm: 'PM',
+  loading: 'Loading',
+  clientBooked: 'Client booked.',
 };
