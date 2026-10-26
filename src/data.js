@@ -14,9 +14,10 @@ export const navCta = { label: 'Book a free demo', href: '/contact' };
 
 export const hero = {
   headline: ['Every customer who reaches out,', 'answered.'],
-  eyebrow: 'Websites. AI reception. Automation.',
+  eyebrow: 'For clinics, salons and service businesses',
   support: 'Websites. AI reception. Automation. One connected customer experience.',
-  sub: 'We build intelligent websites and customer systems that answer enquiries, capture leads, book appointments and follow up. Automatically, 24/7.',
+  sub: 'We build your website and an AI receptionist that answers your customers on WhatsApp, Instagram and your site, books them in and follows up. Day and night.',
+  example: 'Example: Lumière, a clinic using Marhab.',
   primaryCta: { label: 'See it in action', href: '#demo' },
   secondaryCta: { label: 'Book a free demo', href: '/contact' },
   meta: ['Premium websites', 'AI reception, 24/7', 'Built for Qatar'],
@@ -77,12 +78,14 @@ export const journey = {
 /* The showpiece: one customer's week, scrubbed by scroll. Each stage is a
    screen on the same phone and one outcome the business gets from it. */
 export const story = {
-  heading: 'From first message to five-star review.',
-  sub: 'One customer, one week, nothing missed.',
+  eyebrow: 'See it in action',
+  heading: ['It’s 11:02 PM.', 'Everyone has gone home.', 'By 11:03, Sara is booked.'],
+  sub: 'One client, one week, five steps. Scroll to follow along.',
   business: 'Lumière',
   stages: [
     {
       id: 'enquiry',
+      short: 'Lead',
       when: 'Tuesday, 11:02 PM',
       channel: 'Website chat',
       title: 'Never miss a lead',
@@ -94,6 +97,7 @@ export const story = {
     },
     {
       id: 'booking',
+      short: 'Booking',
       when: 'Tuesday, 11:03 PM',
       channel: 'Website chat',
       title: 'Turn enquiries into bookings',
@@ -108,6 +112,7 @@ export const story = {
     },
     {
       id: 'reminder',
+      short: 'Reminder',
       when: 'Wednesday, 3:00 PM',
       channel: 'WhatsApp',
       title: 'Follow up automatically',
@@ -120,6 +125,7 @@ export const story = {
     },
     {
       id: 'review',
+      short: 'Review',
       when: 'Wednesday, 7:40 PM',
       channel: 'WhatsApp',
       title: 'Generate more reviews',
@@ -132,6 +138,7 @@ export const story = {
     },
     {
       id: 'owner',
+      short: 'Dashboard',
       when: 'Friday, 9:00 AM',
       channel: 'Your dashboard',
       title: 'Understand what is happening',
@@ -456,4 +463,8 @@ export const ui = {
   clientBooked: 'Client booked.',
   skipIntro: 'Skip intro',
   skipIntroShort: 'Skip intro',
+  // The scroll story.
+  stepOf: 'Step {n} of {total}',
+  customerSees: 'What your customer sees',
+  youSee: 'What you see',
 };
