@@ -11,7 +11,8 @@ import { useCopy } from '../i18n.jsx';
 // onto is the hero's window of night already filling the screen, so the dark
 // of the loader becomes the dark of the product (see Hero). `onDone(played)`
 // tells the page whether that handoff is happening or the loader was skipped
-// (second visit in the session, or reduced motion).
+// (second visit in the session, or reduced motion). `skip` (a click, tap,
+// scroll or key, caught by the page) ends it at once with a short fade.
 
 const KEY = 'marhab:loaded';
 const MINUTES = ['10:56', '10:57', '10:58', '10:59', '11:00', '11:01', '11:02'];
@@ -65,7 +66,7 @@ function Clock({ time }) {
   );
 }
 
-export default function Loader({ onDone }) {
+export default function Loader({ onDone, skip = false }) {
   const { ui } = useCopy();
   const [visible, setVisible] = useState(loaderWillPlay);
   const [pct, setPct] = useState(0);
@@ -119,6 +120,16 @@ export default function Loader({ onDone }) {
     if (!visible) document.body.style.overflow = '';
   }, [visible]);
 
+  // Skipped (a click, tap, scroll or key): let go now.
+  useEffect(() => {
+    if (!skip || !visible || doneRef.current) return;
+    doneRef.current = true;
+    try {
+      sessionStorage.setItem(KEY, '1');
+    } catch {}
+    setVisible(false);
+  }, [skip, visible]);
+
   return (
     <AnimatePresence>
       {visible && (
@@ -126,7 +137,7 @@ export default function Loader({ onDone }) {
           key="loader"
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.55, ease: [0.4, 0, 0.2, 1] }}
+          transition={{ duration: skip ? 0.3 : 0.55, ease: [0.4, 0, 0.2, 1] }}
           className="fixed inset-0 z-[100] zone-dark bg-bg text-fg overflow-hidden"
           aria-busy="true"
         >

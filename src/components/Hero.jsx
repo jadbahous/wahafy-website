@@ -21,6 +21,7 @@ import Words from './ui/Words.jsx';
 // place on the page, the paper comes up behind it, and the headline rises
 // word by word where "Client booked." stood. Nothing loops. Only transform
 // and opacity move, and the page does not scroll until the window has landed.
+// Any click, tap, scroll or key skips it: the hero is simply there.
 //
 // On scroll the window drifts a little slower than the page, so the hero has
 // depth on the way out. Reduced motion skips the zoom, the drift and the
@@ -62,7 +63,7 @@ function Conversation() {
   );
 }
 
-export default function Hero({ ready = true, intro = false }) {
+export default function Hero({ ready = true, intro = false, skipped = false, onSettled }) {
   const { hero, demo, ui } = useCopy();
   const reduced = useReducedMotion();
   const zoom = intro && !reduced;
@@ -90,13 +91,23 @@ export default function Hero({ ready = true, intro = false }) {
     });
   }, [zoom]);
 
-  // Once the loader lets go: hold the close-up, then zoom out.
+  // Once the loader lets go: hold the close-up, then zoom out. Skipped (a
+  // click, tap, scroll or key, caught by the page): straight to the end.
   useEffect(() => {
-    if (!zoom || !ready) return;
+    if (!zoom) return;
+    if (skipped) {
+      setPhase('settled');
+      return;
+    }
+    if (!ready) return;
     setPhase('hold');
     const t = setTimeout(() => setPhase('zoom'), HOLD * 1000);
     return () => clearTimeout(t);
-  }, [zoom, ready]);
+  }, [zoom, ready, skipped]);
+
+  useEffect(() => {
+    if (settled) onSettled?.();
+  }, [settled, onSettled]);
 
   // No scrolling until the window has landed (the close-up is a transform of
   // the window in its place on the page, so scrolling would carry it off).
@@ -115,7 +126,7 @@ export default function Hero({ ready = true, intro = false }) {
   const drift = useTransform(scrollYProgress, [0, 1], [0, -72]);
   const copyDrift = useTransform(scrollYProgress, [0, 1], [0, 28]);
 
-  const base = zoom ? HOLD + 0.1 : 0.05; // when the words start, after the close-up
+  const base = zoom && !skipped ? HOLD + 0.1 : 0.05; // when the words start, after the close-up
   const rise = (delay) => ({
     hidden: { opacity: 0, y: 14 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease, delay: base + delay } },
@@ -124,10 +135,11 @@ export default function Hero({ ready = true, intro = false }) {
 
   return (
     <section ref={sectionRef} className="relative bg-bg overflow-hidden">
-      {/* The dark the loader fades onto: gone once the window has zoomed out. */}
+      {/* The dark the loader fades onto: gone once the window has zoomed out.
+          It takes the click that skips the opening, so nothing under it is hit. */}
       {zoom && !settled && (
         <motion.div
-          className="fixed inset-0 z-[82] zone-dark bg-bg pointer-events-none"
+          className="fixed inset-0 z-[82] zone-dark bg-bg"
           initial={{ opacity: 1 }}
           animate={{ opacity: phase === 'zoom' ? 0 : 1 }}
           transition={{ duration: 0.9, ease: [0.4, 0, 0.2, 1] }}
@@ -161,6 +173,7 @@ export default function Hero({ ready = true, intro = false }) {
         <div className="grid lg:grid-cols-12 gap-10 lg:gap-8 items-center">
           {/* The promise */}
           <motion.div
+            key={skipped ? 'skipped' : 'intro'}
             className="lg:col-span-6"
             initial="hidden"
             animate={state}
