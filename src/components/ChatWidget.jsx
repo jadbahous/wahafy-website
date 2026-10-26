@@ -245,7 +245,7 @@ export default function ChatWidget() {
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
         aria-label={open ? chat.close : chat.open}
-        className="mw-launch zone-dark fixed z-[80] end-4 bottom-4 sm:end-6 sm:bottom-6 inline-flex items-center gap-2.5 h-[46px] ps-[14px] pe-[18px] rounded-full border border-fg/25 bg-bg/80 backdrop-blur-md text-fg text-[14px] font-medium hover:border-fg/55 hover:bg-fg/[0.08] active:scale-[0.98] transition-[border-color,background-color,box-shadow,transform] duration-300 ease-[cubic-bezier(0.32,0.72,0,1)]"
+        className="mw-launch zone-dark fixed z-[80] end-4 bottom-4 sm:end-6 sm:bottom-6 inline-flex items-center gap-2.5 h-[46px] ps-[14px] pe-[18px] rounded-full border border-fg/25 bg-bg/80 backdrop-blur-md text-fg text-[14px] font-medium hover:border-fg/55 hover:bg-fg/[0.08] active:scale-[0.98] transition-[border-color,background-color,box-shadow,transform,opacity] duration-300 ease-[cubic-bezier(0.32,0.72,0,1)]"
         style={{ boxShadow: 'var(--shadow-2)' }}
       >
         <span className="relative inline-flex w-2 h-2 rounded-full bg-ok-dot">

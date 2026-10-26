@@ -245,12 +245,17 @@ export default function Hero({ ready = true, intro = false, skipped = false, onS
                 >
                   <BookingCard title={demo.card.title} line1={demo.card.line1} line2={demo.card.line2} />
                 </motion.div>
-
-                <p className="absolute end-5 bottom-4 sm:end-7 sm:bottom-5 font-display text-[11px] font-medium uppercase tracking-[0.16em] text-fg/60">
-                  {ui.liveDemo}
-                </p>
               </motion.div>
             </motion.div>
+            {/* Whose phone this is: an example business, not Marhab itself. */}
+            <motion.p
+              className="mt-3 ps-1 text-[13px] leading-snug text-fg/60"
+              initial={zoom ? { opacity: 0 } : false}
+              animate={{ opacity: settled ? 1 : 0 }}
+              transition={{ duration: 0.6, ease }}
+            >
+              {hero.example}
+            </motion.p>
           </div>
         </div>
 
