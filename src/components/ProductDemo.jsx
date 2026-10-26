@@ -80,7 +80,7 @@ export default function ProductDemo() {
   return (
     <section id="demo" className="relative bg-matte text-fg py-28 md:py-36 scroll-mt-16">
       <div className="section-wrap">
-        <SectionHeading eyebrow={demo.eyebrow} heading={demo.heading} sub={demo.sub} max="21ch" subMax="54ch" className="mb-14 md:mb-20" />
+        <SectionHeading eyebrow={demo.eyebrow} heading={demo.heading} sub={demo.sub} max="24ch" subMax="54ch" className="mb-14 md:mb-20" />
 
         <div ref={ref} className="grid lg:grid-cols-12 gap-6 lg:gap-8 items-start">
           {/* Conversation */}

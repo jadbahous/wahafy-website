@@ -36,7 +36,17 @@ export default function SectionHeading({
         className="font-display font-semibold text-[clamp(2.1rem,4.6vw,3.4rem)] leading-[1.04] tracking-[-0.03em] text-fg text-balance"
         style={{ maxWidth: max }}
       >
-        <Words text={heading} delay={0.05} />
+        {Array.isArray(heading) ? (
+          // A heading given as lines keeps each line whole (a sentence per
+          // line), and the word-rise carries on from one line to the next.
+          heading.map((line, i) => (
+            <span key={i} className="block">
+              <Words text={line} delay={0.05 + heading.slice(0, i).join(' ').split(' ').filter(Boolean).length * 0.045} />
+            </span>
+          ))
+        ) : (
+          <Words text={heading} delay={0.05} />
+        )}
       </h2>
       {sub && (
         <p className="mt-5 text-[16.5px] leading-[1.6] text-fg/70" style={{ maxWidth: subMax }}>
